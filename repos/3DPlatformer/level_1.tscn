@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjwbq457xcdw3"]
+
+[ext_resource type="PackedScene" uid="uid://bpomejsiqhomd" path="res://block.tscn" id="1_8kw8v"]
+[ext_resource type="PackedScene" uid="uid://00jt0xqvj0bl" path="res://wyatt.tscn" id="2_5t4dn"]
+[ext_resource type="Texture2D" uid="uid://ccl3p8t2nblcf" path="res://icon.svg" id="3_2hgoc"]
+[ext_resource type="Script" path="res://Icon.gd" id="4_mvhps"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ifpsn"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_65kq8"]
+size = Vector3(10, 0.5, 10)
+
+[node name="Level1" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.94803, 0.318182, 0, -0.318182, 0.94803, 0, 2.96126, 5.47619)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_ifpsn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_65kq8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.64011, 0.768284, 0, -0.768284, 0.64011, 0, 6.44714, 0)
+shadow_enabled = true
+
+[node name="Blocks" type="Node3D" parent="."]
+
+[node name="Block1" parent="Blocks" instance=ExtResource("1_8kw8v")]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0, 3, 1)
+
+[node name="Block2" parent="Blocks" instance=ExtResource("1_8kw8v")]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 3.33963, 3, -0.263368)
+
+[node name="Block3" parent="Blocks" instance=ExtResource("1_8kw8v")]
+transform = Transform3D(0.0825647, 0.996586, 4.63761e-10, -0.993729, 0.0823281, -0.0756575, -0.0753992, 0.00624664, 0.997134, 0, 4.5671, 1.21122)
+
+[node name="Block4" parent="Blocks" instance=ExtResource("1_8kw8v")]
+transform = Transform3D(0.939208, 0.343348, 0, -0.343348, 0.939208, 0, 0, 0, 1, 3.33963, 4.72445, -0.221947)
+
+[node name="Wyatt" parent="." instance=ExtResource("2_5t4dn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76888, 1.1131, 1.67905)
+
+[node name="Icon" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49234, 2.71928)
+texture = ExtResource("3_2hgoc")
+script = ExtResource("4_mvhps")
