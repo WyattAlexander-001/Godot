@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://dykobvr7kyjcm"]
+
+[ext_resource type="Texture2D" uid="uid://cyp4rh65cudcu" path="res://icon.svg" id="1_lega3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe8gy"]
+size = Vector2(130, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssiuh"]
+size = Vector2(620, 130)
+
+[node name="Level1" type="Node2D"]
+
+[node name="block1" type="RigidBody2D" parent="."]
+position = Vector2(614, 127)
+rotation = -0.898333
+gravity_scale = 5.0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="block1"]
+texture = ExtResource("1_lega3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block1"]
+position = Vector2(-1.90735e-06, 0)
+shape = SubResource("RectangleShape2D_qe8gy")
+
+[node name="block2" type="RigidBody2D" parent="."]
+position = Vector2(378, 163)
+rotation = -0.0736106
+gravity_scale = 5.0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="block2"]
+texture = ExtResource("1_lega3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block2"]
+position = Vector2(-1.90735e-06, 0)
+shape = SubResource("RectangleShape2D_qe8gy")
+
+[node name="block3" type="RigidBody2D" parent="."]
+position = Vector2(827, 132)
+rotation = 0.95052
+gravity_scale = 5.0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="block3"]
+texture = ExtResource("1_lega3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block3"]
+position = Vector2(-1.90735e-06, 0)
+shape = SubResource("RectangleShape2D_qe8gy")
+
+[node name="floor" type="StaticBody2D" parent="."]
+position = Vector2(589, 447)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="floor"]
+scale = Vector2(4.8125, 1)
+texture = ExtResource("1_lega3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+shape = SubResource("RectangleShape2D_ssiuh")

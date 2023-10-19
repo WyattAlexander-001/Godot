@@ -1,0 +1,3 @@
+2D Navigation is even easier than 3D. Not like it was that hard to begin with. Just use mouse wheel...
+Rigid Body = Has Physics.
+Static Body = Static, Physics doesn't apply.
