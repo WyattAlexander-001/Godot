@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://tfue42y25j7s"]
+
+[ext_resource type="Texture2D" uid="uid://chhvrnsol54vb" path="res://assets/player/platformChar_idle.png" id="1_7g73i"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_borcb"]
+radius = 10.2273
+
+[node name="Wyatt" type="CharacterBody2D"]
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7g73i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14.905)
+scale = Vector2(2.6, 2.2)
+shape = SubResource("CapsuleShape2D_borcb")
