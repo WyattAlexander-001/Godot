@@ -9,9 +9,11 @@ script = ExtResource("1_80w2t")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(0, 0, 32, 0, 32, 112, 64, 112, 64, 128, 88, 128, 96, 144, 120, 144, 144, 128, 168, 128, 168, 152, 192, 152, 192, 136, 216, 136, 216, 112, 256, 112, 272, 128, 288, 128, 304, 112, 304, 0, 336, 0, 336, 192, 0, 192)
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 112, 40, 112, 72, 128, 88, 128, 96, 144, 120, 144, 136, 128, 168, 128, 168, 152, 192, 152, 192, 136, 216, 136, 216, 120, 240, 120, 264, 144, 312, 160, 312, 112, 312, 0, 328, 0, 328, 192, 0, 192)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_bkbth")]
 position = Vector2(48, 88)
+floor_constant_speed = true
+floor_snap_length = 2.0
