@@ -1,0 +1,1 @@
+Some tutorials are in Godot 3 still so this is good for those types of situations.
