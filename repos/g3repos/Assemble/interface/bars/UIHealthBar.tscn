@@ -1,0 +1,160 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://interface/bars/UIHealthBar.gd" type="Script" id=1]
+[ext_resource path="res://interface/bars/health_point.png" type="Texture" id=2]
+[ext_resource path="res://interface/bars/bar_bg_ninepatch.png" type="Texture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 120, 75 )
+margin_left = 7.92443
+margin_right = 7.92443
+margin_top = 8.67913
+margin_bottom = 7.16972
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_in"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_out"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="UIHealthBar" type="PanelContainer"]
+margin_right = 349.0
+margin_bottom = 73.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.92443
+margin_top = 8.67913
+margin_right = 341.076
+margin_bottom = 65.8303
+mouse_filter = 2
+custom_constants/separation = 8
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+margin_left = 15.0
+margin_right = 69.0
+margin_bottom = 57.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+margin_left = 77.0
+margin_right = 131.0
+margin_bottom = 57.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+margin_left = 139.0
+margin_right = 193.0
+margin_bottom = 57.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer"]
+margin_left = 201.0
+margin_right = 255.0
+margin_bottom = 57.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer"]
+margin_left = 263.0
+margin_right = 317.0
+margin_bottom = 57.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fade_in"
+anims/RESET = SubResource( 2 )
+anims/fade_in = SubResource( 4 )
+anims/fade_out = SubResource( 3 )

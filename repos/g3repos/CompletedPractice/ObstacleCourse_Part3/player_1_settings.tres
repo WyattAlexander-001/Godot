@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://ObstacleCourse_Part3/PlayerSettings.gd" type="Script" id=1]
+[ext_resource path="res://ObstacleCourse_Part3/assets/hand_red_closed.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+move_up_action = "move_up"
+move_down_action = "move_down"
+move_left_action = "move_left"
+move_right_action = "move_right"
+color = Color( 1, 1, 1, 1 )
+hand_texture = ExtResource( 2 )

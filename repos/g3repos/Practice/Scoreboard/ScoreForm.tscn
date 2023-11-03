@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scoreboard/scoreboard_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scoreboard/Scoreboard.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scoreboard/ScoreForm.gd" type="Script" id=3]
+
+[node name="ScoreForm" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 295.0
+margin_top = 102.0
+margin_right = -295.0
+margin_bottom = -102.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 92.0
+
+[node name="NameField" type="LineEdit" parent="HBoxContainer"]
+margin_right = 609.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+placeholder_text = "Enter your name"
+
+[node name="PointsField" type="LineEdit" parent="HBoxContainer"]
+margin_left = 613.0
+margin_right = 1223.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+placeholder_text = "Enter your name"
+
+[node name="OkButton" type="Button" parent="HBoxContainer"]
+margin_left = 1227.0
+margin_right = 1330.0
+margin_bottom = 92.0
+text = "Submit"
+
+[node name="Scoreboard" parent="." instance=ExtResource( 2 )]
+
+[connection signal="pressed" from="HBoxContainer/OkButton" to="." method="_on_OkButton_pressed"]

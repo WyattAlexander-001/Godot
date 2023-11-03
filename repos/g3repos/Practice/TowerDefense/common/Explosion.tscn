@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://TowerDefense/common/Explosion.gd" type="Script" id=1]
+[ext_resource path="res://TowerDefense/assets/particle_smoke.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Curve" id=5]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0.005, 172.273 ), 0.0, 2975.61, 0, 0, Vector2( 0.375, 107.727 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), -1720.45, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0.00543478, 0 ), 0.0, 4.53688, 0, 0, Vector2( 0.3, 0.523864 ), 0.0, 0.0, 0, 0, Vector2( 0.9925, 0.127273 ), -0.484515, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 24.77
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 150.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 300.0
+linear_accel_curve = SubResource( 6 )
+scale_curve = SubResource( 8 )
+
+[node name="Explosion" type="Particles2D"]
+material = SubResource( 2 )
+emitting = false
+amount = 12
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 1 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://common/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ObstacleCourse_Part3/practices/02.Items/InventoryItems.gd" type="Script" id=3]
+[ext_resource path="res://ObstacleCourse_Part3/practices/common/UITooltip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ObstacleCourse_Part3/practices/common/UIDraggedItemPreview.tscn" type="PackedScene" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.282353, 0.282353, 0.411765, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.188235, 0.188235, 0.286275, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.0352941, 0.0392157, 0.12549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="DynamicFont" id=7]
+size = 20
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
+Button/styles/focus = SubResource( 6 )
+Button/styles/hover = SubResource( 3 )
+Button/styles/normal = SubResource( 4 )
+Button/styles/pressed = SubResource( 5 )
+Panel/styles/panel = SubResource( 2 )
+PanelContainer/styles/panel = SubResource( 2 )
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/normal_font = null
+
+[node name="InventoryItems" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 384.0
+margin_top = 192.0
+margin_right = -384.0
+margin_bottom = -192.0
+theme = SubResource( 8 )
+script = ExtResource( 3 )
+
+[node name="UITooltip" parent="." instance=ExtResource( 5 )]
+visible = false
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="ItemGrid" type="GridContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
+columns = 7
+
+[node name="UIDraggedItemPreview" parent="." instance=ExtResource( 6 )]

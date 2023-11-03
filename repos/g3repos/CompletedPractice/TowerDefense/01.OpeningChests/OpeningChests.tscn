@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TowerDefense/01.OpeningChests/Gems.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TowerDefense/01.OpeningChests/OpeningChest.tscn" type="PackedScene" id=2]
+
+[node name="OpeningChests" type="Node2D"]
+
+[node name="Chest" parent="." instance=ExtResource( 2 )]
+position = Vector2( 730, 505 )
+
+[node name="Chest2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 874, 505 )
+
+[node name="Chest3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1018, 505 )
+
+[node name="Chest4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1162, 505 )
+
+[node name="Gems" parent="." instance=ExtResource( 1 )]
+position = Vector2( 843, 657 )
+
+[node name="Gems2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 711, 595 )
+
+[node name="Gems3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1171, 573 )
+
+[node name="Gems4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 951, 378 )

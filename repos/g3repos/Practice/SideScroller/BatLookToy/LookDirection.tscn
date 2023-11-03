@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://SideScroller/BatLookToy/LookDirection.gd" type="Script" id=1]
+
+[node name="LookDirection" type="Node2D"]
+z_index = 1
+script = ExtResource( 1 )
+color = Color( 1, 0.0941176, 0.321569, 1 )

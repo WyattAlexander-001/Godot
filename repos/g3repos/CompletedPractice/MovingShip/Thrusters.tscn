@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MovingShip/Thrusters.gd" type="Script" id=1]
+[ext_resource path="res://MovingShip/flame.png" type="Texture" id=2]
+
+[node name="Thrusters" type="Position2D"]
+script = ExtResource( 1 )
+
+[node name="FlameMain" type="Sprite" parent="."]
+position = Vector2( -69, 0.260895 )
+rotation = 1.57079
+texture = ExtResource( 2 )
+offset = Vector2( -0.260956, 27.6466 )
+
+[node name="FlameLeft" type="Sprite" parent="."]
+position = Vector2( -58.3101, -32 )
+rotation = 1.82394
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 2 )
+offset = Vector2( -0.260956, 27.6466 )
+
+[node name="FlameRight" type="Sprite" parent="."]
+position = Vector2( -58.3101, 34 )
+rotation = 1.22216
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 2 )
+offset = Vector2( -0.260956, 27.6466 )

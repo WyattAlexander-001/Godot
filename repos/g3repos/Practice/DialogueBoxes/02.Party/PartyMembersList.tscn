@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://DialogueBoxes/02.Party/PartyMembersList.gd" type="Script" id=1]
+[ext_resource path="res://DialogueBoxes/common/theme.tres" type="Theme" id=2]
+
+[node name="PartyMembers" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 596.0
+margin_top = 225.0
+margin_right = -596.0
+margin_bottom = -225.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )

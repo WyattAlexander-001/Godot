@@ -1,0 +1,341 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://addons/MainMenu/theme/main_menu_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/main_menu/ScrollingSky.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/MainMenu/menu_9patch.png" type="Texture" id=3]
+[ext_resource path="res://addons/MainMenu/UIDemoList.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/MainMenu/GDQuestLogo.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/MainMenu/UISearchBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/main_menu/logo.png" type="Texture" id=7]
+[ext_resource path="res://ui/main_menu/illustration.png" type="Texture" id=8]
+[ext_resource path="res://ui/main_menu/UIMainMenu.gd" type="Script" id=9]
+[ext_resource path="res://ui/main_menu/FloatingStar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/main_menu/star_4.png" type="Texture" id=11]
+[ext_resource path="res://ui/main_menu/star_1.png" type="Texture" id=12]
+[ext_resource path="res://ui/main_menu/star_3.png" type="Texture" id=13]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = texture(TEXTURE, vec2(1.0 - UV.y, 0));
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0.470588, 0.843137, 1, 0.584314, 0.470588, 0.843137, 1, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+width = 1024
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 384, 384 )
+margin_left = 26.0
+margin_right = 26.0
+margin_top = 44.0
+margin_bottom = 66.0
+axis_stretch_vertical = 2
+
+[node name="UIMainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 9 )
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="ScrollingSky" parent="BackgroundLayer" instance=ExtResource( 2 )]
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = SubResource( 4 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -196.0
+margin_right = 3.0
+margin_bottom = -48.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -61.0
+color = Color( 0.470588, 0.843137, 1, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GDQuestLogo" parent="MarginContainer" instance=ExtResource( 5 )]
+margin_left = 40.0
+margin_top = 1030.0
+margin_right = 180.0
+margin_bottom = 1070.0
+rect_min_size = Vector2( 140, 40 )
+size_flags_horizontal = 0
+size_flags_vertical = 8
+stretch_mode = 5
+
+[node name="VersionNumber" type="Label" parent="MarginContainer"]
+margin_left = 1762.0
+margin_top = 1030.0
+margin_right = 1880.0
+margin_bottom = 1070.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Version 1.0.0"
+valign = 1
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -58.0
+custom_constants/margin_right = 0
+custom_constants/margin_left = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin"]
+margin_top = 40.0
+margin_right = 1920.0
+margin_bottom = 982.0
+custom_constants/separation = 40
+
+[node name="Spacer" type="Control" parent="Margin/HBoxContainer"]
+margin_right = 900.0
+margin_bottom = 942.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Empty" type="Control" parent="Margin/HBoxContainer"]
+margin_left = 940.0
+margin_right = 940.0
+margin_bottom = 942.0
+size_flags_stretch_ratio = 3.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/HBoxContainer"]
+margin_left = 980.0
+margin_right = 1580.0
+margin_bottom = 942.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleContainer" type="PanelContainer" parent="Margin/HBoxContainer/VBoxContainer"]
+margin_top = 87.0
+margin_right = 600.0
+margin_bottom = 426.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="Margin/HBoxContainer/VBoxContainer/TitleContainer"]
+margin_right = 600.0
+margin_bottom = 339.0
+texture = ExtResource( 7 )
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="Margin/HBoxContainer/VBoxContainer/TitleContainer/TextureRect"]
+modulate = Color( 0.0853721, 0.631833, 0.884766, 1 )
+show_behind_parent = true
+margin_top = 7.0
+margin_right = 600.0
+margin_bottom = 346.0
+texture = ExtResource( 7 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Control" parent="Margin/HBoxContainer/VBoxContainer"]
+margin_top = 434.0
+margin_right = 600.0
+margin_bottom = 454.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="SearchBar" parent="Margin/HBoxContainer/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 462.0
+margin_right = 600.0
+margin_bottom = 534.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Margin/HBoxContainer/VBoxContainer"]
+margin_top = 542.0
+margin_right = 600.0
+margin_bottom = 942.0
+rect_min_size = Vector2( 0, 400 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="DemoList" parent="Margin/HBoxContainer/VBoxContainer/PanelContainer" instance=ExtResource( 4 )]
+margin_left = 26.0
+margin_top = 44.0
+margin_right = 574.0
+margin_bottom = 334.0
+
+[node name="Spacer2" type="Control" parent="Margin/HBoxContainer"]
+margin_left = 1620.0
+margin_right = 1920.0
+margin_bottom = 942.0
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 69.0
+margin_top = -728.0
+margin_right = 871.0
+margin_bottom = -13.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FloatingStar" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 240.0
+margin_top = -114.5
+margin_right = 278.0
+margin_bottom = -76.5
+texture = ExtResource( 12 )
+
+[node name="FloatingStar2" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 197.0
+margin_top = -142.5
+margin_right = 227.0
+margin_bottom = -112.5
+
+[node name="FloatingStar3" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 216.0
+margin_top = -191.5
+margin_right = 246.0
+margin_bottom = -161.5
+
+[node name="FloatingStar4" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 257.0
+margin_top = 124.5
+margin_right = 295.0
+margin_bottom = 162.5
+texture = ExtResource( 11 )
+
+[node name="FloatingStar5" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 277.0
+margin_top = 78.5
+margin_right = 307.0
+margin_bottom = 108.5
+texture = ExtResource( 13 )
+
+[node name="FloatingStar6" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 317.0
+margin_top = 147.5
+margin_right = 347.0
+margin_bottom = 177.5
+texture = ExtResource( 13 )
+
+[node name="FloatingStar7" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -261.0
+margin_top = -250.5
+margin_right = -231.0
+margin_bottom = -220.5
+
+[node name="FloatingStar8" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -278.0
+margin_top = -200.5
+margin_right = -240.0
+margin_bottom = -162.5
+texture = ExtResource( 12 )
+
+[node name="FloatingStar9" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -337.0
+margin_top = -179.5
+margin_right = -307.0
+margin_bottom = -149.5
+
+[node name="FloatingStar10" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -438.0
+margin_top = 202.5
+margin_right = -408.0
+margin_bottom = 232.5
+texture = ExtResource( 13 )
+
+[node name="FloatingStar11" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -450.0
+margin_top = 154.5
+margin_right = -420.0
+margin_bottom = 184.5
+texture = ExtResource( 13 )
+
+[node name="FloatingStar12" parent="TextureRect" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -406.0
+margin_top = 135.5
+margin_right = -368.0
+margin_bottom = 173.5
+texture = ExtResource( 11 )

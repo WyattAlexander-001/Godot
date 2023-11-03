@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://TowerDefense/common/DraggableCar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TowerDefense/03.TurretMultipleMobs/Turret_v2.gd" type="Script" id=2]
+[ext_resource path="res://TowerDefense/common/Turret.tscn" type="PackedScene" id=3]
+
+[node name="TurretMultipleMobs" type="Node2D"]
+
+[node name="Turret" parent="." instance=ExtResource( 3 )]
+position = Vector2( 898.317, 528 )
+script = ExtResource( 2 )
+rotation_factor = 0.4
+
+[node name="Mob" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1244, 480 )
+
+[node name="Mob2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 584, 334 )
+
+[node name="Mob3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 756, 640.056 )

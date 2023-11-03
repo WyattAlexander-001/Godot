@@ -1,0 +1,304 @@
+﻿name,scene,description,requirements,project,hints,techniques
+Making the ship move,res://MovingShip/01.MakingShipMove/MakingShipMove.tscn,"Using a fixed velocity value, make the ship move by itself.","Make the ship move every frame at a fixed speed.; Take the [code]_process()[/code] function’s [code]delta[/code] parameter into account.; Use the variable named [code]velocity[/code], which we defined for you.",to space and beyond,"You need to change the value of the velocity variable. It's set to [code]Vector2.ZERO[/code] at first, so the ship won't move when using it.","Changing position, using process, using delta."
+Listening to player input,res://MovingShip/02.AddingInput/AddingInput.tscn,"This time, you need to make the ship listen to input.","Pressing the [code]move_left[/code], [code]move_up[/code], [code]move_right[/code], and [code]move_down[/code] input action respectively moves the ship to the left, up, right, and down.; You should call [code]Input.get_axis()[/code] to calculate the direction vector.;When the player moves diagonally, you should normalize the direction vector so the ship does not move faster.",to space and beyond,"You need to use the [code]Input.get_axis()[/code] function twice, once for the [code]direction.x[/code] axis, and once for the [code]direction.y[/code] axis.; To normalize a vector, call its normalized() function. You need to assign the result of the function call back to a variable.",Calculating the input direction.
+The boost mechanic,res://MovingShip/03.AddingTimer/AddingTimer.tscn,"In this practice, you'll reproduce the boost mechanic we saw in this lesson. You'll need to add a timer to your scene, connect to its signal, and make the ship boost when pressing the [code]boost[/code] input action.","Pressing the [code]boost[/code] input action causes the ship to speed up.; The [code]Sprite[/code] has a [code]Timer[/code] node as its child.; Pressing [code]boost[/code] starts the timer's countdown.; When the timer times outs, the ship goes back to its normal speed.",to space and beyond,"After creating the Timer node, you can connect its timeout signal by going to the Node tab next to the Inspector.",Using signals.
+Making the ship steer,res://MovingShip/04.MakingShipSteer/MakingShipSteer.tscn,Make the ship move smoothly using the steering equation you just learned in the lesson.,The ship should move smoothly using the steering equation we saw here.; You need to calculate and use both the ship's desired velocity and the steering vector.,to space and beyond,"The desired velocity represents the ship moving instantly at the maximum possible speed in the input [code]direction[/code]. ; The [code]steering[/code] vector is the difference between the current and the desired velocity. ; To make the ship accelerate and decelerate smoothly, you add a portion of the [code]steering[/code] vector to the current velocity.",Steering.
+The inventory grid,res://Scoreboard/Inventory/Inventory.tscn,"Our inventory grid is empty! Using the [code]preload()[/code], [code]instance()[/code], and [code]add_child()[/code] functions, fill the inventory with instances of the [i]InventoryItem[/i] scene.
+
+You'll only need to edit the [code]Inventory.gd[/code] script to complete this practice.",Your code uses [code]preload().instance()[/code] to load and instantiate the [i]InventoryItem[/i] scene.; You add [i]InventoryItem[/i] instances as children of the [i]Inventory[/i] node by calling the [code]add_child()[/code] function (you can call [code]add_child()[/code] without a prefix to add a child to the current node).; You do the above in the [code]add_inventory_item()[/code] function we prepared for you.,scoreboard,"You first need to load the InventoryItem scene from the disk. To do so, call [code]preload(""InventoryItem.tscn"")[/code] function.; Loading a scene gives you a template. To create an instance from that template, You need to call its [code]instance()[/code] function.","Preloading, instancing, and adding children from code."
+The poem,res://Scoreboard/Poetry/Poem.tscn,"We have a poem consisting of a list of [code]Label[/code] nodes inside a [code]VBoxContainer[/code], but their text doesn't show up.
+
+Read the scripts in the practice's folder to find how to change the labels' text.","In [code]Poem.gd[/code], calling [code]add_poetry_line()[/code] should display the correct line from the [code]lines[/code] array on each label.",scoreboard,The line [code]for text in lines:[/code] extracts each string from the [code]lines[/code] array and assigns it to the [code]text[/code] variable. The loop passes that [code]text[/code] to the [code]add_poetry_line()[/code] function. It calls the function once for each value in the [code]lines[/code] array.; The [code]PoetryLine.gd[/code] script has a function called [code]set_text()[/code]. It is attached to the instance of [code]PoetryLine.tscn[/code] created by the [code]add_poetry_line()[/code] line function.,Calling a member function on a scene instance.
+The to-do list,res://Scoreboard/TodoList/TodoList.tscn,"We prepared a [i]TodoList[/i] scene for you: [code]TodoList.tscn[/code]. It contains a row with a form field and a button. Currently, they don't do anything.
+
+Next to the scene file, you'll find another one representing a single to-do list entry: [code]TodoItem.tscn[/code].
+
+Your task is to make it so that when you enter something in the form and click the [i]Add[/i] button, a new [i]TodoItem[/i] appears. You'll need to edit the TodoList node's script to achieve that.",Create and add a [i]TodoItem[/i] instance in the [code]add_todo()[/code] function. You'll want to add it as a child of the [i]TodoList[/i] node by calling [code]add_child()[/code].; Make it so that pressing the [code]Button[/code] adds a new [i]TodoItem[/i]. You'll need to connect one of the [code]Button[/code]'s signals.,scoreboard,You need to call [code]set_text()[/code] on the [i]TodoItem[/i] instance to change the displayed text.,"Preloading, instancing, adding children from code, and calling member functions on a scene instance."
+Simple dialogue box,res://DialogueBoxes/01.DialogueBox/LinearDialogue.tscn,"We prepared a variation of the slideshow for you. It is a scene that represents a simple dialogue box, as seen in RPG games. However, currently, only the text is visible when running the scene.
+
+We want to display the speaking character's portrait on the left and their name above the text.
+
+Your task is to add the code to display both the portrait and the character name in the dialogue box.
+
+The script comes with the data you need to display. Each dialogue line is a dictionary with currently two unused key-value pairs for the character's portrait texture and their name.",The dialogue box displays the correct character portrait based on the contents of the [code]dialogue[/code] variable.; The dialogue box displays the correct character name based on the contents of the [code]dialogue[/code] variable.,slideshow,"The [code]line_data[/code] variable contains a dictionary with three keys: [code]name[/code], [code]texture[/code], and [code]text[/code].; You need to extract the [code]texture[/code] value and the [code]name[/code] value from the [code]line_data[/code] dictionary.","Accessing dictionary values, displaying text and images."
+Party members list,res://DialogueBoxes/02.Party/PartyMembersList.tscn,"In this practice, you'll reuse the same techniques you learned in the past two chapters to create party members' displays.
+
+For this challenge, we've prepared the party member scene, [code]PartyMember.tscn[/code], to display a single party member.
+
+Another scene, [code]PartyMembersList.tscn[/code], has a script with an array of dictionaries representing the player's party.
+
+Your task is to write the missing code in [code]PartyMembersList.tscn[/code] to display every member in the player's party.","For each member in the [code]members[/code] array, you create one instance of the Party member scene.; The order, name, and texture of the displayed party members match the data in the [code]members[/code] array.; You use a for loop to create party member instances.",slideshow,"You have an array of dictionaries called [code]members[/code]. In the [code]_ready()[/code] function, using a [code]for[/code] loop, you need to extract each dictionary value from the [code]members[/code] array.; In this loop, you need to call the [code]add_member()[/code] function and pass it the dictionary you extracted in the [code]for[/code] loop. Each call to [code]add_member()[/code] will add one party member, and the function needs one dictionary with the character's data to work.","Looping over an array, passing dictionaries, accessing dictionary values, displaying text and images."
+The credits screen,res://DialogueBoxes/03.Credits/CreditsScreen.tscn,"A fellow developer coded our credits screen, but it’s missing a couple of teammates:
+
+- Bonnie Petersen, our level designer.
+- Judy Prince, our composer.
+
+You need to add the missing two values in the credits array. Each value is a dictionary with two key-value pairs: a name and a role.
+
+We recommend you type the dictionary entries entirely by hand and not duplicate existing lines in the credits script for extra practice.",Add the missing two teammates to the credits dictionary.,dialogue tree,You need to add a new line to the [code]credits[/code] array for each teammate to list in the credits.;Your new lines should be dictionaries like the existing two.,Writing dictionaries.
+Main menu screen,res://DialogueBoxes/04.Menu/MainMenuScreen.tscn,"We designed a couple of screens for our game's main menu, but clicking the buttons doesn't do anything at the moment.
+
+Your task is to connect several buttons to the [code]show_screen()[/code] function, [i]binding[/i] the correct screen scene to the signal callback.
+
+The binding value is the [code]connect()[/code] function's fourth argument, an array containing values to pass to the callback function. In this case, [code]show_screen()[/code].
+
+You'll find an example of the signal connection you need to make in the practice script. We also added code comments to help you a bit.",Clicking the credits button shows the credits screen.; Clicking the options button shows the options screen.; Clicking the quit button quits the game.,dialogue tree,"To bind a value to a signal callback, create an array as the fourth argument and put the bind value there.; You should use the line that connects the start game button to the start menu in [code]MainMenuScreen.gd[/code] as an example.","Connecting signals, binding values to signal callbacks."
+Changing sprite frames,res://TopDownMovement/01.Frames/Frames.tscn,"In this practice, we will familiarize ourselves with how to change a [code]Sprite[/code]'s frames.
+
+To start, select the [code]Sprite[/code] node. In the [i]Inspector[/i], change the [i]Animation -> Frame[/i] value and see what happens.
+
+Once you've experimented with it, set the [i]Animation -> Frame[/i] back to [code]0[/code], then run the scene. You'll see a sprite and a slider. Try changing the slider's value. You'll see that the number changes, but not the sprite.
+
+Your task is to edit the function [code]_on_HSlider_value_change()[/code] so that the selected sprite frame matches the slider's number.","When changing the slider's value, the character's sprite changes accordingly.",top-down movement,You need to use the [code]sprite.frame[/code] property to change the sprite's displayed frame.,Changing a sprite's animation frame.
+Flipping sprites,res://TopDownMovement/02.Flips/Flips.tscn,"An important lesson we need to learn is how to flip a sprite, so we can switch sides without drawing additional images.
+
+Open the scene, and select the [code]Sprite[/code]. Look at the [i]Offset -> Flip H[/i] and [i]Offset -> Flip V[/i] properties in the [i]Inspector[/i].
+
+Try checking and unchecking them, and see how these changes affect the sprite.
+
+Now run the scene, and notice the two buttons labeled [i]Flip Horizontally[/i] and [i]Flip Vertically[/i].",Pressing the buttons flips the sprite horizontally and vertically.,top-down movement,"To flip the character horizontally, you need to change the [code]sprite.flip_h[/code] property.; To flip the character vertically, you need to change the [code]sprite.flip_v[/code] property.",Flipping a sprite.
+Flipping when going left,res://TopDownMovement/03.FlipSprite/FlipSprite.tscn,"Previously, we flipped the sprite by pressing a button. Now, we want to flip the sprite based on the player's input direction.
+
+We can know if a [code]Vector2[/code] points left or right with its [code]x[/code] member variable:
+
+- If [code]x[/code] is exactly [code]0[/code], the vector isn't going left or right.
+- If [code]x[/code] is greater than [code]0[/code], the vector is going right.
+- If [code]x[/code] is lower than [code]0[/code], the vector is going left, and we should flip the sprite.
+
+The scene has a sprite already moving by obtaining a [code]direction[/code] vector from user input. We want to flip the sprite when the [code]direction[/code] is going towards the left.",The sprite looks towards the left when the character moves towards the left. ;The sprite looks towards the right when the character moves towards the right.,top-down movement,"You can  directly assigned the result of a conditional expression to [code]sprite.flip_h[/code]. A conditional expression is any comparison, like [code]direction.y > 5.0[/code], for example. The computer converts that into a value of [code]true[/code] or [code]false[/code].",Flipping a sprite based on the player’s input direction.
+Choose the right frame,res://TopDownMovement/04.RestoreFrames/RestoreFrames.tscn,"This scene already has a sprite that moves, flips, and changes frames. Unfortunately, someone messed up the mapping of directions to frames!
+
+Fix the [code]DIRECTION_TO_FRAME[/code] dictionary so that each direction maps to the correct frame.
+
+Feel free to go back to the scene and change the [i]Animation -> Frame[/i] manually in the [i]Inspector[/i] to know which frame number to use.",The correct sprite frame shows depending on the player’s input direction.,top-down movement,"You only need to change the values in the [code]DIRECTION_TO_FRAME[/code] dictionary.;The values are the numbers after the "":"" like 4 or [code]3[/code].","Mapping values in a dictionary, changing sprite frames correctly based on a direction."
+Eight way movement,res://TopDownMovement/06.EightWayMovement/EightWayMovement.tscn,"The robot moves, but it doesn't flip or change frames. The code already maps directions to frame numbers correctly.
+
+You need to complete the code at the end of the [code]_physics_process()[/code] function so that the sprite correctly flips and faces the right direction.",The sprite flips when moving towards the left.; The character sprite faces towards the input direction.,top-down movement,"You need to make sure the [code]direction_key[/code] variable only has positive X values to match the keys in [code]DIRECTION_TO_FRAME[/code].; For the [code]sprite.frame[/code] and [code]sprite.flip_h[/code] properties, you need to use the same technique as in the previous practices.","Remapping a 2D vector, changing a sprite’s frame and flipping a sprite based on a direction."
+Four way movement,res://TopDownMovement/07.FourWayMovement/FourWayMovement.tscn,"In this practice, the robot can already face the right direction and flip correctly. You need to make sure it can move in only four directions by restricting its movement on one axis.",The robot can only move in four directions.,top-down movement,You need to fill the conditions we’ve prepared for you based on the first one.,Moving in four directions.
+Bumping in walls,res://TopDownMovement/05.Collisions/Collisions.tscn,"We're leaving you with one last practice to wrap up this series.
+
+The character can move and updates its sprite correctly. We have one problem, though: the character passes through walls.
+
+Look at the scene in the Godot editor, and notice the configuration warning in the [i]Scene[/i] dock. A [code]KinematicBody2D[/code] is incomplete without a collision node.
+
+You need to edit the scene and add and configure the correct node so the character cannot go through walls.",The robot has a collision shape.;The robot cannot move through walls.,top-down movement,Click the warning sign next to the [i]Godot[/i] node to learn what it’s missing.,"Making a physics body collide, creating a collision shape."
+Selecting random items,res://RandomRocks/01.SelectRandomItem/SelectRandomItem.tscn,"We want to offer the player random loot to pick from when completing a quest. But currently, our code only generates swords.
+
+Edit the [code]get_random_item()[/code] function to return a random item from the [code]ITEMS[/code] array, which represents our items database in this practice.
+
+Once completed, you should see randomized items on the screen. Our test code calls the [code]get_random_item()[/code] function for each item to display.",The [code]get_random_item()[/code] function returns a random value from the [code]ITEMS[/code] array.,random rocks,You need to replace the [code]0[/code] inside the square brackets with a random number. That number should not become greater than the array size.; You need to use the [code]randi()[/code] function to generate a random number.; You can use the [code]%[/code] sign to limit the generated number.,Getting a random value from an array.
+Placing gems on a grid,res://RandomRocks/02.PlacingOnGrid/PlacingOnGrid.tscn,"In this project, we want to generate a grid of randomly-placed gems.
+
+We have a function to generate one gem and randomize its position, but we lack the loops to create many gems at once.
+
+Complete the [code]generate_gems()[/code] function to generate many gems on a grid. You'll need to add two nested [code]for[/code] loops and indent (add leading tabs) the existing lines of code in the function.
+
+After completing the code, running the scene should generate a grid of ten by ten gems.",The generate_gems() function creates [code]rows * columns[/code] gems.; The gems are laid on a grid.,random rocks,One of the for loops would look something like [code]for x in rows[/code].,"Creating nested loops, using loops to generate grid coordinates."
+Generating random positions,res://RandomRocks/03.RandomPositions/RandomPositions.tscn,"In this practice, your task is to complete the [code]calculate_random_position()[/code] function to generate random positions between [code]Vector2(0, 0)[/code] and [code]Vector2(max_offset, max_offset)[/code]. Our test code will call the function many times to scatter gems in a rectangle.
+
+When placing objects completely randomly like that, we call the distribution [i]white noise[/i]. Unlike with blue noise, things aren't evenly placed, and the result can look chaotic.","The [code]calculate_random_position()[/code] function generates random positions up to [code]Vector2(max_offset, max_offset)[/code].",random rocks,"You can use the function [code]randf()[/code] to generate a random decimal number between [code]0.0[/code] and [code]1.0[/code].; To generate a larger random number, multiply the number returned by [code]randf()[/code]. For example, to get a number between [code]0.0[/code] and [code]10.0[/code], you can write [code]randf() * 10.0[/code].","Generating random decimal numbers,  generating random coordinates."
+Applying blue noise,res://RandomRocks/04.RocksWithBlueNoise/RocksWithBlueNoise.tscn,"This practice reproduces the [i]Random positions with blue noise[/i] lesson. Complete the [code]add_rocks_with_blue_noise()[/code] function to offset each rock within its grid cell, taking its size into account.
+
+Try to do this without looking at the lesson's code to see if you can reproduce it. It uses the techniques you practiced previously.",Each rock has a random offset.; Each rock stays within its grid cell.,random rocks,"To calculate the random offset, you need to take the [code]rock_size[/code] into account.; You need to subtract the [code]rock_size[/code] to the [code]CELL_SIZE[/code] to calculate the maximum allowed offset.",Using blue noise to position randomly-generated objects.
+The maze,res://ObstacleCourse/01.Maze/Maze.tscn,"Our game screen has many walls and a statue in place, but the game character, the walls, and the statue do not have a collision shape.
+
+Open the [i]Godot[/i], [i]RobotStatue[/i], and [i]BrokenWall[/i] scenes and add the missing collision shape to each of them.
+
+All three scenes should use a [code]CollisionShape2D[/code] node with a [i]rectangle[/i] collision shape.
+
+The broken wall's shape should entirely cover the sprite so the player can't walk out of the level.
+
+The statue's collision shape should cover the base on which it lies. That'll allow the character to walk behind the statue.
+
+As for the character, any small shape will do.",Godot.tscn has a rectangular collision shape.; RobotStatue.tscn has a rectangular collision shape.; BrokenWall.tscn has a rectangular collision shape.,obstacle course,You can click the scene icon next to a node to open the corresponding scene. That's where you need to add the collision shape node.,Adding collision shapes to nodes.
+Picking the gems,res://ObstacleCourse/02.PickingTheGems/PickingTheGems.tscn,"The player cannot pick up the gems!
+
+Your task is to change the gems' collision layer and add the missing code so the player can pick them up.
+
+When the player touches a gem, the gem should get freed.
+
+To complete this practice, you'll need to open the [code]Gem.tscn[/code] scene and update the script and the [i]Gem[/i] node's properties.",The player can pick up the gems by walking over them.,obstacle course,"The gems themselves are [code]Area2D[/code] nodes, so you can directly connect their signals by calling [code]connect()[/code].; The player is a physics body. So you need to connect the [code]body_entered[/code] signal to detect the player.",Working with collision layers and masks.
+End game,res://ObstacleCourse/03.EndGame/EndGame.tscn,"Our game level has a statue, and that statue is an [code]Area2D[/code] node.
+
+When the player touches the statue, we want to end the game and display the finish screen. When showing the finish screen, the player should not be able to move anymore.
+
+Your tasks are to:
+
+1. Change the statue's collision layer and mask to detect the player.
+2. Stop the player when touching the statue by turning off physics processing on the [i]Godot[/i] node.
+3. Show the end screen by calling the node's [code]show()[/code] function.
+
+You can complete the second and third tasks by editing the [i]EndGame[/i] node's script, where we already connected the statue's [code]body_entered[/code] signal.",The statue can detect collisions with Godot.; Touching the statue stops Godot.; Touching the statue shows the finish screen.,obstacle course,"To make the character interact with the statue, you need to open the [code]RobotStatue[/code] scene and change the node's collision [i]mask[/i].; The Godot node is a physics body, so you need to connect the statue's [code]body_entered[/code] signal to react to a collision with the character.","Working with collision layers and masks, connecting signals, toggling processing on a node."
+The slowing turret,res://TowerDefense/01.SlowingTurret/SlowingTurret.tscn,"In this project, mob cars are racing along a track. We have a slowing tower with a circular area that currently does nothing.
+
+We want the cars to slow down when they enter the tower's area of effect.
+
+Your task is to complete the [code]body_entered[/code] and [code]body_exited[/code] signal callbacks in the [code]Turret.gd[/code] script and make the cars half as fast while in the tower's range.
+
+The cars use the script [code]Mob.gd[/code]. You can open it to see they have a property named [code]speed[/code]. You need to use that property to slow them down.
+
+Be sure to edit the [i]Turret[/i]'s script for this practice, [i]not[/i] the [code]SlowingTurret.gd[/code] script.",The cars slow down when entering the turret's range.; The cars speed back up when leaving the turret's range.,tower defense,You need to open the Turret.gd script to complete this practice. The comments in there will help you complete the practice.,Changing a node’s properties when inside an area.
+Planet defender,res://TowerDefense/02.PlanetDefender/PlanetDefender.tscn,"Our planet's under attack! Toy space mice are raining down on Earth like asteroids.
+
+Using your nuclear toy gun, you must ensure they never hit the surface.
+
+The gun is ready to fire rockets, but the aiming system is broken. Your task is to fix it.
+
+Open the [code]Turret.gd[/code] script and complete both the [code]_physics_process()[/code] and [code]_on_Timer_timeout()[/code] functions. You'll find the details inside the comments in the script.",The gun automatically aims at the enemies.; The gun shoots at its targets.,tower defense,"In [code]Turret.gd[/code], you need to edit the [code]_physics_process()[/code] and [code]_on_Timer_timeout()[/code] functions.; You can use the [code]Vector2.angle_to_point()[/code] function to calculate the angle to the target.; To make the rocket face the target, you can use the [code]global_transform[/code] property.","Calculating an angle, making a node's transform match another."
+Homing rocket defender,res://TowerDefense/03.HomingRocketDefender/HomingRocketDefender.tscn,"The evil mice are back, and we have a problem.
+
+This turret is too slow! It can't turn fast enough to destroy the enemies.
+
+Luckily, we got a fresh shipment of homing rockets. Using the homing rockets, we should be able to destroy all the enemies.
+
+Notice the [code]HomingRocket.tscn[/code] scene. That's the one we will use.
+
+Open the [code]TurretHoming.gd[/code] script, and override the proper function, so the turret launches a homing rocket.
+
+You will need to:
+
+1. Extend the proper function to launch a homing rocket instead of a normal rocket.
+2. Preload and instance a homing rocket.
+3. Give the homing rocket a target.
+4. Give the homing rocket an initial velocity.
+
+Don't hesitate to open [code]Turret.gd[/code] and [code]HomingRocket.gd[/code] to read them and remember how they work.
+
+Good luck in saving the planet!",The turret shoots homing rockets.; The turret aims at enemies.; The homing rockets have an initial velocity.,tower defense,The function you need to override in [code]HomingRocket.gd[/code] is [code]_on_Timer_timeout()[/code].,"Overriding functions, instancing, adding children, setting properties and transforms."
+Triggering an animation,res://ObstacleCourse_Part2/01.Blink/Blink.tscn,"In this practice, we have a character and a button. When we toggle the button on, we want Godot to play a blink animation repeatedly. When we toggle the button off, we want the animation to stop.
+
+To get started, open the [i]Triggering an animation[/i] practice in the [i]Practices[/i] dock.
+
+First, create an animation called ""blink"" in the [code]AnimationPlayer[/code].
+
+The blink animation should have the following keyframes:
+
+- At [code]0.0[/code] seconds, Godot's [code]modulate[/code] property should be a fully opaque white color (the [code]modulate[/code] property's default).
+- In the middle of the animation, Godot's [code]modulate[/code] property should be a fully transparent white (it should have an alpha value of [code]0[/code]).
+
+Make sure the blink animation loops. Finally, open the [code]Blink.gd[/code] script and write the necessary code for the animation to start and stop when toggling the button.
+
+Good luck!",There's a blink animation with two modulate keyframes.; The animation loops.; Pressing the button plays the animation.,Obstacle course part 2,"The function [code]_on_button_toggled()[/code] receives a [code]bool[/code] parameter.; You use [code]animation_player.play(""animationName"")[/code] to play an animation called ""animationName"".;You use [code]animation_player.stop()[/code] to stop the animation player.","Creating animations, controlling animations."
+Increasing the gem counter,res://ObstacleCourse_Part2/02.GemCounter/GemCounter.tscn,"This practice will bring you back to detecting collisions and interactions with the [code]Area2D[/code] node.
+
+We created a gem-counter scene, and as the name suggests, the player has to pick up the gems and increase a UI counter that will show his progress.
+
+One problem is that the player can't interact with the gems.
+
+To understand the problem, you first need to open the [code]Godot.tscn[/code] scene and investigate the collision mask properties for the [code]Area2D[/code] node.
+
+The next step is to open the [code]Gem.tscn[/code] scene and set up the collision layer so that Godot can detect touching the [i]Gem[/i].
+
+The counter should increment when the player touches the [i]Gem[/i], and the UI label should reflect this change by changing to ""Gems: 1"", where ""1"" is the gem amount.
+
+You'll need to write code in the [code]GemCounter.gd[/code] script.",The robot can pick up gems.; Picking up a gem increases the gem counter.,Obstacle course part 2,"Godot's [code]Area2D[/code] does the collecting. You want to make a note of its [code]collision mask[/code] number, and then see if the Gem scene fits.; You can transform a number to a string using the [code]str(number)[/code] function.","Using areas, using collision layers and masks, connecting signals, converting values to text."
+Turning on the lights,res://ObstacleCourse_Part2/03.LightSwitch/LightSwitch.tscn,"Code the interaction between [i]Godot[/i] and the [i]Switch[/i] to turn on a light.
+
+To complete the practice, you'll need to add the [code]Light.tscn[/code] scene to the scene tree as a child of the [i]Switch[/i] node. Place it somewhere sensible in the scene.
+
+Then you'll need to open the [code]Switch.gd[/code] script and code the player-switch interaction.
+
+When the player touches the switch, the light should turn on for a short while.
+
+The [i]Light[/i] scene has a [code]Light2D[/code] node at the root. You can turn on lights by setting its [code]enabled[/code] property to [code]true[/code].","Walking over the switch turns on the light. ; Walking over the switch starts a timer. ; When the timer times out, the light turns off.",Obstacle course part 2,"After dragging [code]Light.tscn[/code] under the [code]Switch[/code] node, try setting [code]enabled[/code] on/off manually, to see how it should look.; set [code]light.enabled[/code] to turn on the light.","Connecting signals, changing properties of another node, using areas, using timers."
+Adding the double jump,res://SideScroller/01.AddingDoubleJump/AddingDoubleJump.tscn,"You're given a scene with the robot. It can jump once, but not twice. Your task is to allow it to jump another time in the air.
+
+You will work in the [code]SideScrollDoubleJump.gd[/code] script. You can click the script icon next to the [i]SideScrollDoubleJump[/i] node to open it.",The character cannot jump more times than there are jumps in the [code]jump_strengths[/code] array.; The character actually jumps.; Each jumps increases [code]jump_number[/code].; The available jumps reset when the character touches the ground.,Think on your feet,You need to increase [code]jump_number[/code] with each jump.;You need to make sure [code]jump_number[/code] does not spill over [code]jump_strengths.size()[/code].;Make sure [code]jump_number[/code] is reset to 0 when we drop back to the floor.,"Accessing arrays, managing states, jumps."
+Creating a jump pad,res://SideScroller/02.CreatingAJumpPad/CreatingAJumpPad.tscn,"In this practice, you'll code a jumping pad that makes the character bounce when walking on it.
+
+The pad has a [i]PlayerDetector[/i] node, which will detect when the robot enters its area.
+
+When the robot touches the [i]PlayerDetector[/i], we want to make the player jump.
+
+The pad also has an exported property named [code]jump_increase_amount[/code]: a number that we want to propel the robot by.
+
+You will:
+
+1. Make sure the robot jumps up when touching the platform and that the strength of that jump is equal to [code]jump_increase_amount[/code].
+2. Increase the robot's [code]jump_number[/code] (without that, the robot could jump three times!).
+
+You will work in the [code]_on_body_entered()[/code] function.",Touching the pad makes the player jump by [code]jump_increase_amount[/code]. ; The player can only jump once after jumping on the pad.,Think on your feet,You should use [code]jump_increase_amount[/code] and add it to the player's [code]velocity[/code].;You should only add [code]jump_increase_amount[/code] to one of the parameters of the velocity.,Changing properties on other nodes.
+Marbles,res://SideScroller/03.Marbles/Marbles.tscn,"Each marble has a small drag area in this practice, which creates an arrow when you click and drag it. When you release the mouse, a [code]requested_move[/code] signal is emitted.
+
+Open the [code]Marble.gd[/code] script.
+
+You will work in the [code]_on_DragArea_requested_move()[/code] function. This function receives a vector equal to the mouse direction and distance from the rock's center.
+
+Your job is to apply this impulse to the marble to make the marble move.",The marbles move when clicking and dragging over them.,Think on your feet,"The marble is already a [code]RigidBody2D[/code], so you can call [code]apply_central_impulse()[/code] directly.;You only need to transfer the impulse provided to the correct function.",Moving rigid bodies.
+Fortune cookie,res://ObstacleCourse_Part3/practices/01.FortuneCookies/FortuneCookie.tscn,"We have a [i]FortuneCookie[/i] scene that can display sentences nicely when pressing a button.
+
+Unfortunately, right now, it doesn't have anything to show!
+
+There are two parts to this practice:
+
+1. You will first create a resource file and give it to the [i]FortuneCookie[/i] node.
+2. Then, you'll write a function to get a random line from the resource and call it from the fortune cookie script.
+
+Open the [code]FortuneCookie.tscn[/code] scene in the [i]FileSystem[/i] dock.
+
+Select the [i]FortuneCookie[/i] node in the scene and look at the [i]Inspector[/i]. It expects a [code]Book[/code] resource. You will need to create a new [code]Book[/code] resource file and give it several [code]lines[/code] of text to display.
+
+[b]Important:[/b] you must add the lines to the [code]Book[/code] resource in the [i]Inspector[/i]. If you add them to the [code]Book.gd[/code] script after creating the resource file, your lines of text will not be taken into account.
+
+To add lines to the [code]Book[/code] resource, first expand the [i]Lines[/i] property in the [i]Inspector[/i] and increase the [i]Size[/i] value.
+
+[img=$SIZE]res://addons/PracticeTester/images/practice-fortune-cookie-1.png[/img]
+
+New slots will appear where you can write lines.
+
+[img=$SIZE]res://addons/PracticeTester/images/practice-fortune-cookie-2.png[/img]
+
+Then, you'll need to code a function named [code]get_random_line()[/code] in the [code]Book.gd[/code] script.
+
+The function should return a random value from the [code]Book.lines[/code] array. You will need to call that function from the [code]FortuneCookie.gd[/code] script.
+
+Here are three lines that you can write in your [code]Book[/code] resource:
+
+- It's not a bug. It's an undocumented feature!
+- Programming is the process of putting new bugs in.
+- Computers are useless. They only give you answers.",The [i]FortuneCookie[/i] has a Book resource.; The Book resource has a function [code]get_random_line()[/code] that returns a random line of text from its [code]lines[/code] array.; The [i]FortuneCookie[/i] displays random lines.,Obstacle course part 3,"You need to create a Resource file in the file system, and set its script property to [code]Book[/code].;Add some lines to the book.;For the [code]get_random_line()[/code] function, you can use [code]var line = lines[randi() % lines.size()][/code].","Creating a resource, using a resource."
+Inventory items,res://ObstacleCourse_Part3/practices/02.Items/InventoryItems.tscn,"In this practice, you will create a couple of resource files and give them to an inventory to display.
+
+You will first need to complete the [i]InventoryItem[/i] script. You need to add four exported variables to the resource script. You'll find the details in the [code]InventoryItem.gd[/code] file.
+
+Then, create at least three [i]InventoryItem[/i] resource files and fill in their properties. You can use images in the [code]assets/[/code] neighbor directory for the icon textures.
+
+Finally, add all resource files to the [i]InventoryItems[/i] node's [i]Items[/i] property in the [i]Inspector[/i].
+
+The [i]Items[/i] property is an exported array. Click the button that says [i]Array (Size 0)[/i] next to the property label to edit it.
+
+[img=$SIZE]res://addons/PracticeTester/images/practice-array-size-label.png[/img]
+
+Click the field next to [i]Size[/i] and set the number to match the number of resources you created.
+
+[img=$SIZE]res://addons/PracticeTester/images/practice-setting-array-size-inspector.png[/img]
+
+You can now drag and drop each of your tres files onto one of the created slots. Be careful not to leave any empty slots, or you will get errors.
+
+[img=$SIZE]res://addons/PracticeTester/images/practice-setting-array-resources-inspector.png[/img]",The [i]InventoryItems[/i] node has at least three item resources.,Obstacle course part 3,"There is no catch, you really just have to add [code]export var x[/code] for each variable listed in the file [code]InventoryItem.gd[/code].",Creating resources.
+Saving the inventory,res://ObstacleCourse_Part3/practices/03.Saving/Saving.tscn,"In this practice, you will write code to save and load an inventory from the [i]Inventory[/i] resource.
+
+We prepared a scene with the inventory's interface. It has an [code]Inventory[/code] resource attached to it, and when you run the scene, the resource's contents show up.
+
+[img=$SIZE]res://addons/PracticeTester/images/practice-inventory-save.png[/img]
+
+There are also several buttons to save the inventory, add an item, and remove an item. But there's an issue: the [code]Inventory.save()[/code] function does not exist.
+
+Your task is to open the [code]Inventory.gd[/code] script and add the missing function.",The [code]Inventory[/code] resource has a function named [code]save()[/code].;Calling the [code]save()[/code] function write the [code]Inventory[/code] to the disk.,Obstacle course part 3,Start with [code]function save():[/code].;Use the [code]ResourceSaver[/code]!; you need to use [code]ResourceSaver.save()[/code]. Use the tooltips to help you fill the function.,Saving resources.
+Equipping weapons,res://ObstacleCourse_Part3/practices/04.Equipping/Equipping.tscn,"The [code]Inventory[/code] resource in this exercise is shared between the inventory screen, and a character visualization to the right.
+
+[img=$SIZE]res://addons/PracticeTester/images/practice-equip.png[/img]
+
+When we set an item in the slot at the bottom, we want that change to be reflected in the character to the right.
+
+You will work in two files:
+
+- [code]Character.gd[/code]
+- [code]Inventory.gd[/code]
+
+You should make sure:
+
+1. That [code]Inventory.gd[/code] emits the correct signals when a weapon is set. There are two setters, one for the left hand, and one for the right hand.
+2. That [code]Character.gd[/code] does connect the proper signals to the proper functions.
+
+Good luck!",The [code]Inventory[/code] emits signals when equipping weapons in the left and right hand slots.; The [code]Character[/code] connects to the [code]Inventory[/code]'s signals.,Obstacle course part 3,"Take note of the signal names, and [code]emit()[/code] them at the appropriate place in [code]Inventory.gd[/code].; In [code]Character.gd[/code], you need to connect both signals.",Emitting and connecting to resource signals.

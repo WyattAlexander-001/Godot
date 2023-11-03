@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://levels/rooms/floating_dungeon_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://levels/rooms/tileset_invisible_walls.tres" type="TileSet" id=3]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://levels/rooms/RoomA.tscn" type="PackedScene" id=5]
+[ext_resource path="res://levels/rooms/RoomB.tscn" type="PackedScene" id=6]
+[ext_resource path="res://levels/rooms/RoomC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://levels/rooms/RoomD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/background/BackgroundBlueSky.tscn" type="PackedScene" id=9]
+[ext_resource path="res://interface/bars/UIHealthBar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/rooms/chests/Chest.tscn" type="PackedScene" id=11]
+
+[node name="Main" type="Node2D"]
+position = Vector2( 128, -64 )
+script = ExtResource( 2 )
+
+[node name="Bridges" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -327660, 5, 0, -262124, 5, 4, -196588, 5, 4, -131052, 5, 4, -65516, 5, 0, 262152, 5, 0, 262153, 5, 2, 262154, 5, 2, 262155, 5, 2, 262156, 5, 0, 458770, 5, 0, 524306, 5, 4, 589839, 5, 1, 589840, 5, 2, 589841, 5, 2, 589842, 5, 5, 655375, 5, 4, 720911, 5, 0 )
+
+[node name="InvisibleWalls" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 128, 128 )
+show_collision = true
+collision_layer = 64
+collision_mask = 0
+format = 1
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="UIHealthBar" parent="UILayer" instance=ExtResource( 10 )]
+margin_left = 64.0
+margin_top = 960.0
+margin_right = 413.0
+margin_bottom = 1033.0
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 576, 576 )
+
+[node name="RoomA" parent="." instance=ExtResource( 5 )]
+position = Vector2( -312, -8 )
+
+[node name="RoomB" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1672, -8 )
+
+[node name="RoomC" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1416, -1928 )
+
+[node name="RoomD" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1160, 1528 )
+
+[node name="BackgroundBlueSky" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[node name="Chest" parent="." instance=ExtResource( 11 )]
+position = Vector2( 832, 1024 )

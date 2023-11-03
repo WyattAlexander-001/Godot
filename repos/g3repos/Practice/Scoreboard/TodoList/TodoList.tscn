@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scoreboard/TodoList/TodoList.gd" type="Script" id=2]
+[ext_resource path="res://DialogueBoxes/common/theme.tres" type="Theme" id=3]
+
+[node name="TodoList" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 513.0
+margin_top = 247.0
+margin_right = -513.0
+margin_bottom = -247.0
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 894.0
+margin_bottom = 44.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+margin_right = 833.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+margin_left = 837.0
+margin_right = 894.0
+margin_bottom = 44.0
+text = "Add"
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_Button_pressed"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scoreboard/ScoreRow.gd" type="Script" id=1]
+
+[node name="ScoreRow" type="HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+
+[node name="PointsLabel" type="Label" parent="."]
+modulate = Color( 1, 0.947644, 0, 1 )
+margin_top = 13.0
+margin_right = 220.0
+margin_bottom = 27.0
+text = "Here is some random text 100002"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 224.0
+margin_top = 13.0
+margin_right = 444.0
+margin_bottom = 27.0
+text = "Here is some random text 100002"

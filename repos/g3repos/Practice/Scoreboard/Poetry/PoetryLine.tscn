@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scoreboard/Poetry/PoetryLine.gd" type="Script" id=1]
+[ext_resource path="res://Scoreboard/Poetry/assets/star.svg" type="Texture" id=2]
+
+[node name="PoetryLine" type="HBoxContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 117.0
+margin_bottom = 31.0
+size_flags_horizontal = 0
+custom_constants/separation = 10
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+margin_left = 34.0
+margin_top = 5.0
+margin_right = 110.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "a label"
+valign = 1

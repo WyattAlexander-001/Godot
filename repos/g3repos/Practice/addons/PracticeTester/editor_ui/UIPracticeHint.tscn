@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/PracticeTester/editor_ui/Revealer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/PracticeTester/editor_ui/UIPracticeHint.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="UIPracticeHint" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+title = "Hint"
+
+[node name="Text" type="RichTextLabel" parent="." index="2"]
+margin_top = 26.0
+margin_right = 136.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+custom_styles/normal = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "This is a test hint."
+text = "This is a test hint."
+fit_content_height = true

@@ -1,0 +1,50 @@
+[gd_resource type="Theme" load_steps=12 format=2]
+
+[ext_resource path="res://addons/MainMenu/search_bar_9patch.png" type="Texture" id=1]
+[ext_resource path="res://ui/theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/MainMenu/theme/hseparator_stylebox.tres" type="StyleBox" id=3]
+[ext_resource path="res://addons/MainMenu/theme/fonts/font_button_main_menu.tres" type="DynamicFont" id=4]
+[ext_resource path="res://addons/MainMenu/theme/button_disabled.tres" type="StyleBox" id=5]
+[ext_resource path="res://addons/MainMenu/theme/button_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://addons/MainMenu/theme/button_normal.tres" type="StyleBox" id=7]
+[ext_resource path="res://addons/MainMenu/theme/button_hover.tres" type="StyleBox" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 384, 64 )
+margin_left = 17.0
+margin_right = 18.0
+margin_top = 17.0
+margin_bottom = 16.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[resource]
+default_font = SubResource( 2 )
+Button/colors/font_color = Color( 0.572549, 0.560784, 0.721569, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_focus = Color( 0.572549, 0.560784, 0.721569, 1 )
+Button/colors/font_color_hover = Color( 0.572549, 0.560784, 0.721569, 1 )
+Button/colors/font_color_pressed = Color( 0.0901961, 0.0941176, 0.188235, 1 )
+Button/fonts/font = ExtResource( 4 )
+Button/styles/disabled = ExtResource( 5 )
+Button/styles/focus = SubResource( 3 )
+Button/styles/hover = ExtResource( 8 )
+Button/styles/normal = ExtResource( 7 )
+Button/styles/pressed = ExtResource( 6 )
+HSeparator/constants/separation = 20
+HSeparator/styles/separator = ExtResource( 3 )
+LineEdit/styles/normal = SubResource( 1 )
+MarginContainer/constants/margin_bottom = 40
+MarginContainer/constants/margin_left = 40
+MarginContainer/constants/margin_right = 40
+MarginContainer/constants/margin_top = 40
+VBoxContainer/constants/separation = 8

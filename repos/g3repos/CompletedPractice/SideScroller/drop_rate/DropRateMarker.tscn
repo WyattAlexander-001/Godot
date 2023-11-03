@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://DialogueBoxes/common/theme.tres" type="Theme" id=1]
+[ext_resource path="res://SideScroller/drop_rate/DropRateMarker.gd" type="Script" id=2]
+
+[node name="DropRateMarker" type="Label"]
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 1 )
+text = "0"
+script = ExtResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 1040, 0, 0, 0 )
+width = 5.0

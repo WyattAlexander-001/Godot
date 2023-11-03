@@ -1,0 +1,230 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://ObstacleCourse/ObstacleCourse.gd" type="Script" id=1]
+[ext_resource path="res://ObstacleCourse/fonts/remaining_time_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ObstacleCourse/fonts/info_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ObstacleCourse/assets/finish.png" type="Texture" id=4]
+[ext_resource path="res://ObstacleCourse/Course.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ObstacleCourse/obstacles/PushWall.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ObstacleCourse/Godot.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 320, 32 )
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "3" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:custom_fonts/font:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 512 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:rect_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 1080 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "start_countdown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "3", "2", "1" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9, 1, 1.9, 2, 3 ),
+"transitions": PoolRealArray( 1, 0, 1, 0, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ), Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:custom_fonts/font:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 512 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("../..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start"
+} ]
+}
+
+[node name="ObstacleCourse" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Course" parent="." instance=ExtResource( 5 )]
+
+[node name="Godot" parent="Course" instance=ExtResource( 7 )]
+position = Vector2( 512, 513 )
+
+[node name="Camera2D" type="Camera2D" parent="Course/Godot"]
+current = true
+
+[node name="Obstacles" type="YSort" parent="Course"]
+position = Vector2( 0, 1 )
+
+[node name="PushWall" parent="Course/Obstacles" instance=ExtResource( 6 )]
+position = Vector2( 1472, 384 )
+
+[node name="PushWall2" parent="Course/Obstacles" instance=ExtResource( 6 )]
+position = Vector2( 3136, 1920 )
+
+[node name="OffCourse" type="StaticBody2D" parent="Course"]
+visible = false
+position = Vector2( 0, 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Course/OffCourse"]
+polygon = PoolVector2Array( 0, 0, 1664, 0, 1664, 384, 1280, 384, 1280, 128, 128, 128, 128, 448, 256, 448, 256, 640, 128, 640, 128, 832, 512, 832, 512, 960, 1152, 960, 1152, 832, 1280, 832, 1280, 512, 1664, 512, 1664, 1536, 0, 1536 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Course/OffCourse"]
+polygon = PoolVector2Array( 1664, 576, 2176, 576, 2176, 704, 2432, 704, 2432, 2752, 2816, 2752, 2816, 2688, 2816, 2624, 3584, 2624, 3584, 2368, 4352, 2368, 4352, 2304, 4480, 2304, 4480, 2368, 4608, 2368, 4608, 2496, 4864, 2496, 4864, 2304, 4992, 2304, 4992, 3584, 1664, 3584 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Course/OffCourse"]
+polygon = PoolVector2Array( 1664, 0, 5376, 0, 5376, 1152, 4480, 1152, 4480, 1280, 4352, 1280, 4352, 1408, 4352, 1472, 4480, 1472, 4480, 2048, 4352, 2048, 4352, 2176, 3840, 2176, 3840, 2048, 3712, 2048, 3712, 1920, 2816, 1920, 2816, 1344, 2944, 1344, 2944, 960, 3072, 960, 3072, 1088, 3200, 1088, 3200, 1600, 3584, 1600, 3584, 1344, 3712, 1344, 3712, 1152, 3584, 1152, 3584, 896, 3456, 896, 3456, 768, 3200, 768, 3200, 512, 2816, 512, 2816, 320, 3328, 320, 3328, 448, 3712, 448, 3712, 576, 4224, 576, 4224, 256, 3584, 256, 3584, 128, 1664, 128 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Course/OffCourse"]
+polygon = PoolVector2Array( 2688, 2048, 2688, 2432, 2944, 2432, 2944, 2304, 3328, 2304, 3328, 2048 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Course/OffCourse"]
+polygon = PoolVector2Array( 4864, 1152, 4864, 1472, 4736, 1472, 4736, 1920, 4864, 1920, 4864, 2112, 4736, 2112, 4736, 2176, 5120, 2176, 5120, 2560, 5376, 2560, 5376, 2432, 5632, 2432, 5632, 2880, 5504, 2880, 5504, 3136, 4992, 3136, 4992, 3584, 6144, 3584, 6144, 1152 )
+
+[node name="FinishLine" type="Area2D" parent="Course"]
+position = Vector2( 5120, 2689 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="Sprite" type="Sprite" parent="Course/FinishLine"]
+position = Vector2( -128, 0 )
+texture = ExtResource( 4 )
+offset = Vector2( 320, 32 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 64 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Course/FinishLine"]
+position = Vector2( 192, 32 )
+shape = SubResource( 14 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Info" type="Label" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+rect_scale = Vector2( 3, 3 )
+rect_pivot_offset = Vector2( 960, 540 )
+custom_fonts/font = ExtResource( 3 )
+text = "3"
+align = 1
+valign = 1
+
+[node name="RemainingTime" type="Label" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -129.0
+margin_top = 25.0
+margin_right = -20.0
+margin_bottom = 88.0
+custom_fonts/font = ExtResource( 2 )
+text = "00.00"
+align = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 12.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CanvasLayer/Info")
+autoplay = "start_countdown"
+anims/RESET = SubResource( 10 )
+anims/start_countdown = SubResource( 11 )

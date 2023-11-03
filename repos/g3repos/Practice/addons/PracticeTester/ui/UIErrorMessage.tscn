@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/PracticeTester/ui/UIErrorMessage.gd" type="Script" id=1]
+[ext_resource path="res://addons/PracticeTester/ui/theme/panel_error_log.tres" type="StyleBox" id=2]
+
+[node name="UIErrorMessage" type="PanelContainer"]
+margin_right = 354.0
+margin_bottom = 28.0
+custom_styles/panel = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 338.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 1, 0.0941176, 0.321569, 1 )
+text = "Error message"
+autowrap = true
+
+[node name="Tween" type="Tween" parent="."]

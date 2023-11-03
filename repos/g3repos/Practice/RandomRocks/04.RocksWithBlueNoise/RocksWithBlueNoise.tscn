@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://RandomRocks/04.RocksWithBlueNoise/RocksWithBlueNoise.gd" type="Script" id=1]
+
+[node name="RocksWithBlueNoise" type="Node2D"]
+position = Vector2( 335, 0 )
+script = ExtResource( 1 )

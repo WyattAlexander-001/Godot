@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://SideScroller/13.OpeningDoors/Switch.gd" type="Script" id=1]
+[ext_resource path="res://SideScroller/pressure-plate.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 46, 11.5 )
+
+[node name="Switch" type="Area2D"]
+position = Vector2( 823, 1041 )
+collision_layer = 0
+collision_mask = 7
+monitorable = false
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1.5 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -0.000244141 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )

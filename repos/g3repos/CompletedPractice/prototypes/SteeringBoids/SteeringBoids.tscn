@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://prototypes/SteeringBoids/SteeringBoids.gd" type="Script" id=1]
+
+[node name="ManySteeringShips" type="Node2D"]
+position = Vector2( 943, 563 )
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -924.0
+margin_top = -538.0
+margin_right = -884.0
+margin_bottom = -524.0
+text = "Press Enter to spawn ships"

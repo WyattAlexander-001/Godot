@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://ObstacleCourse_Part3/practices/04.Equipping/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://ObstacleCourse_Part3/practices/03.Saving/items/Boomerang.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+items = [ ExtResource( 3 ) ]

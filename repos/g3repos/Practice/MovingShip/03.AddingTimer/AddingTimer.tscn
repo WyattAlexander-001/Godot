@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MovingShip/03.AddingTimer/AddingTimer.gd" type="Script" id=1]
+[ext_resource path="res://MovingShip/green_ship.png" type="Texture" id=2]
+
+[node name="Sprite" type="Sprite"]
+position = Vector2( 946, 544 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

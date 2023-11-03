@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://SideScroller/asteroid.png" type="Texture" id=1]
+
+[sub_resource type="PhysicsMaterial" id=1]
+rough = true
+bounce = 0.2
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 84.006
+
+[node name="Rock" type="RigidBody2D"]
+position = Vector2( 631, 561 )
+collision_layer = 0
+collision_mask = 5
+mass = 4.0
+physics_material_override = SubResource( 1 )
+gravity_scale = 20.0
+can_sleep = false
+angular_damp = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 1 )

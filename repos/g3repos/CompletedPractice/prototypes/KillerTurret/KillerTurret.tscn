@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://prototypes/KillerTurret/turret_gun.png" type="Texture" id=1]
+[ext_resource path="res://prototypes/KillerTurret/KillerTurret.gd" type="Script" id=2]
+
+[node name="KillerTurret" type="Node2D"]
+z_index = 2
+script = ExtResource( 2 )
+
+[node name="Gun" type="Sprite" parent="."]
+rotation = 1.57079
+texture = ExtResource( 1 )
+offset = Vector2( 0.0157623, -20.0256 )
+
+[node name="FirePoint" type="Position2D" parent="Gun"]
+position = Vector2( 9.99569e-05, -45 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

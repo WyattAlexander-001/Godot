@@ -1,0 +1,180 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ObstacleCourse/02.PickingTheGems/PickingTheGems.gd" type="Script" id=1]
+[ext_resource path="res://ObstacleCourse/02.PickingTheGems/BrokenWall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ObstacleCourse/02.PickingTheGems/RobotStatue.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ObstacleCourse/assets/dungeon_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://ObstacleCourse/02.PickingTheGems/Godot.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ObstacleCourse/02.PickingTheGems/Gem.tscn" type="PackedScene" id=6]
+
+[node name="PickingTheGems" type="YSort"]
+script = ExtResource( 1 )
+
+[node name="Floor" type="TileMap" parent="."]
+position = Vector2( 0, 1 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( 0, 3, 0, 1, 3, 65536, 2, 3, 65536, 3, 3, 65536, 4, 3, 65536, 5, 3, 65536, 6, 3, 65536, 7, 3, 65536, 8, 3, 65536, 9, 3, 65536, 10, 3, 65536, 11, 3, 65536, 12, 3, 65536, 13, 3, 65536, 14, 3, 2, 65536, 3, 65536, 65537, 3, 65538, 65538, 3, 131072, 65539, 3, 65536, 65540, 3, 131072, 65541, 3, 65538, 65542, 3, 196610, 65543, 3, 65536, 65544, 3, 65538, 65545, 3, 196610, 65546, 3, 196609, 65547, 3, 65538, 65548, 3, 196609, 65549, 3, 65536, 65550, 3, 65536, 131072, 3, 65536, 131073, 3, 65536, 131074, 3, 65538, 131075, 3, 196609, 131076, 3, 65536, 131077, 3, 131072, 131078, 3, 65538, 131079, 3, 131072, 131080, 3, 131072, 131081, 3, 196608, 131082, 3, 131072, 131083, 3, 65536, 131084, 3, 65536, 131085, 3, 65538, 131086, 3, 65536, 196608, 3, 65536, 196609, 3, 131074, 196610, 3, 131072, 196611, 3, 65538, 196612, 3, 131072, 196613, 3, 65538, 196614, 3, 65538, 196615, 3, 131072, 196616, 3, 65538, 196617, 3, 196609, 196618, 3, 131072, 196619, 3, 131072, 196620, 3, 65536, 196621, 3, 196609, 196622, 3, 65536, 262144, 3, 65536, 262145, 3, 196608, 262146, 3, 65537, 262147, 3, 131074, 262148, 3, 131072, 262149, 3, 65536, 262150, 3, 65538, 262151, 3, 65538, 262152, 3, 196610, 262153, 3, 131072, 262154, 3, 65538, 262155, 3, 65537, 262156, 3, 65538, 262157, 3, 65538, 262158, 3, 65536, 327680, 3, 65536, 327681, 3, 196609, 327682, 3, 196608, 327683, 3, 196608, 327684, 3, 65538, 327685, 3, 196608, 327686, 3, 196608, 327687, 3, 131072, 327688, 3, 65538, 327689, 3, 65538, 327690, 3, 131074, 327691, 3, 65536, 327692, 3, 131074, 327693, 3, 65538, 327694, 3, 65536, 393216, 3, 65536, 393217, 3, 65538, 393218, 3, 196610, 393219, 3, 131072, 393220, 3, 196610, 393221, 3, 131072, 393222, 3, 196608, 393223, 3, 196608, 393224, 3, 65538, 393225, 3, 196608, 393226, 3, 65538, 393227, 3, 65536, 393228, 3, 65538, 393229, 3, 196609, 393230, 3, 65536, 458752, 3, 65539, 458753, 3, 131075, 458754, 3, 131075, 458755, 3, 262145, 458756, 3, 131076, 458757, 3, 262148, 458758, 3, 262145, 458759, 3, 262145, 458760, 3, 196612, 458761, 3, 262145, 458762, 3, 262148, 458763, 3, 131075, 458764, 3, 131075, 458765, 3, 131075, 458766, 3, 262149 )
+
+[node name="Godot" parent="." instance=ExtResource( 5 )]
+position = Vector2( 288, 590 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="RobotStatue" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1602, 407 )
+
+[node name="Walls" type="YSort" parent="."]
+
+[node name="BrokenWall" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1088, 768 )
+
+[node name="BrokenWall12" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 960, 768 )
+
+[node name="BrokenWall13" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 832, 832 )
+
+[node name="BrokenWall14" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 704, 768 )
+
+[node name="BrokenWall15" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 704, 640 )
+
+[node name="BrokenWall16" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 704, 512 )
+
+[node name="BrokenWall2" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1152, 512 )
+
+[node name="BrokenWall3" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 896, 320 )
+
+[node name="BrokenWall10" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 896, 192 )
+
+[node name="BrokenWall11" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 576, 448 )
+
+[node name="BrokenWall17" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 768, 192 )
+
+[node name="BrokenWall18" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 640, 192 )
+
+[node name="BrokenWall19" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 448, 512 )
+
+[node name="BrokenWall20" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 512, 128 )
+
+[node name="BrokenWall21" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 384, 128 )
+
+[node name="BrokenWall22" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 256, 192 )
+
+[node name="BrokenWall23" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 128, 320 )
+
+[node name="BrokenWall24" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 128, 448 )
+
+[node name="BrokenWall25" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 128, 576 )
+
+[node name="BrokenWall26" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 128, 704 )
+
+[node name="BrokenWall27" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 192, 832 )
+
+[node name="BrokenWall28" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 320, 832 )
+
+[node name="BrokenWall29" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 448, 768 )
+
+[node name="BrokenWall30" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 448, 640 )
+
+[node name="BrokenWall4" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1088, 640 )
+
+[node name="BrokenWall5" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1024, 256 )
+
+[node name="BrokenWall6" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1152, 256 )
+
+[node name="BrokenWall7" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1280, 256 )
+
+[node name="BrokenWall8" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1408, 256 )
+
+[node name="BrokenWall9" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1280, 512 )
+
+[node name="BrokenWall31" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1408, 576 )
+
+[node name="BrokenWall32" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1408, 704 )
+
+[node name="BrokenWall33" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1536, 768 )
+
+[node name="BrokenWall34" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1664, 768 )
+
+[node name="BrokenWall35" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1792, 768 )
+
+[node name="BrokenWall36" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1792, 640 )
+
+[node name="BrokenWall37" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1792, 512 )
+
+[node name="BrokenWall38" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1792, 384 )
+
+[node name="BrokenWall39" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1792, 256 )
+
+[node name="BrokenWall40" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1664, 192 )
+
+[node name="BrokenWall41" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1536, 192 )
+
+[node name="Gems" type="YSort" parent="."]
+
+[node name="Gem" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 294, 413 )
+
+[node name="Gem2" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 319, 333 )
+
+[node name="Gem3" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 388, 271 )
+
+[node name="Gem4" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 483, 260 )
+
+[node name="Gem5" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 577, 265 )
+
+[node name="Gem6" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 851, 414 )
+
+[node name="Gem7" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 958, 447 )
+
+[node name="Gem8" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 1027, 366 )
+
+[node name="Gem9" parent="Gems" instance=ExtResource( 6 )]
+position = Vector2( 1134, 336 )

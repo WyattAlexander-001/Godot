@@ -1,0 +1,170 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://addons/PracticeTester/ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=1]
+[ext_resource path="res://DialogueBoxes/common/theme.tres" type="Theme" id=2]
+[ext_resource path="res://Scoreboard/Poetry/assets/star.svg" type="Texture" id=3]
+[ext_resource path="res://ObstacleCourse_Part3/practices/01.FortuneCookies/FortuneCookie.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.112305, 0.112305, 0.179688, 1 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.457875, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.188235, 0.188235, 0.286275, 1, 0.188235, 0.188235, 0.286275, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0.0101351, 1 ), 0.0, 0.17619, 0, 0, Vector2( 1, 0.169318 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 91.55
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_random = 1.0
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/PanelContainer/MarginContainer/Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/PanelContainer/MarginContainer/Label/Particles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 24 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/PanelContainer/MarginContainer/Label/Particles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "text"
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/PanelContainer/MarginContainer/Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/PanelContainer/MarginContainer/Label/Particles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 24 ), Vector2( 780, 24 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/PanelContainer/MarginContainer/Label/Particles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="FortuneCookie" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 560.0
+margin_top = 481.0
+margin_right = 1360.0
+margin_bottom = 599.0
+rect_min_size = Vector2( 800, 0 )
+custom_constants/separation = 18
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 800.0
+margin_bottom = 60.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+margin_right = 800.0
+margin_bottom = 60.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 790.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 1 )
+percent_visible = 0.0
+
+[node name="Particles2D" type="Particles2D" parent="VBoxContainer/PanelContainer/MarginContainer/Label"]
+position = Vector2( 0, 24 )
+emitting = false
+amount = 60
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 3 )
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 78.0
+margin_right = 800.0
+margin_bottom = 118.0
+
+[node name="Button" type="Button" parent="VBoxContainer/CenterContainer"]
+margin_left = 302.0
+margin_right = 498.0
+margin_bottom = 40.0
+size_flags_horizontal = 0
+text = "Give me a Quote"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/text = SubResource( 1 )

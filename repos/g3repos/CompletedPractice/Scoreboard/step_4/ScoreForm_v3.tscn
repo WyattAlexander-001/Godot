@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scoreboard/common/scoreboard_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scoreboard/step_4/Scoreboard_v4.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scoreboard/step_3/ScoreForm_v2.gd" type="Script" id=3]
+
+[node name="ScoreForm_v3" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 374.0
+margin_top = 161.0
+margin_right = -374.0
+margin_bottom = -161.0
+rect_min_size = Vector2( 960, 540 )
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "The form doesn't change in this final version, but the Scoreboard instance does, which is why need a new scene for the form too."
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 62.0
+size_flags_vertical = 8
+
+[node name="NameField" type="LineEdit" parent="HBoxContainer"]
+margin_right = 560.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+placeholder_text = "Enter your name"
+
+[node name="PointsField" type="LineEdit" parent="HBoxContainer"]
+margin_left = 564.0
+margin_right = 1124.0
+margin_bottom = 62.0
+size_flags_horizontal = 3
+text = "50"
+
+[node name="OkButton" type="Button" parent="HBoxContainer"]
+margin_left = 1128.0
+margin_right = 1172.0
+margin_bottom = 62.0
+text = "Ok"
+
+[node name="Scoreboard" parent="." instance=ExtResource( 2 )]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[connection signal="pressed" from="HBoxContainer/OkButton" to="." method="_on_OkButton_pressed"]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://DialogueBoxes/common/theme.tres" type="Theme" id=1]
+[ext_resource path="res://addons/BackgroundInjector/backgrounds/space_background.png" type="Texture" id=2]
+[ext_resource path="res://DialogueBoxes/04.Menu/MainMenuScreen.gd" type="Script" id=3]
+
+[node name="MainMenuScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -95.0
+margin_right = 150.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 300, 0 )
+custom_constants/separation = 10
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 40.0
+text = "Start Game"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+margin_top = 50.0
+margin_right = 300.0
+margin_bottom = 90.0
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+margin_top = 100.0
+margin_right = 300.0
+margin_bottom = 140.0
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+margin_top = 150.0
+margin_right = 300.0
+margin_bottom = 190.0
+text = "Quit"
+
+[node name="Screens" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="."]
+visible = false
+margin_right = 103.0
+margin_bottom = 62.0
+text = "back"
+
+[node name="Tween" type="Tween" parent="."]

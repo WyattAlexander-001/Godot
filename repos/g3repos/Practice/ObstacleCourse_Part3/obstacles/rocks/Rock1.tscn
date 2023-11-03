@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ObstacleCourse_Part3/obstacles/rocks/rock1.png" type="Texture" id=1]
+[ext_resource path="res://ObstacleCourse_Part3/obstacles/rocks/StaticBody2D.tscn" type="PackedScene" id=2]
+
+[node name="Rock1" type="Sprite"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 32, 32 )

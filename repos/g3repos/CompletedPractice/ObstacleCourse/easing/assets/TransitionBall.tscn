@@ -1,0 +1,213 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ObstacleCourse/easing/assets/ball.svg" type="Texture" id=1]
+[ext_resource path="res://ui/theme/gdscript_app_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ObstacleCourse/easing/assets/TransitionBall.gd" type="Script" id=3]
+[ext_resource path="res://common/ui/theme/fonts/font_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://common/ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=5]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.464183, 0.836676 )
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+width = 256
+height = 128
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.9, 0 )
+
+[node name="EasingTester" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+theme = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 560.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 560, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 560.0
+margin_bottom = 44.0
+
+[node name="Easing" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 120, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Easing:"
+
+[node name="EasingOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 136.0
+margin_right = 560.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+margin_top = 60.0
+margin_right = 560.0
+margin_bottom = 68.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 84.0
+margin_right = 560.0
+margin_bottom = 128.0
+
+[node name="Easing2" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 120, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Transition:"
+
+[node name="TransitionOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 136.0
+margin_right = 560.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+margin_top = 144.0
+margin_right = 560.0
+margin_bottom = 152.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 168.0
+margin_right = 560.0
+margin_bottom = 196.0
+
+[node name="DurationSliderLabel" type="Label" parent="VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+margin_right = 120.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 120, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Duration"
+
+[node name="DurationSlider" type="HSlider" parent="VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+margin_left = 136.0
+margin_right = 560.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = 0.25
+max_value = 5.0
+step = 0.25
+value = 0.25
+tick_count = 5
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 212.0
+margin_right = 560.0
+margin_bottom = 220.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 236.0
+margin_right = 560.0
+margin_bottom = 280.0
+
+[node name="Animation" type="Label" parent="VBoxContainer/HBoxContainer4"]
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 120, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Animation:"
+
+[node name="AnimationStyleOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+margin_left = 136.0
+margin_right = 560.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 576.0
+margin_right = 1096.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 520, 0 )
+custom_constants/margin_top = 0
+
+[node name="AssetsContainer" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 500.0
+margin_bottom = 1060.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/AssetsContainer"]
+margin_right = 480.0
+margin_bottom = 28.0
+size_flags_horizontal = 5
+
+[node name="Label" type="Label" parent="MarginContainer/AssetsContainer/HBoxContainer"]
+margin_right = 120.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Transition:"
+
+[node name="TransitionLabel" type="Label" parent="MarginContainer/AssetsContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 136.0
+margin_right = 480.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
+text = "Something"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/AssetsContainer"]
+margin_top = 44.0
+margin_right = 480.0
+margin_bottom = 72.0
+size_flags_horizontal = 5
+
+[node name="Label2" type="Label" parent="MarginContainer/AssetsContainer/HBoxContainer2"]
+margin_right = 120.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Easing:"
+
+[node name="EasingLabel" type="Label" parent="MarginContainer/AssetsContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 136.0
+margin_right = 480.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
+text = "Something"
+
+[node name="AssetsPlacer" type="Control" parent="MarginContainer"]
+margin_left = 260.0
+margin_top = 1060.0
+margin_right = 260.0
+margin_bottom = 1060.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Shadow" type="Sprite" parent="MarginContainer/AssetsPlacer"]
+unique_name_in_owner = true
+light_mask = 6
+position = Vector2( 0, -80 )
+texture = SubResource( 2 )
+
+[node name="Ball" type="Sprite" parent="MarginContainer/AssetsPlacer"]
+unique_name_in_owner = true
+position = Vector2( 0, -208.876 )
+texture = ExtResource( 1 )

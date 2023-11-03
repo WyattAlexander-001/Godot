@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ObstacleCourse_Part3/practices/common/UIItem.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0352941, 0.0392157, 0.129412, 1 )
+border_width_top = 2
+border_color = Color( 0.0352941, 0.0392157, 0.129412, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="UIItem" type="Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 140, 140 )
+mouse_default_cursor_shape = 2
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+expand = true
+stretch_mode = 6
+
+[node name="AmountLabel" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -103.0
+margin_bottom = -104.0
+align = 1
+valign = 1
+
+[node name="NameLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -29.0
+margin_bottom = -15.0
+align = 1
+valign = 1
+
+[node name="TooltipTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DropTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

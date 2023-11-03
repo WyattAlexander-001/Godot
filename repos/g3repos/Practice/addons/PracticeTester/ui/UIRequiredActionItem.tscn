@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/PracticeTester/ui/theme/gdscript_app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/PracticeTester/ui/UIRequiredActionItem.gd" type="Script" id=3]
+[ext_resource path="res://addons/PracticeTester/ui/theme/fonts/font_text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://addons/PracticeTester/ui/icons/checkbox_checked.png" type="Texture" id=5]
+[ext_resource path="res://addons/PracticeTester/ui/icons/checkbox_empty.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="UIRequiredActionItem" type="CheckBox"]
+margin_right = 136.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 260, 0 )
+theme = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 0.572549, 0.560784, 0.721569, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_icons/checked_disabled = ExtResource( 5 )
+custom_icons/checked = ExtResource( 5 )
+custom_icons/unchecked_disabled = ExtResource( 6 )
+custom_icons/unchecked = ExtResource( 6 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/disabled = ExtResource( 2 )
+disabled = true
+text = "Press move_left"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

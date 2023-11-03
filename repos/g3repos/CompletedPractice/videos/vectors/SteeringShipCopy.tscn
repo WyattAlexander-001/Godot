@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://videos/vectors/SteeringShipCopy.gd" type="Script" id=1]
+[ext_resource path="res://MovingShip/flame.png" type="Texture" id=2]
+[ext_resource path="res://MovingShip/Thrusters.gd" type="Script" id=3]
+[ext_resource path="res://MovingShip/green_ship.png" type="Texture" id=4]
+
+[node name="SteeringShipCopy" type="Sprite"]
+position = Vector2( 932, 519 )
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+
+[node name="Thrusters" type="Position2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="FlameMain" type="Sprite" parent="Thrusters"]
+position = Vector2( -69, 0.260895 )
+rotation = 1.57079
+texture = ExtResource( 2 )
+offset = Vector2( -0.260956, 27.6466 )
+
+[node name="FlameLeft" type="Sprite" parent="Thrusters"]
+position = Vector2( -58.3101, -32 )
+rotation = 1.82394
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 2 )
+offset = Vector2( -0.260956, 27.6466 )
+
+[node name="FlameRight" type="Sprite" parent="Thrusters"]
+position = Vector2( -58.3101, 34 )
+rotation = 1.22216
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 2 )
+offset = Vector2( -0.260956, 27.6466 )

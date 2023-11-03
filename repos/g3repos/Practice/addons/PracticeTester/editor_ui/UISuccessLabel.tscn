@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/PracticeTester/editor_ui/UISuccessLabel.gd" type="Script" id=1]
+
+[node name="UISuccessLabel" type="Label"]
+visible = false
+margin_top = 974.0
+margin_right = 1906.0
+margin_bottom = 988.0
+text = "Progress reset successfully!"
+align = 1
+autowrap = true
+script = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

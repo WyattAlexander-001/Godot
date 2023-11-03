@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/fonts/opensans_bold_32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://DialogueBoxes/01.DialogueBox/LinearDialogue.gd" type="Script" id=2]
+[ext_resource path="res://common/fonts/opensans-regular-24.tres" type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0352941, 0.0392157, 0.12549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.188235, 0.188235, 0.286275, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.290196, 0.294118, 0.388235, 1 )
+
+[node name="SimpleDialogue" type="PanelContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -320.0
+grow_vertical = 0
+rect_min_size = Vector2( 0, 320 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 320.0
+custom_constants/margin_right = 300
+custom_constants/margin_top = 20
+custom_constants/margin_left = 300
+custom_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 300.0
+margin_top = 20.0
+margin_right = 1620.0
+margin_bottom = 300.0
+custom_constants/separation = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 288.0
+margin_bottom = 280.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 284.0
+margin_bottom = 276.0
+rect_min_size = Vector2( 280, 0 )
+expand = true
+stretch_mode = 7
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 308.0
+margin_right = 1320.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 1012.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0.788235, 0.780392, 0.839216, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Character name"
+
+[node name="TextLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 49.0
+margin_right = 1012.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Sample text here"
+autowrap = true

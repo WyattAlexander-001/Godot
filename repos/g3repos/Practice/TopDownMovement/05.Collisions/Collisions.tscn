@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://TopDownMovement/05.Collisions/Collisions.gd" type="Script" id=1]
+[ext_resource path="res://TopDownMovement/shadow_circle.png" type="Texture" id=2]
+[ext_resource path="res://TopDownMovement/godot.png" type="Texture" id=3]
+[ext_resource path="res://RandomRocks/dungeon_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://TopDownMovement/05.Collisions/Godot.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hover"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -5 ) ]
+}
+
+[node name="Collisions" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Ground" type="TileMap" parent="."]
+position = Vector2( -114, -37 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 128, 128 )
+cell_y_sort = true
+format = 1
+tile_data = PoolIntArray( 65539, 3, 0, 65540, 3, 65536, 65541, 3, 65536, 65542, 3, 65536, 65543, 3, 65536, 65544, 3, 65536, 65545, 3, 65536, 65546, 3, 65536, 65547, 3, 65536, 65548, 3, 65536, 65549, 3, 2, 131075, 3, 65536, 131076, 3, 196609, 131077, 3, 131072, 131078, 3, 131074, 131079, 3, 65536, 131080, 3, 131072, 131081, 3, 131072, 131082, 3, 196610, 131083, 3, 131074, 131084, 3, 196609, 131085, 3, 65536, 196611, 3, 65536, 196612, 3, 65536, 196613, 3, 131072, 196614, 3, 65538, 196615, 3, 196608, 196616, 3, 196609, 196617, 3, 65536, 196618, 3, 131072, 196619, 3, 131072, 196620, 3, 131074, 196621, 3, 65536, 262147, 3, 65536, 262148, 3, 131074, 262149, 3, 65536, 262150, 3, 196608, 262151, 3, 65538, 262152, 3, 131073, 262153, 3, 131072, 262154, 3, 65538, 262155, 3, 196608, 262156, 3, 196609, 262157, 3, 65536, 327683, 3, 65536, 327684, 3, 131074, 327685, 3, 131072, 327686, 3, 65536, 327687, 3, 65536, 327688, 3, 196608, 327689, 3, 131074, 327690, 3, 131074, 327691, 3, 65538, 327692, 3, 65538, 327693, 3, 65536, 393219, 3, 262147, 393220, 3, 65536, 393221, 3, 65536, 393222, 3, 65536, 393223, 3, 65536, 393224, 3, 65536, 393225, 3, 131072, 393226, 3, 196609, 393227, 3, 131072, 393228, 3, 65536, 393229, 3, 65541, 458756, 3, 65539, 458757, 3, 131075, 458758, 3, 262148, 458759, 3, 131076, 458760, 3, 65540, 458761, 3, 131076, 458762, 3, 131075, 458763, 3, 131075, 458764, 3, 65541 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Walls" type="TileMap" parent="."]
+position = Vector2( -114, -37 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 128, 128 )
+cell_y_sort = true
+format = 1
+tile_data = PoolIntArray( 65540, 0, 0, 65541, 0, 1, 65542, 0, 1, 65543, 0, 1, 65544, 0, 1, 65545, 0, 1, 65546, 0, 1, 65547, 0, 1, 65548, 0, 2, 131076, 0, 65536, 131077, 0, 65537, 131078, 0, 3, 131079, 0, 131073, 131080, 0, 131073, 131081, 0, 131073, 131082, 0, 5, 131083, 0, 65537, 131084, 0, 65538, 196612, 0, 65536, 196613, 0, 65537, 196614, 0, 65538, 196618, 0, 65536, 196619, 0, 65537, 196620, 0, 65538, 262148, 0, 131072, 262149, 0, 5, 262150, 0, 65538, 262154, 0, 65536, 262155, 0, 3, 262156, 0, 131074, 327685, 0, 65536, 327686, 0, 196609, 327687, 0, 1, 327688, 0, 1, 327689, 0, 1, 327690, 0, 196608, 327691, 0, 65538, 393221, 0, 131072, 393222, 0, 131073, 393223, 0, 131073, 393224, 0, 131073, 393225, 0, 131073, 393226, 0, 131073, 393227, 0, 131074 )
+
+[node name="Godot" type="KinematicBody2D" parent="."]
+position = Vector2( 977, 504 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Shadow" type="Sprite" parent="Godot"]
+modulate = Color( 1, 1, 1, 0.356863 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Godot"]
+texture = ExtResource( 3 )
+offset = Vector2( 0, -61 )
+hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Godot"]
+autoplay = "hover"
+anims/RESET = SubResource( 2 )
+anims/hover = SubResource( 3 )

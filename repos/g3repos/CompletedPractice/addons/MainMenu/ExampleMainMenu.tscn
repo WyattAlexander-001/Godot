@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/MainMenu/ExampleMainMenu.gd" type="Script" id=1]
+[ext_resource path="res://addons/MainMenu/theme/main_menu_theme.tres" type="Theme" id=2]
+[ext_resource path="res://addons/MainMenu/UISearchBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/MainMenu/menu_9patch.png" type="Texture" id=5]
+[ext_resource path="res://addons/MainMenu/GDQuestLogo.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/MainMenu/UIDemoList.tscn" type="PackedScene" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 384, 384 )
+margin_left = 26.0
+margin_right = 26.0
+margin_top = 44.0
+margin_bottom = 66.0
+axis_stretch_vertical = 2
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Margin"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 1880.0
+margin_bottom = 1040.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/CenterContainer"]
+margin_left = 610.0
+margin_top = 142.0
+margin_right = 1230.0
+margin_bottom = 858.0
+rect_min_size = Vector2( 620, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleContainer" type="PanelContainer" parent="Margin/CenterContainer/VBoxContainer"]
+margin_right = 620.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="Margin/CenterContainer/VBoxContainer/TitleContainer"]
+margin_right = 620.0
+
+[node name="HSeparator" type="HSeparator" parent="Margin/CenterContainer/VBoxContainer"]
+margin_top = 8.0
+margin_right = 620.0
+margin_bottom = 28.0
+
+[node name="SearchBar" parent="Margin/CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
+
+[node name="PanelContainer" type="PanelContainer" parent="Margin/CenterContainer/VBoxContainer"]
+margin_top = 116.0
+margin_right = 620.0
+margin_bottom = 716.0
+rect_min_size = Vector2( 0, 600 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="DemoList" parent="Margin/CenterContainer/VBoxContainer/PanelContainer" instance=ExtResource( 9 )]
+margin_left = 26.0
+margin_top = 44.0
+margin_right = 594.0
+margin_bottom = 534.0
+demos_dirpaths = [ "res://1.making-toys/" ]
+filenames_to_ignore = [ "SteeringShip.tscn", "Thrusters.tscn", "Marble.tscn", "Bullet.tscn" ]
+
+[node name="GDQuestLogo" parent="Margin" instance=ExtResource( 8 )]
+margin_left = 40.0
+margin_top = 984.0
+margin_right = 221.0
+margin_bottom = 1040.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+expand = false
+
+[node name="VersionNumber" type="Label" parent="Margin"]
+margin_left = 1762.0
+margin_top = 980.0
+margin_right = 1880.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Version 0.1.0"
+valign = 1
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -10

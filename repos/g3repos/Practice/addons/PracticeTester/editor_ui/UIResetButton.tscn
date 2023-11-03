@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/PracticeTester/editor_ui/UIResetButton.gd" type="Script" id=1]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://addons/PracticeTester/ui/theme/gdscript_app_theme.tres" type="Theme" id=5]
+
+[node name="UIResetButton" type="PanelContainer"]
+margin_right = 121.0
+margin_bottom = 54.0
+theme = ExtResource( 5 )
+script = ExtResource( 1 )
+
+[node name="ResetButton" type="Button" parent="."]
+margin_right = 206.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 40 )
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/normal = ExtResource( 3 )
+text = "Reset Progress"
+
+[node name="Popup" type="ConfirmationDialog" parent="."]
+visible = true
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 475.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 300, 105 )
+window_title = "Reset Progess?"
+dialog_text = "Do you really want to reset your progress?
+
+This cannot be undone."

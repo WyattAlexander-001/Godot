@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://RandomRocks/03.BlueNoiseMask/BlueNoiseMask.tscn" type="PackedScene" id=1]
+[ext_resource path="res://videos/blue-noise/BlueNoiseVideo.gd" type="Script" id=2]
+[ext_resource path="res://RandomRocks/02.BlueNoise/BlueNoise.tscn" type="PackedScene" id=3]
+[ext_resource path="res://RandomRocks/01.RegularGrid/RegularGrid.tscn" type="PackedScene" id=4]
+
+[node name="BlueNoiseVideo" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Scenes" type="Node2D" parent="."]
+
+[node name="RegularGrid" parent="Scenes" instance=ExtResource( 4 )]
+visible = false
+script = null
+
+[node name="BlueNoise" parent="Scenes" instance=ExtResource( 3 )]
+script = null
+
+[node name="BlueNoiseMask" parent="Scenes" instance=ExtResource( 1 )]
+visible = false
+script = null
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true

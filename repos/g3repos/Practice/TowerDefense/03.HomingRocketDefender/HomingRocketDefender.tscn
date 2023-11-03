@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://TowerDefense/02.PlanetDefender/Turret.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TowerDefense/02.PlanetDefender/Planet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TowerDefense/03.HomingRocketDefender/HomingRocketDefender.gd" type="Script" id=3]
+[ext_resource path="res://TowerDefense/03.HomingRocketDefender/TurretHoming.gd" type="Script" id=4]
+
+[node name="HomingRocketDefender" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Planet" parent="." instance=ExtResource( 2 )]
+position = Vector2( 915, 567 )
+
+[node name="TurretHoming" parent="Planet" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

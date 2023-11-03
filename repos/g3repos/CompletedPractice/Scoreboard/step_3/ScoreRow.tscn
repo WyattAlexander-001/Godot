@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scoreboard/common/ScoreRow.gd" type="Script" id=1]
+[ext_resource path="res://Scoreboard/common/scoreboard_theme.tres" type="Theme" id=2]
+
+[node name="ScoreRow" type="HBoxContainer"]
+anchor_right = 1.0
+margin_left = 51.0
+margin_top = 73.0
+margin_right = 51.0
+margin_bottom = 87.0
+size_flags_horizontal = 3
+theme = ExtResource( 2 )
+custom_constants/separation = 10
+script = ExtResource( 1 )
+
+[node name="PointsLabel" type="Label" parent="."]
+modulate = Color( 1, 0.960784, 0.25098, 1 )
+margin_right = 70.0
+margin_bottom = 34.0
+text = "10000"
+
+[node name="NameLabel" type="Label" parent="."]
+margin_left = 80.0
+margin_right = 247.0
+margin_bottom = 34.0
+text = "Marcel Dupont"

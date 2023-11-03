@@ -1,0 +1,118 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://addons/PracticeTester/editor_ui/UIPracticeItem.gd" type="Script" id=1]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/PracticeTester/editor_ui/reload.svg" type="Texture" id=3]
+[ext_resource path="res://addons/PracticeTester/editor_ui/revealer_inner_content_panel.tres" type="StyleBox" id=4]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_focus.tres" type="StyleBox" id=5]
+[ext_resource path="res://addons/PracticeTester/ui/theme/gdscript_app_theme.tres" type="Theme" id=6]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_hover.tres" type="StyleBox" id=7]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=9]
+[ext_resource path="res://addons/PracticeTester/editor_ui/font_title_practice.tres" type="DynamicFont" id=10]
+[ext_resource path="res://addons/PracticeTester/editor_ui/CheckmarkRevealer.tscn" type="PackedScene" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="UIPracticeItem" type="PanelContainer"]
+margin_right = 482.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 140, 60 )
+size_flags_horizontal = 3
+theme = ExtResource( 6 )
+script = ExtResource( 1 )
+
+[node name="Revealer" parent="." instance=ExtResource( 12 )]
+margin_right = 482.0
+margin_bottom = 68.0
+content_panel = ExtResource( 4 )
+
+[node name="Column" type="VBoxContainer" parent="Revealer"]
+visible = false
+margin_left = 8.0
+margin_top = 46.0
+margin_right = 474.0
+margin_bottom = 389.0
+custom_constants/separation = 8
+
+[node name="Description" type="RichTextLabel" parent="Revealer/Column"]
+margin_right = 466.0
+margin_bottom = 35.0
+custom_styles/normal = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "This is a test description"
+text = "This is a test description"
+fit_content_height = true
+
+[node name="HSeparator3" type="HSeparator" parent="Revealer/Column"]
+margin_top = 43.0
+margin_right = 466.0
+margin_bottom = 83.0
+custom_constants/separation = 40
+
+[node name="PracticedTechniques" type="Label" parent="Revealer/Column"]
+margin_top = 91.0
+margin_right = 466.0
+margin_bottom = 114.0
+custom_fonts/font = ExtResource( 10 )
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Revealer/Column"]
+margin_top = 122.0
+margin_right = 466.0
+margin_bottom = 162.0
+custom_constants/separation = 40
+
+[node name="TasksTitle" type="Label" parent="Revealer/Column"]
+margin_top = 170.0
+margin_right = 466.0
+margin_bottom = 193.0
+custom_fonts/font = ExtResource( 10 )
+text = "Tasks"
+
+[node name="TasksList" type="VBoxContainer" parent="Revealer/Column"]
+margin_top = 201.0
+margin_right = 466.0
+margin_bottom = 201.0
+
+[node name="HSeparator2" type="HSeparator" parent="Revealer/Column"]
+margin_top = 209.0
+margin_right = 466.0
+margin_bottom = 249.0
+custom_constants/separation = 40
+
+[node name="HintsTitle" type="Label" parent="Revealer/Column"]
+margin_top = 257.0
+margin_right = 466.0
+margin_bottom = 280.0
+custom_fonts/font = ExtResource( 10 )
+text = "Hints"
+
+[node name="HintsList" type="VBoxContainer" parent="Revealer/Column"]
+margin_top = 288.0
+margin_right = 466.0
+margin_bottom = 288.0
+
+[node name="RevertButton" type="Button" parent="Revealer/Column"]
+margin_top = 296.0
+margin_right = 466.0
+margin_bottom = 343.0
+rect_min_size = Vector2( 240, 40 )
+mouse_default_cursor_shape = 2
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "Revert"
+icon = ExtResource( 3 )
+expand_icon = true
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 475.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 300, 105 )
+window_title = "Revert Practice?"
+dialog_text = "Revert practice '%s' files to their original state?
+
+This cannot be undone."

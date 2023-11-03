@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 0.960784, 0.25098, 1 )
+
+[node name="TileVideo" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1792.0
+margin_bottom = -952.0
+rect_min_size = Vector2( 128, 128 )
+custom_styles/panel = SubResource( 1 )

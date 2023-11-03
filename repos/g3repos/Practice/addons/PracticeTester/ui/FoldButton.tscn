@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxLine" id=3]
+color = Color( 0.188235, 0.188235, 0.286275, 1 )
+grow_begin = -40.0
+grow_end = -40.0
+vertical = true
+
+[node name="FoldButton" type="Button"]
+margin_right = 12.0
+margin_bottom = 346.0
+rect_min_size = Vector2( 10, 340 )
+mouse_default_cursor_shape = 2
+custom_styles/focus = SubResource( 2 )
+
+[node name="VSeparator" type="VSeparator" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_right = 2.0
+mouse_filter = 2
+custom_styles/separator = SubResource( 3 )
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_right = -1.0
+mouse_filter = 2
+custom_styles/separator = SubResource( 3 )

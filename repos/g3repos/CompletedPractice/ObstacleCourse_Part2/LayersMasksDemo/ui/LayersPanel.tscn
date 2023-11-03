@@ -1,0 +1,193 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ObstacleCourse_Part2/LayersMasksDemo/ui/icon_kinematic_body_2d.svg" type="Texture" id=2]
+[ext_resource path="res://ObstacleCourse_Part2/LayersMasksDemo/assets/9patch_mainmenu.png" type="Texture" id=3]
+[ext_resource path="res://ObstacleCourse_Part2/LayersMasksDemo/ui/LayersPanel.gd" type="Script" id=4]
+[ext_resource path="res://ObstacleCourse_Part2/LayersMasksDemo/ui/ButtonPressedStyleBox.tres" type="StyleBox" id=5]
+[ext_resource path="res://ObstacleCourse_Part2/LayersMasksDemo/ui/theme.tres" type="Theme" id=6]
+[ext_resource path="res://ObstacleCourse_Part2/LayersMasksDemo/ui/ButtonNormalStyleBox.tres" type="StyleBox" id=7]
+
+[node name="LayersPanel" type="NinePatchRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -118.0
+margin_right = 118.0
+margin_bottom = 262.0
+rect_min_size = Vector2( 0, 262 )
+mouse_filter = 0
+size_flags_horizontal = 3
+texture = ExtResource( 3 )
+patch_margin_left = 16
+patch_margin_top = 32
+patch_margin_right = 16
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 6 )
+custom_constants/margin_right = 24
+custom_constants/margin_top = 24
+custom_constants/margin_left = 24
+custom_constants/margin_bottom = 24
+
+[node name="LayersMasks" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 212.0
+margin_bottom = 238.0
+mouse_filter = 2
+
+[node name="ObjectLabel" type="HBoxContainer" parent="MarginContainer/LayersMasks"]
+margin_right = 188.0
+margin_bottom = 34.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/LayersMasks/ObjectLabel"]
+margin_right = 25.0
+margin_bottom = 34.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/LayersMasks/ObjectLabel/CenterContainer"]
+margin_top = 4.0
+margin_right = 25.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 25, 25 )
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="MarginContainer/LayersMasks/ObjectLabel"]
+margin_left = 29.0
+margin_right = 97.0
+margin_bottom = 34.0
+theme = ExtResource( 6 )
+text = "Player"
+valign = 1
+
+[node name="Layer" type="Label" parent="MarginContainer/LayersMasks"]
+margin_top = 38.0
+margin_right = 188.0
+margin_bottom = 72.0
+text = "Layer"
+
+[node name="LayerButtons" type="HBoxContainer" parent="MarginContainer/LayersMasks"]
+margin_top = 76.0
+margin_right = 188.0
+margin_bottom = 116.0
+mouse_filter = 2
+custom_constants/separation = 8
+
+[node name="Layer1" type="Button" parent="MarginContainer/LayersMasks/LayerButtons"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
+toggle_mode = true
+pressed = true
+text = "1"
+
+[node name="Layer2" type="Button" parent="MarginContainer/LayersMasks/LayerButtons"]
+margin_left = 48.0
+margin_right = 88.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
+toggle_mode = true
+text = "2"
+
+[node name="Layer3" type="Button" parent="MarginContainer/LayersMasks/LayerButtons"]
+margin_left = 96.0
+margin_right = 136.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
+toggle_mode = true
+text = "3"
+
+[node name="Layer4" type="Button" parent="MarginContainer/LayersMasks/LayerButtons"]
+margin_left = 144.0
+margin_right = 184.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
+toggle_mode = true
+text = "4"
+
+[node name="Mask" type="Label" parent="MarginContainer/LayersMasks"]
+margin_top = 120.0
+margin_right = 188.0
+margin_bottom = 154.0
+text = "Mask"
+
+[node name="MaskButtons" type="HBoxContainer" parent="MarginContainer/LayersMasks"]
+margin_top = 158.0
+margin_right = 188.0
+margin_bottom = 198.0
+custom_constants/separation = 8
+
+[node name="Mask1" type="Button" parent="MarginContainer/LayersMasks/MaskButtons"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
+toggle_mode = true
+text = "1"
+
+[node name="Mask2" type="Button" parent="MarginContainer/LayersMasks/MaskButtons"]
+margin_left = 48.0
+margin_right = 88.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
+toggle_mode = true
+text = "2"
+
+[node name="Mask3" type="Button" parent="MarginContainer/LayersMasks/MaskButtons"]
+margin_left = 96.0
+margin_right = 136.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
+toggle_mode = true
+text = "3"
+
+[node name="Mask4" type="Button" parent="MarginContainer/LayersMasks/MaskButtons"]
+margin_left = 144.0
+margin_right = 184.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 7 )
+toggle_mode = true
+text = "4"
+
+[connection signal="mouse_entered" from="." to="." method="_on_LayersPanel_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_LayersPanel_mouse_exited"]

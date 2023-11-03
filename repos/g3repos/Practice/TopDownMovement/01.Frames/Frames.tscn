@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://TopDownMovement/01.Frames/Frames.gd" type="Script" id=1]
+[ext_resource path="res://TopDownMovement/shadow_circle.png" type="Texture" id=2]
+[ext_resource path="res://TopDownMovement/godot.png" type="Texture" id=3]
+[ext_resource path="res://DialogueBoxes/common/theme.tres" type="Theme" id=4]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hover"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -5 ) ]
+}
+
+[node name="Frames" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Godot" type="Node2D" parent="."]
+position = Vector2( 960, 540 )
+
+[node name="Shadow" type="Sprite" parent="Godot"]
+modulate = Color( 1, 1, 1, 0.356863 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Godot"]
+texture = ExtResource( 3 )
+offset = Vector2( 0, -61 )
+hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Godot"]
+autoplay = "hover"
+anims/RESET = SubResource( 2 )
+anims/hover = SubResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.5
+margin_top = 45.0
+margin_right = 100.5
+margin_bottom = 99.0
+theme = ExtResource( 4 )
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/VBoxContainer"]
+margin_right = 201.0
+margin_bottom = 16.0
+max_value = 5.0
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+margin_top = 20.0
+margin_right = 201.0
+margin_bottom = 54.0
+text = "0"
+align = 1
+valign = 1

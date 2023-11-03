@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://TowerDefense/common/Rocket.gd" type="Script" id=1]
+[ext_resource path="res://TowerDefense/assets/rocket_homing.png" type="Texture" id=2]
+[ext_resource path="res://TowerDefense/assets/particle_smoke.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15, 4 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.565217, 0.875776 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0.164773 ), 0.0, 5.93058, 0, 0, Vector2( 0.315217, 0.646591 ), -0.304132, -0.304132, 0, 0, Vector2( 0.98913, 0.478409 ), -3.06497, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.2
+scale_random = 0.18
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[node name="Rocket" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 12, 0 )
+shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( -5, 0 )
+amount = 400
+lifetime = 0.5
+local_coords = false
+process_material = SubResource( 6 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 13, 0 )
+texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

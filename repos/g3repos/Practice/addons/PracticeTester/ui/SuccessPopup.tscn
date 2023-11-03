@@ -1,0 +1,189 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://addons/PracticeTester/ui/theme/fonts/font_text.tres" type="DynamicFont" id=1]
+[ext_resource path="res://addons/PracticeTester/ui/theme/fonts/font_text_bold.tres" type="DynamicFont" id=2]
+[ext_resource path="res://addons/PracticeTester/ui/theme/gdscript_app_theme.tres" type="Theme" id=3]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://addons/PracticeTester/ui/theme/focus_accent.tres" type="StyleBox" id=5]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://addons/PracticeTester/ui/theme/fonts/font_title_big.tres" type="DynamicFont" id=7]
+[ext_resource path="res://addons/PracticeTester/ui/theme/button_outline_large_hover.tres" type="StyleBox" id=8]
+[ext_resource path="res://addons/PracticeTester/ui/theme/panel_popup.tres" type="StyleBox" id=11]
+[ext_resource path="res://addons/PracticeTester/ui/SuccessPopup.gd" type="Script" id=12]
+
+[sub_resource type="Shader" id=24]
+code = "shader_type canvas_item;
+render_mode blend_add;
+
+uniform float thickness = 1.0;
+
+void vertex() {
+    VERTEX.x *= (1.0 - INSTANCE_CUSTOM.y) * 2.0;
+		VERTEX.y *= thickness;
+}"
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 24 )
+shader_param/thickness = 2.0
+
+[sub_resource type="Gradient" id=20]
+offsets = PoolRealArray( 0, 0.516355, 1 )
+colors = PoolColorArray( 0, 1, 0.286275, 0, 0.239216, 1, 0.431373, 1, 0, 1, 0.286275, 0 )
+
+[sub_resource type="GradientTexture" id=21]
+gradient = SubResource( 20 )
+width = 32
+
+[sub_resource type="Curve" id=25]
+_data = [ Vector2( 0, 0 ), 0.0, 15.1674, 0, 0, Vector2( 0.0419426, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Shader" id=27]
+code = "shader_type canvas_item;
+render_mode blend_add;
+
+uniform float thickness = 1.0;
+
+void vertex() {
+    VERTEX.x *= (1.0 - INSTANCE_CUSTOM.y) * 2.0;
+		VERTEX.y *= thickness;
+}"
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = SubResource( 27 )
+shader_param/thickness = 12.0
+
+[sub_resource type="Gradient" id=28]
+offsets = PoolRealArray( 0, 0.516355, 1 )
+colors = PoolColorArray( 0, 1, 0.286275, 0, 0.239216, 1, 0.431373, 1, 0, 1, 0.286275, 0 )
+
+[sub_resource type="GradientTexture" id=29]
+gradient = SubResource( 28 )
+width = 32
+
+[sub_resource type="Curve" id=30]
+_data = [ Vector2( 0, 0 ), 0.0, 15.1674, 0, 0, Vector2( 0.0419426, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="SuccessPopup" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0364, 0.04108, 0.13, 0.431373 )
+script = ExtResource( 12 )
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+material = SubResource( 23 )
+position = Vector2( 960, 539 )
+lifetime = 4.0
+texture = SubResource( 21 )
+emission_shape = 2
+emission_rect_extents = Vector2( 960, 540 )
+gravity = Vector2( 0, 0 )
+angle = -45.0
+scale_amount = 10.0
+scale_amount_random = 0.5
+scale_amount_curve = SubResource( 25 )
+
+[node name="ThickParticles" type="CPUParticles2D" parent="."]
+material = SubResource( 26 )
+position = Vector2( 960, 539 )
+amount = 4
+lifetime = 5.0
+texture = SubResource( 29 )
+emission_shape = 2
+emission_rect_extents = Vector2( 600, 200 )
+gravity = Vector2( 0, 0 )
+angle = -45.0
+scale_amount = 16.0
+scale_amount_random = 0.5
+scale_amount_curve = SubResource( 30 )
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -301.0
+margin_top = -171.0
+margin_right = 301.0
+margin_bottom = 171.0
+theme = ExtResource( 3 )
+custom_styles/panel = ExtResource( 11 )
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 594.0
+margin_bottom = 334.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+
+[node name="Column" type="VBoxContainer" parent="Panel/Margin"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 546.0
+margin_bottom = 286.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/Margin/Column"]
+margin_right = 506.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 7 )
+text = "Success!"
+align = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Panel/Margin/Column"]
+margin_top = 56.0
+margin_right = 506.0
+margin_bottom = 64.0
+
+[node name="Label2" type="Label" parent="Panel/Margin/Column"]
+margin_top = 80.0
+margin_right = 506.0
+margin_bottom = 108.0
+custom_fonts/font = ExtResource( 2 )
+text = "You completed the practice."
+align = 1
+autowrap = true
+
+[node name="Label3" type="Label" parent="Panel/Margin/Column"]
+margin_top = 124.0
+margin_right = 506.0
+margin_bottom = 183.0
+custom_fonts/font = ExtResource( 1 )
+text = "Stay to keep playing, or quit to move on to the next lesson."
+align = 1
+autowrap = true
+
+[node name="Row" type="HBoxContainer" parent="Panel/Margin/Column"]
+margin_top = 199.0
+margin_right = 506.0
+margin_bottom = 246.0
+alignment = 1
+
+[node name="StayButton" type="Button" parent="Panel/Margin/Column/Row"]
+margin_left = 125.0
+margin_right = 245.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 120, 40 )
+custom_colors/font_color_focus = Color( 0.239216, 1, 0.431373, 1 )
+custom_colors/font_color_pressed = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
+text = "Stay"
+
+[node name="QuitButton" type="Button" parent="Panel/Margin/Column/Row"]
+margin_left = 261.0
+margin_right = 381.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 120, 40 )
+custom_colors/font_color_focus = Color( 0.239216, 1, 0.431373, 1 )
+custom_colors/font_color_pressed = Color( 0.960784, 0.980392, 0.980392, 1 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
+text = "Quit"

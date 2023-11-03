@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/talking_synth.mp3-8d146515cd50508bf082a9482f660d0b.mp3str"
+
+[deps]
+
+source_file="res://DialogueBoxes/common/talking_synth.mp3"
+dest_files=[ "res://.import/talking_synth.mp3-8d146515cd50508bf082a9482f660d0b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
