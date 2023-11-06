@@ -1,0 +1,134 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://common/Player/flameA_yellow.png" type="Texture" id=1]
+[ext_resource path="res://common/asteroids/asteroidB.png" type="Texture" id=2]
+[ext_resource path="res://common/asteroids/asteroidC.png" type="Texture" id=3]
+[ext_resource path="res://common/asteroids/asteroidA.png" type="Texture" id=4]
+[ext_resource path="res://addons/node-essential-helpers/debug_drawing/DebugDrawCollisionShape2D.gd" type="Script" id=5]
+[ext_resource path="res://common/planet.png" type="Texture" id=6]
+[ext_resource path="res://common/Player/player.png" type="Texture" id=7]
+[ext_resource path="res://Screens/Camera2D/RotateCamera/AsteroidsShip.gd" type="Script" id=8]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 165.661
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 29.1643
+
+[sub_resource type="Animation" id=3]
+resource_name = "blink"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25, 0.35, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 3, 1.4, 1.4, 1 ), Color( 1, 1, 1, 1 ), Color( 3, 1.4, 1.4, 1 ), Color( 1, 1, 1, 1 ), Color( 3, 1.4, 1.4, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="RotateCamera" type="Node2D"]
+
+[node name="Planet" type="StaticBody2D" parent="."]
+position = Vector2( 960, 540 )
+
+[node name="Sprite" type="Sprite" parent="Planet"]
+scale = Vector2( 1.28373, 1.28373 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
+shape = SubResource( 1 )
+
+[node name="Asteroids" type="Node2D" parent="."]
+
+[node name="AsteroidA" type="Sprite" parent="Asteroids"]
+position = Vector2( 1300.89, 872.662 )
+texture = ExtResource( 2 )
+
+[node name="AsteroidB" type="Sprite" parent="Asteroids"]
+position = Vector2( 751.422, 189.916 )
+texture = ExtResource( 3 )
+
+[node name="AsteroidC" type="Sprite" parent="Asteroids"]
+position = Vector2( 487.93, 731.554 )
+texture = ExtResource( 4 )
+
+[node name="AsteroidD" type="Sprite" parent="Asteroids"]
+position = Vector2( 1426.41, 443.68 )
+texture = ExtResource( 2 )
+
+[node name="AsteroidE" type="Sprite" parent="Asteroids"]
+position = Vector2( 886.121, 967.401 )
+texture = ExtResource( 3 )
+
+[node name="AsteroidF" type="Sprite" parent="Asteroids"]
+position = Vector2( 951.848, 165.064 )
+texture = ExtResource( 4 )
+
+[node name="AsteroidG" type="Sprite" parent="Asteroids"]
+position = Vector2( 1488.57, 626.195 )
+texture = ExtResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 533.77, 534.382 )
+rotation = 1.57079
+rotating = true
+current = true
+process_mode = 0
+
+[node name="PlayerAsteroids" type="KinematicBody2D" parent="." groups=[
+"player",
+]]
+position = Vector2( 533.77, 534.382 )
+collision_mask = 4
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAsteroids"]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="DemoCollisionShapeDebug" type="Node2D" parent="PlayerAsteroids/CollisionShape2D"]
+script = ExtResource( 5 )
+shape_type = 2
+outline_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+outline_thickness = 0.0
+shape_size = Vector2( 51.1232, 51.1232 )
+
+[node name="Sprite" type="Sprite" parent="PlayerAsteroids"]
+rotation = 1.57079
+texture = ExtResource( 7 )
+
+[node name="FlameMain" type="Sprite" parent="PlayerAsteroids/Sprite"]
+show_behind_parent = true
+position = Vector2( -0.000351365, 56 )
+rotation = 4.05312e-06
+texture = ExtResource( 1 )
+offset = Vector2( 4.76837e-07, 40.5 )
+
+[node name="FlameLeft" type="Sprite" parent="PlayerAsteroids/Sprite"]
+show_behind_parent = true
+position = Vector2( -30.502, 53.3778 )
+rotation = 0.261799
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 4.76837e-07, 40.5 )
+
+[node name="FlameRight" type="Sprite" parent="PlayerAsteroids/Sprite"]
+show_behind_parent = true
+position = Vector2( 30.5014, 53.5654 )
+rotation = -0.261799
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 4.76837e-07, 40.5 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerAsteroids/Sprite"]
+remote_path = NodePath("../../../Camera2D")
+update_scale = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAsteroids"]
+anims/blink = SubResource( 3 )

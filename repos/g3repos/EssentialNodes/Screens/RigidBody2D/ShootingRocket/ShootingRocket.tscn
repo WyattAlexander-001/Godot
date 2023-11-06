@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Screens/RigidBody2D/ShootingRocket/Asteroid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Player/RigidPlayer2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://common/Weapons/Rocket/Weapon.tscn" type="PackedScene" id=3]
+
+[node name="ShootingRocket" type="Node2D"]
+
+[node name="Asteroids" type="Node2D" parent="."]
+
+[node name="Asteroid1" parent="Asteroids" instance=ExtResource( 1 )]
+mass = 3.0
+
+[node name="Asteroid2" parent="Asteroids" instance=ExtResource( 1 )]
+position = Vector2( 373.333, 690.942 )
+mass = 3.0
+
+[node name="Asteroid3" parent="Asteroids" instance=ExtResource( 1 )]
+position = Vector2( 1371.14, 571.561 )
+mass = 3.0
+
+[node name="Asteroid6" parent="Asteroids" instance=ExtResource( 1 )]
+position = Vector2( 1157.32, 379.127 )
+mass = 3.0
+
+[node name="Asteroid4" parent="Asteroids" instance=ExtResource( 1 )]
+position = Vector2( 1624.15, 216.984 )
+mass = 3.0
+
+[node name="Asteroid5" parent="Asteroids" instance=ExtResource( 1 )]
+position = Vector2( 1087.83, 696.287 )
+mass = 3.0
+
+[node name="RigidPlayer" parent="." instance=ExtResource( 2 )]
+position = Vector2( 302.906, 304.687 )
+
+[node name="Weapon" parent="RigidPlayer" instance=ExtResource( 3 )]

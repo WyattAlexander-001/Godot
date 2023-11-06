@@ -1,0 +1,205 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://common/PlayerFPS3D/RobotWeapon3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Light/Muzzleflash/Muzzleflash.gd" type="Script" id=2]
+[ext_resource path="res://common/PlayerFPS3D/flame_model.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://common/PlayerFPS3D/flame.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+
+[sub_resource type="Animation" id=2]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Viewmodel/RobotWeapon3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Viewmodel/RobotWeapon3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Viewmodel/RobotWeapon3D/Flame:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Viewmodel/RobotWeapon3D:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.1, 0.1 ), Vector3( 0, 0.1, 0.1 ), Vector3( 0, -0.05, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Viewmodel/RobotWeapon3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 0.25, 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 45, -5, -10 ), Vector3( 75, -10, -10 ), Vector3( -10, 5, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Viewmodel/MuzzleLight:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Viewmodel/RobotWeapon3D/Flame:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Viewmodel/RobotWeapon3D/Flame:material/0:albedo_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 4, 4, 4, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 4 )
+
+[sub_resource type="Environment" id=5]
+tonemap_mode = 3
+glow_enabled = true
+glow_bicubic_upscale = true
+
+[sub_resource type="CylinderMesh" id=6]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.75
+radial_segments = 16
+rings = 1
+
+[node name="Muzzleflash" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+material_override = SubResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+width = 4.0
+height = 4.0
+depth = 12.0
+
+[node name="Hollow" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+operation = 2
+width = 1.8
+height = 4.0
+depth = 11.4
+
+[node name="DirectionalLight" type="DirectionalLight" parent="CSGCombiner"]
+transform = Transform( -3.8017e-08, -0.493532, 0.869728, -2.1573e-08, 0.869728, 0.493532, -1, 1.77636e-15, -4.37114e-08, 0, 2, -1.866 )
+shadow_enabled = true
+
+[node name="Player" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+autoplay = "idle"
+playback_speed = 0.75
+anims/idle = SubResource( 2 )
+anims/shoot = SubResource( 3 )
+
+[node name="Camera" type="Camera" parent="Player"]
+current = true
+
+[node name="Viewmodel" type="Spatial" parent="Player"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.15, -0.05, -0.25 )
+
+[node name="RobotWeapon3D" parent="Player/Viewmodel" instance=ExtResource( 1 )]
+transform = Transform( 0.997012, 0.0427064, -0.064374, -0.0771814, 0.586251, -0.806445, 0.00329901, 0.809003, 0.587795, 0, 0.0625, 0.075 )
+
+[node name="Flame" type="MeshInstance" parent="Player/Viewmodel/RobotWeapon3D"]
+transform = Transform( -4.78467e-08, 1.06811e-08, -0.25, 0.25, 7.45058e-09, -4.36557e-08, 0, -0.25, -8.11997e-09, 0, 0, -0.300897 )
+visible = false
+cast_shadow = 0
+mesh = ExtResource( 3 )
+software_skinning_transform_normals = false
+material/0 = SubResource( 4 )
+
+[node name="MuzzleLight" type="OmniLight" parent="Player/Viewmodel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -0.4 )
+light_color = Color( 0.94902, 0.65098, 0.368627, 1 )
+light_energy = 0.555556
+shadow_enabled = true
+omni_range = 2.0
+omni_attenuation = 0.8
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 5 )
+
+[node name="Barrel" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.6, 3.1 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="Barrel2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.6, 3.6 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.66076, -5.04121 )
+shadow_enabled = true
+omni_range = 10.0
+omni_shadow_mode = 0
+
+[node name="BakedLightmap" type="BakedLightmap" parent="."]

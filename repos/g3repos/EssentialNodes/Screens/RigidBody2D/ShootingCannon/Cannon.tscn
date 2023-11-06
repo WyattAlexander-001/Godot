@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://common/turrets/turret_ballLauncher_green.png" type="Texture" id=1]
+[ext_resource path="res://Screens/RigidBody2D/ShootingCannon/Cannon.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fire"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.666, 0.666 ),
+"update": 0,
+"values": [ Vector2( -96, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/Barrel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.666, 0.666 ),
+"update": 0,
+"values": [ Vector2( 2, 1 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Cannon" type="Polygon2D"]
+position = Vector2( 120, 800 )
+color = Color( 0.560784, 0.870588, 0.364706, 1 )
+antialiased = true
+invert_border = 10.0
+polygon = PoolVector2Array( 16, 120, -8, 32, 0, 32, 24, 120 )
+script = ExtResource( 2 )
+
+[node name="Shade" type="Polygon2D" parent="."]
+color = Color( 0.235294, 0.639216, 0.439216, 1 )
+polygon = PoolVector2Array( -40, 120, -32, 32, -8, 32, 16, 120 )
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2( -24, 48 )
+
+[node name="Barrel" type="Sprite" parent="Pivot"]
+rotation = 1.5708
+texture = ExtResource( 1 )
+offset = Vector2( 0, -45 )
+
+[node name="FirePoint" type="Position2D" parent="Pivot/Barrel"]
+position = Vector2( 0, -96 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fire = SubResource( 1 )

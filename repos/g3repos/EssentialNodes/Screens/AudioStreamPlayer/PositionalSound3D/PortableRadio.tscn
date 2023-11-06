@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Screens/AudioStreamPlayer/PositionalSound3D/computerNoise_000.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Screens/AudioStreamPlayer/PositionalSound3D/musicOn.png" type="Texture" id=2]
+[ext_resource path="res://Screens/AudioStreamPlayer/PositionalSound3D/PortableRadio.gd" type="Script" id=3]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.4, 0.2, 0.1 )
+
+[sub_resource type="CylinderMesh" id=2]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.4
+
+[sub_resource type="CylinderMesh" id=3]
+top_radius = 0.08
+bottom_radius = 0.1
+height = 0.02
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 0.25
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+scale = 0.2
+scale_random = 0.2
+scale_curve = SubResource( 5 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+flags_unshaded = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=8]
+material = SubResource( 7 )
+
+[sub_resource type="ArrayMesh" id=9]
+surfaces/0 = {
+"aabb": AABB( -0.228868, -0.128868, -0.0788675, 0.457735, 0.257745, 0.157745 ),
+"array_data": PoolByteArray( 63, 92, 106, 190, 216, 245, 3, 62, 74, 133, 161, 61, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 0, 63, 92, 106, 62, 216, 245, 3, 62, 74, 133, 161, 189, 0, 0, 129, 0, 129, 0, 0, 127, 85, 57, 0, 0, 63, 92, 106, 62, 216, 245, 3, 62, 74, 133, 161, 61, 0, 0, 127, 0, 127, 0, 0, 127, 85, 53, 0, 0, 63, 92, 106, 190, 216, 245, 3, 62, 74, 133, 161, 189, 0, 0, 129, 0, 129, 0, 0, 127, 0, 60, 0, 0, 63, 92, 106, 190, 216, 245, 3, 190, 74, 133, 161, 61, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 56, 63, 92, 106, 62, 216, 245, 3, 190, 74, 133, 161, 189, 0, 0, 129, 0, 129, 0, 0, 127, 85, 57, 0, 56, 63, 92, 106, 62, 216, 245, 3, 190, 74, 133, 161, 61, 0, 0, 127, 0, 127, 0, 0, 127, 85, 53, 0, 56, 63, 92, 106, 190, 216, 245, 3, 190, 74, 133, 161, 189, 0, 0, 129, 0, 129, 0, 0, 127, 0, 60, 0, 56, 63, 92, 106, 62, 216, 245, 3, 62, 74, 133, 161, 61, 127, 0, 0, 0, 0, 0, 129, 127, 85, 53, 0, 0, 63, 92, 106, 190, 216, 245, 3, 62, 74, 133, 161, 189, 129, 0, 0, 0, 0, 0, 127, 127, 0, 0, 0, 56, 63, 92, 106, 62, 216, 245, 3, 62, 74, 133, 161, 189, 127, 0, 0, 0, 0, 0, 129, 127, 85, 57, 0, 0, 63, 92, 106, 190, 216, 245, 3, 62, 74, 133, 161, 61, 129, 0, 0, 0, 0, 0, 127, 127, 85, 53, 0, 56, 63, 92, 106, 62, 216, 245, 3, 190, 74, 133, 161, 61, 127, 0, 0, 0, 0, 0, 129, 127, 85, 53, 0, 56, 63, 92, 106, 190, 216, 245, 3, 190, 74, 133, 161, 189, 129, 0, 0, 0, 0, 0, 127, 127, 0, 0, 0, 60, 63, 92, 106, 62, 216, 245, 3, 190, 74, 133, 161, 189, 127, 0, 0, 0, 0, 0, 129, 127, 85, 57, 0, 56, 63, 92, 106, 190, 216, 245, 3, 190, 74, 133, 161, 61, 129, 0, 0, 0, 0, 0, 127, 127, 85, 53, 0, 60, 63, 92, 106, 62, 216, 245, 3, 62, 74, 133, 161, 61, 0, 127, 0, 0, 129, 0, 0, 127, 85, 53, 0, 56, 63, 92, 106, 190, 216, 245, 3, 190, 74, 133, 161, 61, 0, 129, 0, 0, 127, 0, 0, 127, 85, 57, 0, 56, 63, 92, 106, 190, 216, 245, 3, 62, 74, 133, 161, 61, 0, 127, 0, 0, 129, 0, 0, 127, 85, 57, 0, 56, 63, 92, 106, 62, 216, 245, 3, 190, 74, 133, 161, 61, 0, 129, 0, 0, 127, 0, 0, 127, 0, 60, 0, 56, 63, 92, 106, 62, 216, 245, 3, 62, 74, 133, 161, 189, 0, 127, 0, 0, 129, 0, 0, 127, 85, 53, 0, 60, 63, 92, 106, 190, 216, 245, 3, 190, 74, 133, 161, 189, 0, 129, 0, 0, 127, 0, 0, 127, 85, 57, 0, 60, 63, 92, 106, 190, 216, 245, 3, 62, 74, 133, 161, 189, 0, 127, 0, 0, 129, 0, 0, 127, 85, 57, 0, 60, 63, 92, 106, 62, 216, 245, 3, 190, 74, 133, 161, 189, 0, 129, 0, 0, 127, 0, 0, 127, 0, 60, 0, 60 ),
+"array_index_data": PoolByteArray( 0, 0, 4, 0, 2, 0, 2, 0, 4, 0, 6, 0, 1, 0, 5, 0, 3, 0, 3, 0, 5, 0, 7, 0, 8, 0, 12, 0, 10, 0, 10, 0, 12, 0, 14, 0, 9, 0, 13, 0, 11, 0, 11, 0, 13, 0, 15, 0, 16, 0, 20, 0, 18, 0, 18, 0, 20, 0, 22, 0, 17, 0, 21, 0, 19, 0, 19, 0, 21, 0, 23, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 36,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 24
+}
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 1, 0.894118, 0.470588, 0 )
+
+[sub_resource type="ConvexPolygonShape" id=11]
+points = PoolVector3Array( -0.2, 0.1, 0.05, 0.2, 0.1, -0.05, 0.2, 0.1, 0.05, -0.2, 0.1, -0.05, -0.2, -0.1, 0.05, 0.2, -0.1, -0.05, 0.2, -0.1, 0.05, -0.2, -0.1, -0.05, 0.2, 0.1, 0.05, -0.2, 0.1, -0.05, 0.2, 0.1, -0.05, -0.2, 0.1, 0.05, 0.2, -0.1, 0.05, -0.2, -0.1, -0.05, 0.2, -0.1, -0.05, -0.2, -0.1, 0.05, 0.2, 0.1, 0.05, -0.2, -0.1, 0.05, -0.2, 0.1, 0.05, 0.2, -0.1, 0.05, 0.2, 0.1, -0.05, -0.2, -0.1, -0.05, -0.2, 0.1, -0.05, 0.2, -0.1, -0.05 )
+
+[sub_resource type="Animation" id=12]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("RadioMesh/OutlineMesh:material/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Color( 1, 0.894118, 0.470588, 1 ), Color( 1, 0.894118, 0.470588, 1 ), Color( 1, 0.894118, 0.470588, 0 ) ]
+}
+
+[node name="PortableRadio" type="RigidBody"]
+mode = 2
+linear_damp = 2.0
+angular_damp = 1.0
+script = ExtResource( 3 )
+
+[node name="RadioMesh" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="AerialMesh" type="MeshInstance" parent="RadioMesh"]
+transform = Transform( 0.987688, -0.156434, 0, 0.156434, 0.987688, 0, 0, 0, 1, 0.1, 0.2, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="SpeakerMesh" type="MeshInstance" parent="RadioMesh"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.05, 0, 0.05 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="RadioMesh/SpeakerMesh"]
+stream = ExtResource( 1 )
+unit_db = -20.0
+pitch_scale = 0.4
+
+[node name="Particles" type="Particles" parent="RadioMesh/SpeakerMesh"]
+emitting = false
+amount = 3
+lifetime = 0.67
+explosiveness = 0.25
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="OutlineMesh" type="MeshInstance" parent="RadioMesh"]
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Highlight = SubResource( 12 )

@@ -1,0 +1,182 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://common/Player3D/Player3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Area/Sign3D/Sign3D.gd" type="Script" id=2]
+[ext_resource path="res://Screens/Area/Sign3D/SignGreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=5]
+[ext_resource path="res://common/UI/fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://common/UI/textFrame.png" type="Texture" id=8]
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=9]
+
+[sub_resource type="SphereShape" id=1]
+radius = 1.5
+
+[sub_resource type="DynamicFont" id=4]
+size = 36
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="QuadMesh" id=10]
+size = Vector2( 1.1, 1.1 )
+
+[sub_resource type="ViewportTexture" id=12]
+flags = 13
+viewport_path = NodePath("Sign/SignViewport")
+
+[sub_resource type="SpatialMaterial" id=11]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+flags_albedo_tex_force_srgb = true
+albedo_texture = SubResource( 12 )
+
+[sub_resource type="QuadMesh" id=5]
+size = Vector2( 6, 1.5 )
+
+[sub_resource type="ViewportTexture" id=13]
+flags = 13
+viewport_path = NodePath("Sign/PopupViewport")
+
+[sub_resource type="SpatialMaterial" id=7]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+flags_albedo_tex_force_srgb = true
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+albedo_texture = SubResource( 13 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 0.384662, 0.635591, 0.161862 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 50, 1, 50 )
+
+[node name="Sign3D" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Sign" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.90523 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Sign" groups=["Draw", "Interactive"]]
+shape = SubResource( 1 )
+
+[node name="SignViewport" type="Viewport" parent="Sign"]
+size = Vector2( 400, 400 )
+transparent_bg = true
+hdr = false
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Label" type="Label" parent="Sign/SignViewport"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+custom_fonts/font = SubResource( 4 )
+text = "Areas detect when something enters them, like the player touching a sign."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupViewport" type="Viewport" parent="Sign"]
+size = Vector2( 1000, 250 )
+transparent_bg = true
+hdr = false
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Sign/PopupViewport"]
+margin_right = 1000.0
+margin_bottom = 250.0
+texture = ExtResource( 8 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Sign/PopupViewport/NinePatchRect"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -125.0
+margin_right = 500.0
+margin_bottom = 125.0
+custom_fonts/font = SubResource( 4 )
+text = "Areas detect when something enters them, like the player touching a sign."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SignGreen" parent="Sign" instance=ExtResource( 3 )]
+
+[node name="SignText" type="MeshInstance" parent="Sign/SignGreen"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0.02 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 11 )
+
+[node name="Billboard" type="MeshInstance" parent="Sign"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.08613, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 7 )
+
+[node name="Tween" type="Tween" parent="Sign"]
+
+[node name="StaticBody" type="StaticBody" parent="Sign"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Sign/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.616264, 0 )
+shape = SubResource( 8 )
+
+[node name="Player3D" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.7298 )
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 9 )]
+data = {
+"cells": PoolIntArray( 3, 0, 1048614, 65532, 0, 1441830, -131077, 0, 9, -65541, 0, 9, -65536, 0, 9, -65535, 0, 9, -65534, 0, 9, -65533, 0, 9, -65532, 0, 16, -5, 0, 655370, -4, 0, 655375, -3, 0, 1441807, -2, 0, 9, -1, 0, 9, 1, 1, 1441795, 3, 1, 1048614, 65532, 1, 1441830, -131077, 1, 9, -65541, 1, 9, -65536, 1, 9, -65535, 1, 9, -65534, 1, 9, -65533, 1, 9, -65532, 1, 10, -5, 1, 655370, -4, 1, 1441807, -3, 1, 1441801, -2, 1, 9, -1, 1, 9, 3, 2, 1048614, 65532, 2, 1441830, 65533, 2, 655363, 65534, 2, 0, -131077, 2, 9, -65541, 2, 9, -65536, 2, 9, -65535, 2, 1048591, -65534, 2, 1441807, -65533, 2, 9, -65532, 2, 10, -5, 2, 655376, -4, 2, 1441807, -3, 2, 9, -2, 2, 9, -1, 2, 9, 2, 3, 38, 3, 3, 39, 65532, 3, 1441831, 65533, 3, 38, -131077, 3, 9, -65541, 3, 9, -65536, 3, 15, -65535, 3, 655375, -65534, 3, 655375, -65533, 3, 9, -65532, 3, 10, -5, 3, 655370, -4, 3, 9, -3, 3, 9, -2, 3, 9, -1, 3, 1441807, -196608, 4, 9, -196607, 4, 9, -196606, 4, 9, -196605, 4, 9, -196604, 4, 1441836, -131077, 4, 655404, -131076, 4, 9, -131075, 4, 9, -131074, 4, 9, -131073, 4, 9, -131072, 4, 9, -131071, 4, 9, -131070, 4, 9, -131069, 4, 9, -131068, 4, 1441836, -65541, 4, 655404, -65540, 4, 9, -65539, 4, 9, -65538, 4, 9, -65537, 4, 9, -65536, 4, 1441808, -65535, 4, 1441808, -65534, 4, 1441808, -65533, 4, 1441802, -65532, 4, 8, -5, 4, 1441800, -4, 4, 1441802, -3, 4, 1441802, -2, 4, 1441802, -1, 4, 1441802, -196608, 65531, 9, -196607, 65531, 9, -196606, 65531, 9, -196605, 65531, 9, -196604, 65531, 44, -131077, 65531, 1048620, -131076, 65531, 9, -131075, 65531, 9, -131074, 65531, 9, -131073, 65531, 9, -131072, 65531, 9, -131071, 65531, 9, -131070, 65531, 9, -131069, 65531, 9, -131068, 65531, 44, -65541, 65531, 1048620, -65540, 65531, 9, -65539, 65531, 9, -65538, 65531, 9, -65537, 65531, 9, -65536, 65531, 1048586, -65535, 65531, 1048586, -65534, 65531, 1048586, -65533, 65531, 1048586, -65532, 65531, 1048584, -5, 65531, 655374, -4, 65531, 1048586, -3, 65531, 1048586, -2, 65531, 1048586, -1, 65531, 1048586, 2, 65532, 655398, 3, 65532, 1048615, 65532, 65532, 655399, 65533, 65532, 655398, -131077, 65532, 9, -65541, 65532, 9, -65536, 65532, 1441801, -65535, 65532, 9, -65534, 65532, 9, -65533, 65532, 9, -65532, 65532, 10, -5, 65532, 655370, -4, 65532, 9, -3, 65532, 9, -2, 65532, 9, -1, 65532, 9, 2, 65533, 1441795, 3, 65533, 1048614, 65532, 65533, 1441830, 65534, 65533, 1441794, -131077, 65533, 9, -65541, 65533, 9, -65536, 65533, 9, -65535, 65533, 1441801, -65534, 65533, 1441801, -65533, 65533, 9, -65532, 65533, 10, -5, 65533, 655370, -4, 65533, 9, -3, 65533, 1441801, -2, 65533, 9, -1, 65533, 9, 1, 65534, 1048576, 3, 65534, 1048614, 65532, 65534, 1441830, 65533, 65534, 1441797, -131077, 65534, 9, -65541, 65534, 9, -65536, 65534, 9, -65535, 65534, 1441801, -65534, 65534, 1441801, -65533, 65534, 1441801, -65532, 65534, 10, -5, 65534, 655370, -4, 65534, 9, -3, 65534, 9, -2, 65534, 9, -1, 65534, 9, 3, 65535, 1048614, 65532, 65535, 1441830, 65533, 65535, 1048577, -131077, 65535, 9, -65541, 65535, 9, -65536, 65535, 9, -65535, 65535, 9, -65534, 65535, 9, -65533, 65535, 9, -65532, 65535, 10, -5, 65535, 655370, -4, 65535, 655375, -3, 65535, 9, -2, 65535, 9, -1, 65535, 9 )
+}
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 9 )

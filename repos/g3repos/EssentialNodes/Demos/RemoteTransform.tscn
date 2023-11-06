@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://common/Basic3D/3DPlatformingEnvironment.tres" type="Environment" id=1]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=2]
+[ext_resource path="res://Screens/RemoteTransform/RemoteCamera/RemoteCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=5]
+[ext_resource path="res://Screens/RemoteTransform/Skateboarding3D/Skateboarding3D.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/RemoteTransform/GrindRail/GrindRail.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/RemoteTransform/Airstrike3D/Airstrike3D.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Screens/RemoteTransform/3DCardDragging/3DCardDragging.tscn" type="PackedScene" id=9]
+
+[node name="RemoteTransform" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="RemoteCamera" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 4 )
+movement_scheme = 3
+
+[node name="GrindRail" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 7 )
+movement_scheme = 3
+
+[node name="Skateboarding3D" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 6 )
+controls = [ "move_up", "move_down", "move_left", "move_right" ]
+
+[node name="Airstrike3D" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 8 )
+controls = [ "shoot_3d", "move_up", "move_down", "move_left", "move_right" ]
+
+[node name="3DCardDragging" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 9 )
+controls = [ "click" ]
+force_confined_mouse_mode = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 1 )

@@ -1,0 +1,140 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://common/Environment/space_environment_meshlib.tres" type="MeshLibrary" id=2]
+[ext_resource path="res://Screens/Viewport/Nametags/Nametags.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.08, 0.56, 0.8, 0.2 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Nametag/Viewport")
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = SubResource( 2 )
+
+[sub_resource type="QuadMesh" id=4]
+resource_local_to_scene = true
+material = SubResource( 3 )
+size = Vector2( 6, 2 )
+
+[node name="Nametags" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Nametag" type="Spatial" parent="."]
+
+[node name="Viewport" type="Viewport" parent="Nametag"]
+size = Vector2( 600, 200 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Nametag/Viewport"]
+margin_right = 600.0
+margin_bottom = 64.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="Nametag/Viewport/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 592.0
+margin_bottom = 53.0
+size_flags_horizontal = 5
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+text = "DragonSlayer2000"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Nametag"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CameraOrigin" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+
+[node name="Camera" type="Camera" parent="CameraOrigin"]
+transform = Transform( -1, 0, -8.74228e-08, -2.26267e-08, 0.965926, 0.258819, 8.44439e-08, 0.258819, -0.965926, 0, 2, -6 )
+current = true
+fov = 90.0
+
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, 0, 6, 1 )
+shadow_enabled = true
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 2 )
+cell_center_y = false
+data = {
+"cells": PoolIntArray( 0, 0, 28, 1, 0, 25, -131072, 0, 9, -131071, 0, 9, -131070, 0, 10, -65538, 0, 655370, -65537, 0, 9, -65535, 0, 24, -131072, 1, 9, -131071, 1, 1441807, -131070, 1, 16, -65538, 1, 655370, -65537, 1, 9, -65535, 1, 39, -131072, 2, 1441808, -131071, 2, 1441802, -131070, 2, 14, -65538, 2, 1441800, -65537, 2, 1441802, -131072, 65531, 1048586, -131071, 65531, 1048586, -131070, 65531, 1048590, -65538, 65531, 655368, -65537, 65531, 1048586, -131072, 65532, 1048585, -131071, 65532, 1048585, -131070, 65532, 16, -65538, 65532, 655370, -65537, 65532, 1048585, -65536, 65532, 1048593, -65535, 65532, 1048583, -1, 65532, 655367, -131072, 65533, 1048586, -131071, 65533, 1048585, -131070, 65533, 10, -65538, 65533, 655370, -65537, 65533, 1048585, -65536, 65533, 1441805, -65535, 65533, 11, -1, 65533, 1441799, -131072, 65534, 9, -131071, 65534, 9, -131070, 65534, 16, -65538, 65534, 655370, -65537, 65534, 9, -65536, 65534, 655399, -65535, 65534, 1048615, -1, 65534, 655362, 0, 65535, 28, 1, 65535, 28, -131072, 65535, 9, -131071, 65535, 9, -131070, 65535, 10, -65538, 65535, 655370, -65537, 65535, 9, -65535, 65535, 26, -2, 65535, 655360, -1, 65535, 655364 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, -1, 0 )
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -320.0
+margin_top = -166.0
+margin_right = 320.0
+margin_bottom = -52.0
+placeholder_text = "Type your name here"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Zoom" type="Button" parent="CanvasLayer/Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -330.0
+margin_top = -327.0
+margin_right = -30.0
+margin_bottom = -213.0
+toggle_mode = true
+text = "Toggle Zoom"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="sort_children" from="Nametag/Viewport/PanelContainer" to="." method="_on_PanelContainer_sort_children"]
+[connection signal="text_changed" from="CanvasLayer/Control/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="toggled" from="CanvasLayer/Control/Zoom" to="." method="_on_Zoom_toggled"]

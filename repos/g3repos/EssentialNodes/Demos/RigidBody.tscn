@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=1]
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=2]
+[ext_resource path="res://Screens/RigidBody/PlanetGravity3D/PlanetGravity3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/RigidBody/ShootingCannon3D/ShootingCannon3D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/RigidBody/KinematicVsRigidBody3D/KinematicVsRigidBody3D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/RigidBody/Shattering3D/Shattering3D.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/RigidBody/ShootingGrenade3D/ShootingGrenade3D.tscn" type="PackedScene" id=7]
+[ext_resource path="res://common/Basic3D/3DPlatformingEnvironment.tres" type="Environment" id=11]
+
+[node name="RigidBody" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="KinematicVsRigidBody3D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 5 )
+movement_scheme = 3
+
+[node name="PlanetGravity3D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 3 )
+movement_scheme = 3
+
+[node name="ShootingGrenade3D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 7 )
+controls = [ "shoot_3d" ]
+movement_scheme = 3
+
+[node name="ShootingCannon3D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 4 )
+controls = [ "shoot_3d" ]
+
+[node name="Shattering3D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 6 )
+controls = [ "shoot_3d" ]
+movement_scheme = 3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 11 )

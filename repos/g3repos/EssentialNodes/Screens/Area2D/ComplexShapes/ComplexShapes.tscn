@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Area2D/ComplexShapes/ComplexShapes.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 330.03, 62.5931 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 73.8197, 264.865 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 154.662
+
+[node name="ComplexShapes" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 180.199, 481.292 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 818.076, 365.587 )
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=[
+"Draw",
+"HurtBox",
+]]
+position = Vector2( -208.265, -149.831 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=[
+"Draw",
+"HurtBox",
+]]
+position = Vector2( -205.268, 377.573 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" groups=[
+"Draw",
+"HurtBox",
+]]
+position = Vector2( -206.766, 364.089 )
+shape = SubResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" groups=[
+"Draw",
+"HurtBox",
+]]
+position = Vector2( 743.161, 11.9865 )
+polygon = PoolVector2Array( -5.59076, -4.15915, 81.311, -58.0982, -13.0823, 178.634, 283.583, 520.248, -108.974, 307.489, -375.673, 464.811, -272.289, 166.648, -486.547, 21.3121, -194.377, 69.2579, -149.428, -323.299, -62.5264, 55.7732 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D" groups=[
+"Draw",
+"HurtBox",
+]]
+position = Vector2( 109.457, -125.475 )
+shape = SubResource( 3 )

@@ -1,0 +1,239 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://common/Player3D/Player3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=2]
+[ext_resource path="res://common/Basic3D/Neutral.tres" type="Material" id=3]
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://common/Turret3D/LineOfSightTurret3D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://common/Camera3D/ThirdPersonCamera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/AudioStreamPlayer/DopplerEffect/FiringTurret3D.gd" type="Script" id=7]
+[ext_resource path="res://Screens/AudioStreamPlayer/DopplerEffect/Projectile.tscn" type="PackedScene" id=8]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 50, 1, 50 )
+
+[sub_resource type="CylinderMesh" id=2]
+top_radius = 0.2
+bottom_radius = 0.3
+height = 1.0
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.05, 0.05, 0.3 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+flags_unshaded = true
+params_blend_mode = 1
+albedo_color = Color( 1, 0, 0, 1 )
+proximity_fade_enable = true
+proximity_fade_distance = 0.5
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("TargetModel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.25, 0.25, 0.25 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TargetModel/MeshInstance:material/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0, 0, 1 ) ]
+}
+
+[node name="DopplerEffect" type="Spatial"]
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 4 )]
+data = {
+"cells": PoolIntArray( -65536, 0, 1048585, -65535, 0, 1048585, -65534, 0, 1048585, -65533, 0, 1048585, -65532, 0, 10, -5, 0, 655370, -4, 0, 1048585, -3, 0, 1048585, -2, 0, 1048585, -1, 0, 1048585, 65533, 1, 1441794, -65536, 1, 1048585, -65535, 1, 1048585, -65534, 1, 1048585, -65533, 1, 1048585, -65532, 1, 10, -5, 1, 655370, -4, 1, 1048585, -3, 1, 1048585, -2, 1, 1048585, -1, 1, 1048585, 2, 2, 1048576, 3, 2, 1048578, 65532, 2, 1441792, 65533, 2, 0, 65534, 2, 1048576, -65536, 2, 1048585, -65535, 2, 1048585, -65534, 2, 1048585, -65533, 2, 1048585, -65532, 2, 10, -5, 2, 655370, -4, 2, 1048591, -3, 2, 1048585, -2, 2, 1048585, -1, 2, 1048585, 2, 3, 655360, 3, 3, 0, 65532, 3, 655362, -65536, 3, 1048585, -65535, 3, 1048585, -65534, 3, 1048585, -65533, 3, 1441807, -65532, 3, 10, -5, 3, 655376, -4, 3, 655375, -3, 3, 1048585, -2, 3, 15, -1, 3, 1048585, -65536, 4, 1441802, -65535, 4, 1441802, -65534, 4, 1441802, -65533, 4, 1441808, -65532, 4, 14, -5, 4, 1441806, -4, 4, 1441802, -3, 4, 1441802, -2, 4, 1441802, -1, 4, 1441802, -65536, 65531, 1048586, -65535, 65531, 1048586, -65534, 65531, 1048586, -65533, 65531, 1048586, -65532, 65531, 1048584, -5, 65531, 655374, -4, 65531, 1048592, -3, 65531, 1048586, -2, 65531, 1048586, -1, 65531, 1048586, 3, 65532, 1441792, 65532, 65532, 1441794, 65534, 65532, 655360, -65536, 65532, 1048585, -65535, 65532, 1048585, -65534, 65532, 1048585, -65533, 65532, 1048585, -65532, 65532, 10, -5, 65532, 655370, -4, 65532, 655375, -3, 65532, 15, -2, 65532, 1048591, -1, 65532, 1048585, 2, 65533, 1, 3, 65533, 655365, 65532, 65533, 655360, 65533, 65533, 1441792, 65534, 65533, 1048576, -65536, 65533, 1048585, -65535, 65533, 1048585, -65534, 65533, 1048585, -65533, 65533, 1048585, -65532, 65533, 10, -5, 65533, 655376, -4, 65533, 1048585, -3, 65533, 1048585, -2, 65533, 1048591, -1, 65533, 1048585, 3, 65534, 2, 65533, 65534, 0, -65536, 65534, 1048585, -65535, 65534, 1048585, -65534, 65534, 1048585, -65533, 65534, 1048585, -65532, 65534, 10, -5, 65534, 655370, -4, 65534, 1441807, -3, 65534, 1048585, -2, 65534, 1048585, -1, 65534, 1048585, -65536, 65535, 1048585, -65535, 65535, 1048585, -65534, 65535, 1048585, -65533, 65535, 1048585, -65532, 65535, 10, -5, 65535, 655370, -4, 65535, 1048585, -3, 65535, 1048585, -2, 65535, 1048585, -1, 65535, 1048585 )
+}
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 1 )
+
+[node name="LineOfSightTurret3D" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+script = ExtResource( 7 )
+player_path = NodePath("../Player3D")
+projectile_scene = ExtResource( 8 )
+
+[node name="PoleModel" parent="LineOfSightTurret3D" index="2"]
+visible = false
+
+[node name="Pole" parent="LineOfSightTurret3D/PoleModel" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+
+[node name="Timer" type="Timer" parent="LineOfSightTurret3D"]
+one_shot = true
+
+[node name="Pole" type="MeshInstance" parent="LineOfSightTurret3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 3 )
+
+[node name="Player3D" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="TargetModel" type="Spatial" parent="Player3D"]
+transform = Transform( 1, -8.74228e-08, 8.74228e-08, 8.74228e-08, 1, 8.74228e-08, -8.74228e-08, -8.74228e-08, 1, 0, 1, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500414, -0.425889, -0.271793 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500414, -0.425889, 0.502075 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.37609, -0.425889, -0.400768 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.3775, -0.425889, -0.400768 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.507988, -0.425889, 0.50625 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.507988, -0.425889, -0.273937 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.507988, -0.297573, -0.401917 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.505288, -0.295427, -0.401917 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.505288, -0.2965, 0.628976 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.502752, -0.295427, 0.628976 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance13" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.507988, 0.482844, -0.401917 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance14" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.505288, 0.482844, -0.401917 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance15" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.505288, 0.482844, 0.628976 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance16" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.502752, 0.486063, 0.636747 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.380585, -0.425889, 0.639871 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.375002, -0.425889, 0.639871 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance17" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500414, 0.613588, -0.267822 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance18" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500414, 0.613588, 0.506797 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance19" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.369653, 0.613588, -0.400768 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance20" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.380718, 0.613588, -0.400768 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance21" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.507988, 0.613588, 0.49889 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance22" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.507988, 0.613588, -0.274412 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance23" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.37844, 0.613588, 0.639871 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance24" type="MeshInstance" parent="Player3D/TargetModel"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.369638, 0.613588, 0.639871 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="TargetAnimation" type="AnimationPlayer" parent="Player3D"]
+anims/highlight = SubResource( 5 )
+
+[node name="CameraController" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+player_path = NodePath("../Player3D")
+
+[editable path="LineOfSightTurret3D"]

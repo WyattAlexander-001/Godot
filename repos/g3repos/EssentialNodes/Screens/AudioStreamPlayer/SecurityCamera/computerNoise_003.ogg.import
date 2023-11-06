@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/computerNoise_003.ogg-dff384bdf5d39b3024b753d601fd9130.oggstr"
+
+[deps]
+
+source_file="res://Screens/AudioStreamPlayer/SecurityCamera/computerNoise_003.ogg"
+dest_files=[ "res://.import/computerNoise_003.ogg-dff384bdf5d39b3024b753d601fd9130.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

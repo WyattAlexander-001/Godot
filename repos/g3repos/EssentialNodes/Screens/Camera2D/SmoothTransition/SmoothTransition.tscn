@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Camera2D/SmoothTransition/SmoothTransitionCamera2D.gd" type="Script" id=2]
+
+[node name="SmoothTransition" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1200, 800 )
+current = true
+process_mode = 0
+smoothing_enabled = true
+script = ExtResource( 2 )
+target_a = NodePath("../PlayerA")
+target_b = NodePath("../PlayerB")
+target_c = NodePath("../PlayerC")
+
+[node name="PlayerA" parent="." instance=ExtResource( 1 )]
+position = Vector2( 800, 100 )
+
+[node name="PlayerB" parent="." instance=ExtResource( 1 )]
+modulate = Color( 0.301961, 0.65098, 1, 1 )
+position = Vector2( 400, 800 )
+
+[node name="PlayerC" parent="." instance=ExtResource( 1 )]
+modulate = Color( 0.729412, 0.380392, 0.337255, 1 )
+position = Vector2( 1200, 800 )

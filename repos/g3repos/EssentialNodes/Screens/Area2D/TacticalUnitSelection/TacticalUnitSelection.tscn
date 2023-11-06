@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Screens/Area2D/TacticalUnitSelection/SelectableUnit2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Area2D/TacticalUnitSelection/SelectionArea2D.tscn" type="PackedScene" id=2]
+
+[node name="TacticalUnitSelection" type="Node2D"]
+
+[node name="SelectionArea2D" parent="." instance=ExtResource( 2 )]
+z_index = 10
+
+[node name="Units" type="Node2D" parent="."]
+
+[node name="SelectableUnit2D" parent="Units" instance=ExtResource( 1 )]
+position = Vector2( 851.921, 548.153 )
+rotation = -0.650624
+
+[node name="SelectableUnit2D5" parent="Units" instance=ExtResource( 1 )]
+position = Vector2( 566.871, 357.607 )
+rotation = -1.13767
+
+[node name="SelectableUnit2D6" parent="Units" instance=ExtResource( 1 )]
+position = Vector2( 1187.45, 300.974 )
+rotation = 0.594931
+
+[node name="SelectableUnit2D7" parent="Units" instance=ExtResource( 1 )]
+position = Vector2( 1182.69, 721.953 )
+rotation = 1.71637
+
+[node name="SelectableUnit2D2" parent="Units" instance=ExtResource( 1 )]
+position = Vector2( 684.967, 789.664 )
+rotation = -2.38828
+scale = Vector2( 1, 1 )
+
+[node name="SelectableUnit2D3" parent="Units" instance=ExtResource( 1 )]
+position = Vector2( 974.145, 543.424 )
+rotation = 0.337455
+
+[node name="SelectableUnit2D4" parent="Units" instance=ExtResource( 1 )]
+position = Vector2( 915.856, 497.286 )
+rotation = 0.057641

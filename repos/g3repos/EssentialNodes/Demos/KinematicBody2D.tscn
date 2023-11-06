@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/DemoScreen2D.gd" type="Script" id=1]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenNavigator.gd" type="Script" id=2]
+[ext_resource path="res://Screens/KinematicBody2D/SideScrollMovement/SideScrollMovement.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/KinematicBody2D/Stomp/StompMechanic.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/KinematicBody2D/MovingPlatforms/MovingPlatforms.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/KinematicBody2D/RotatingPlatforms/RotatingPlatforms.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Screens/KinematicBody2D/WallSlideAndJump/WallSlideAndJump.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Screens/KinematicBody2D/PushRigidBodies/PushRigidBodies.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Screens/KinematicBody2D/PassThroughMechanics/PassThroughMechanics.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Screens/KinematicBody2D/TopdownMovement/TopdownMovement.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Screens/KinematicBody2D/TopDownPushMovement/TopDownPushMovement.tscn" type="PackedScene" id=13]
+
+[node name="KinematicBody2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="SideScrollMovement" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 3 )
+movement_scheme = 2
+
+[node name="StompMechanic" type="Node2D" parent="."]
+position = Vector2( 1896, 0 )
+script = ExtResource( 1 )
+scene = ExtResource( 6 )
+movement_scheme = 2
+
+[node name="MovingPlatforms" type="Node2D" parent="."]
+position = Vector2( 3800, 0 )
+script = ExtResource( 1 )
+scene = ExtResource( 7 )
+movement_scheme = 2
+
+[node name="RotatingBodies" type="Node2D" parent="."]
+position = Vector2( 8, 1120 )
+script = ExtResource( 1 )
+scene = ExtResource( 8 )
+movement_scheme = 2
+
+[node name="WallSlideAndJump" type="Node2D" parent="."]
+position = Vector2( 1896, 1120 )
+script = ExtResource( 1 )
+scene = ExtResource( 9 )
+movement_scheme = 2
+
+[node name="PassThroughMechanics" type="Node2D" parent="."]
+position = Vector2( 3804.8, 1120 )
+script = ExtResource( 1 )
+scene = ExtResource( 11 )
+movement_scheme = 2
+
+[node name="PushRigidBodies" type="Node2D" parent="."]
+position = Vector2( 0, 2359.2 )
+script = ExtResource( 1 )
+scene = ExtResource( 10 )
+movement_scheme = 2
+
+[node name="TopdownMovement" type="Node2D" parent="."]
+position = Vector2( 1896, 2359.2 )
+script = ExtResource( 1 )
+scene = ExtResource( 12 )
+movement_scheme = 2
+
+[node name="TopDownPushMovement" type="Node2D" parent="."]
+position = Vector2( 3804.8, 2359.2 )
+script = ExtResource( 1 )
+scene = ExtResource( 13 )
+movement_scheme = 2

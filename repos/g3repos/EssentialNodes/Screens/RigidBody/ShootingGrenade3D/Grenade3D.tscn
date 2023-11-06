@@ -1,0 +1,113 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Screens/RigidBody/ShootingGrenade3D/grenade.gltf" type="PackedScene" id=1]
+[ext_resource path="res://Screens/RigidBody/ShootingGrenade3D/Grenade3D.gd" type="Script" id=2]
+[ext_resource path="res://common/Assets3D/Assets-Matte.tres" type="Material" id=3]
+[ext_resource path="res://common/Assets3D/Assets-Gloss.tres" type="Material" id=4]
+[ext_resource path="res://common/Assets3D/Assets-Glow.tres" type="Material" id=5]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.1
+rough = true
+bounce = 0.5
+
+[sub_resource type="CylinderShape" id=2]
+radius = 0.1
+height = 0.4
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.439372, 1 )
+colors = PoolColorArray( 2, 1.5, 0, 1, 0.730301, 0.139585, 0, 1, 0.163457, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.61005, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+lifetime_randomness = 0.1
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 3, 0 )
+initial_velocity = 8.0
+initial_velocity_random = 1.0
+scale_random = 0.5
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+proximity_fade_enable = true
+proximity_fade_distance = 0.5
+
+[sub_resource type="SphereMesh" id=11]
+material = SubResource( 10 )
+radial_segments = 16
+rings = 16
+
+[sub_resource type="SphereShape" id=12]
+radius = 5.0
+
+[sub_resource type="Animation" id=13]
+resource_name = "Detonate"
+length = 2.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.5, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_explode"
+}, {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[node name="Grenade3D" type="RigidBody"]
+mass = 0.5
+physics_material_override = SubResource( 1 )
+gravity_scale = 2.0
+script = ExtResource( 2 )
+blast_impulse = 7.0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Grenade" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+
+[node name="grenade" parent="Grenade" index="0"]
+material/0 = ExtResource( 4 )
+material/1 = ExtResource( 5 )
+material/2 = ExtResource( 3 )
+
+[node name="Explosion" type="Particles" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 9 )
+draw_pass_1 = SubResource( 11 )
+
+[node name="ExplosionRadius" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="ExplosionRadius"]
+shape = SubResource( 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Detonate = SubResource( 13 )
+
+[editable path="Grenade"]

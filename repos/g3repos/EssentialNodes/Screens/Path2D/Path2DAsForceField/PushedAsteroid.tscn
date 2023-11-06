@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/debug_drawing/DebugDrawCollisionShape2D.gd" type="Script" id=1]
+[ext_resource path="res://common/asteroids/asteroidA.png" type="Texture" id=2]
+[ext_resource path="res://Screens/Path2D/Path2DAsForceField/Line2D.gd" type="Script" id=3]
+[ext_resource path="res://Screens/Path2D/Path2DAsForceField/PushedAsteroid.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.2
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 60.0
+
+[node name="PushedAsteroid" type="RigidBody2D"]
+collision_layer = 5
+collision_mask = 7
+mass = 4.0
+physics_material_override = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="asteroidA" type="Sprite" parent="."]
+show_behind_parent = true
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="DemoCollisionShapeDebug" type="Node2D" parent="CollisionShape2D"]
+script = ExtResource( 1 )
+shape_type = 2
+outline_color = Color( 0.301961, 0.65098, 1, 1 )
+shape_size = Vector2( 60, 60 )
+
+[node name="Line2D" type="Line2D" parent="." groups=[
+"CollisionShapeDebug",
+]]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 8.0
+default_color = Color( 0.4, 0.501961, 1, 1 )
+script = ExtResource( 3 )
+
+[node name="Polygon2DTip" type="Polygon2D" parent="Line2D"]
+color = Color( 0.4, 0.501961, 1, 1 )
+polygon = PoolVector2Array( 0, -20, 0, 20, 40, 0 )

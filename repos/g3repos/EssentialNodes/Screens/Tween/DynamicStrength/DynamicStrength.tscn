@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/UI/TextButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/explosion/explosion_alt.png" type="Texture" id=2]
+[ext_resource path="res://Screens/Tween/DynamicStrength/DynamicStrength.gd" type="Script" id=3]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=4]
+[ext_resource path="res://common/UI/Slider.tscn" type="PackedScene" id=5]
+
+[node name="DynamicStrength" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+theme = ExtResource( 4 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Explosion" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 960, 360 )
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="HSlider" parent="." instance=ExtResource( 5 )]
+margin_left = -540.0
+margin_top = 19.6567
+margin_right = 540.0
+margin_bottom = 167.657
+
+[node name="SmallLabel" type="Label" parent="HSlider"]
+margin_left = -140.0
+margin_top = -15.0
+margin_right = -20.0
+margin_bottom = 119.0
+rect_min_size = Vector2( 120, 182 )
+rect_pivot_offset = Vector2( 60, 25 )
+text = "small"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigLabel" type="Label" parent="HSlider"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -15.0
+margin_right = 140.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 120, 182 )
+rect_pivot_offset = Vector2( 60, 25 )
+text = "big"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExplodeButton" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -159.0
+margin_top = 210.0
+margin_right = 159.0
+margin_bottom = 362.0
+text = "Explode"
+
+[connection signal="pressed" from="ExplodeButton" to="." method="_on_ExplodeButton_pressed"]

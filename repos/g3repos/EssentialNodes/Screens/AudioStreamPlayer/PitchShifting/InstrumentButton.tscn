@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/AudioStreamPlayer/PitchShifting/piccolo_c5.tres" type="AudioStream" id=1]
+[ext_resource path="res://common/UI/fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Button
+
+export var pitch := 1.0
+export(AudioStreamSample) var sample
+
+onready var _audio_player := $AudioStreamPlayer
+
+
+func _ready() -> void:
+	_audio_player.pitch_scale = pitch
+	_audio_player.stream = sample
+	connect(\"button_down\", _audio_player, \"play\")
+	connect(\"button_up\", _audio_player, \"stop\")
+"
+
+[node name="InstrumentButton" type="Button"]
+margin_right = 64.0
+margin_bottom = 192.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.376471, 0.376471, 0.439216, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "C"
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )

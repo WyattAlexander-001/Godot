@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://common/UI/textFrame.png" type="Texture" id=2]
+[ext_resource path="res://Screens/RichTextLabel/CustomBBCode/RichTextHover.gd" type="Script" id=3]
+[ext_resource path="res://Screens/RichTextLabel/CustomBBCode/RichTextFlash.gd" type="Script" id=4]
+[ext_resource path="res://Screens/RichTextLabel/CustomBBCode/RichTextCensor.gd" type="Script" id=5]
+
+[sub_resource type="RichTextEffect" id=1]
+script = ExtResource( 3 )
+
+[sub_resource type="RichTextEffect" id=2]
+script = ExtResource( 4 )
+
+[sub_resource type="RichTextEffect" id=3]
+script = ExtResource( 5 )
+
+[node name="CustomBBCode" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = 420.0
+margin_top = 360.0
+margin_right = 1500.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 1080, 360 )
+rect_pivot_offset = Vector2( 540, 180 )
+texture = ExtResource( 2 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = -12.0
+bbcode_enabled = true
+bbcode_text = "You can code your own RichTextEffects to affect:
+
+- [hover speed=5]position[/hover]
+- [flash]Color[/flash]
+and even
+-[censor]alter the letters in a text[/censor].
+"
+meta_underlined = false
+text = "You can code your own RichTextEffects to affect:
+
+- position
+- Color
+and even
+-alter the letters in a text.
+"
+fit_content_height = true
+scroll_active = false
+custom_effects = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ]
+__meta__ = {
+"_edit_use_anchors_": false
+}

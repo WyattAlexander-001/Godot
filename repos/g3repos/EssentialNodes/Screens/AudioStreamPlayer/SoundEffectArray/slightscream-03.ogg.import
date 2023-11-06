@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/slightscream-03.ogg-8196e8d50f0f78554938d8ae0505e9e4.oggstr"
+
+[deps]
+
+source_file="res://Screens/AudioStreamPlayer/SoundEffectArray/slightscream-03.ogg"
+dest_files=[ "res://.import/slightscream-03.ogg-8196e8d50f0f78554938d8ae0505e9e4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Screens/Area/Rocks3D/black_hole.gltf" type="PackedScene" id=2]
+[ext_resource path="res://Screens/Area/Rocks3D/BlackHole3D.gd" type="Script" id=3]
+[ext_resource path="res://Screens/Area/Rocks3D/pattern.png" type="Texture" id=4]
+
+[sub_resource type="Shader" id=6]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.4.stable's SpatialMaterial.
+
+shader_type spatial;
+render_mode blend_mix;
+
+
+uniform sampler2D texture_pattern : hint_albedo;
+uniform float refraction : hint_range(-16,16);
+uniform sampler2D texture_normal : hint_normal;
+uniform float normal_scale : hint_range(-16,16);
+uniform float speed : hint_range(0.0, 1.0) = 0.5;
+
+void vertex() {
+	MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
+	MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(length(WORLD_MATRIX[0].xyz), 0.0, 0.0, 0.0),vec4(0.0, length(WORLD_MATRIX[1].xyz), 0.0, 0.0),vec4(0.0, 0.0, length(WORLD_MATRIX[2].xyz), 0.0),vec4(0.0, 0.0, 0.0, 1.0));
+}
+
+void fragment() {
+	float gradient = smoothstep(0.0, 1.0, clamp( min(2.0 * UV.y, 2.0 - 2.0 * UV.y ) * 4.0 - 0.5, 0.0, 1.0));
+	vec2 base_uv = UV;
+	base_uv.x += base_uv.y * 1.0;
+	vec4 albedo_tex = texture(texture_pattern, base_uv + vec2(0.0, -TIME * speed));
+	ALBEDO = mix(vec3(0.2, 0.0, 0.7), vec3(1.0), pow(albedo_tex.r, 2.0));
+	ROUGHNESS = 1.0;
+	SPECULAR = 0.0;
+	NORMALMAP = texture(texture_normal,base_uv + vec2(0.0, -TIME * speed)).rgb;
+	NORMALMAP_DEPTH = normal_scale;
+	vec3 unpacked_normal = NORMALMAP;
+	unpacked_normal.xy = unpacked_normal.xy * 2.0 - 1.0;
+	unpacked_normal.z = sqrt(max(0.0, 1.0 - dot(unpacked_normal.xy, unpacked_normal.xy)));
+	vec3 ref_normal = normalize( mix(NORMAL,TANGENT * unpacked_normal.x + BINORMAL * unpacked_normal.y + NORMAL * unpacked_normal.z,NORMALMAP_DEPTH) );
+	vec2 ref_ofs = SCREEN_UV - ref_normal.xy * refraction;
+	ref_ofs = mix(SCREEN_UV, ref_ofs, gradient);
+	float ref_amount = 1.0 * (1.0 - albedo_tex.r * gradient);
+	EMISSION += textureLod(SCREEN_TEXTURE,ref_ofs,0.0).rgb * ref_amount;
+	EMISSION += pow(albedo_tex.r, 8.0) * gradient * 4.0;
+	ALBEDO *= 1.0 - ref_amount;
+	ALPHA = 1.0;
+}
+"
+
+[sub_resource type="OpenSimplexNoise" id=4]
+
+[sub_resource type="NoiseTexture" id=5]
+seamless = true
+as_normalmap = true
+noise = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/refraction = 0.15
+shader_param/normal_scale = 1.5
+shader_param/speed = 0.5
+shader_param/texture_pattern = ExtResource( 4 )
+shader_param/texture_normal = SubResource( 5 )
+
+[sub_resource type="SphereShape" id=1]
+radius = 7.0
+
+[node name="BlackHole3D" type="Area"]
+collision_layer = 0
+gravity_point = true
+script = ExtResource( 3 )
+
+[node name="black_hole" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+
+[node name="black_hole" parent="black_hole" index="0"]
+material/0 = SubResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="." groups=["Draw", "Interactive"]]
+shape = SubResource( 1 )
+
+[editable path="black_hole"]

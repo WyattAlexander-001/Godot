@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=2]
+[ext_resource path="res://Screens/ProgressBar/LimitHealth/LimitHealth.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/ProgressBar/LevelProgress/LevelProgress.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/ProgressBar/HealthMaximum/HealthMaximum.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/ProgressBar/AbilityCooldown/AbilityCooldown.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=9]
+
+[node name="ProgressBar" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="LimitHealth" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 3 )
+movement_scheme = 2
+
+[node name="LevelProgress" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 4 )
+movement_scheme = 2
+
+[node name="HealthMaximum" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 5 )
+movement_scheme = 2
+
+[node name="AbilityCooldown" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 7 )

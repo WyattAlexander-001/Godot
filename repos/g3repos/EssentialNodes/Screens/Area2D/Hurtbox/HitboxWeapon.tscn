@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Screens/Area2D/Hurtbox/swordA_yellow.png" type="Texture" id=1]
+[ext_resource path="res://Screens/Area2D/Hurtbox/HitboxWeapon.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+length = 0.5
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.166 ),
+"transitions": PoolRealArray( 1.56917, 1 ),
+"update": 0,
+"values": [ -89.9999, 89.9999 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.498 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.333333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="HitboxWeapon" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, -38 )
+collision_layer = 8
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" groups=["Draw", "HurtBox"]]
+polygon = PoolVector2Array( -128, 0, -112, -72, -64, -112, 0, -132.776, 56, -112, 104, -72, 128, 0 )
+
+[node name="Pivot" type="Position2D" parent="."]
+position = Vector2( 0, -38 )
+rotation = 1.57079
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+visible = false
+show_behind_parent = true
+texture = ExtResource( 1 )
+offset = Vector2( 0.216705, -65.9752 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 1 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

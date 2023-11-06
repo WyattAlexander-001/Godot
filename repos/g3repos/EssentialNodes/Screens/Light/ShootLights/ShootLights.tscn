@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Screens/Light/ShootLights/FlorescentLight.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/PlayerFPS3D/LaserBeam3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://common/PlayerFPS3D/FPSPlayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/PlayerFPS3D/RobotWeapon3D.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ProceduralSky" id=1]
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_sky_contribution = 0.0
+glow_enabled = true
+glow_bicubic_upscale = true
+
+[node name="Spatial" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="FPSPlayer" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.222153, 0 )
+
+[node name="RobotWeapon3D" parent="FPSPlayer/TiltPivot" index="1" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, -0.198, -0.561 )
+
+[node name="LaserBeam3D" parent="FPSPlayer/TiltPivot/RobotWeapon3D" instance=ExtResource( 2 )]
+
+[node name="Hallway" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="Room" type="CSGBox" parent="Hallway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0 )
+width = 25.0
+height = 7.0
+depth = 7.0
+
+[node name="Hollow" type="CSGBox" parent="Hallway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.8, 0 )
+operation = 2
+width = 18.0
+height = 5.0
+depth = 6.0
+
+[node name="Window" type="CSGBox" parent="Hallway"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6634, 4, 1.49012e-08 )
+operation = 2
+width = 3.0
+height = 1.0
+depth = 4.0
+
+[node name="Lights" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
+[node name="FlorescentLight1" parent="Lights" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2 )
+
+[node name="FlorescentLight2" parent="Lights" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2 )
+
+[node name="FlorescentLight3" parent="Lights" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2 )
+
+[node name="FlorescentLight4" parent="Lights" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2 )
+
+[node name="FlorescentLight5" parent="Lights" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2 )
+
+[node name="FlorescentLight6" parent="Lights" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2 )
+
+[editable path="FPSPlayer"]

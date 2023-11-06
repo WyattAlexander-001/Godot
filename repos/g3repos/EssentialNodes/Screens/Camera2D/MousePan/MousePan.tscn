@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Camera2D/MousePan/MousePan.gd" type="Script" id=2]
+[ext_resource path="res://common/asteroids/asteroidB.png" type="Texture" id=3]
+[ext_resource path="res://common/asteroids/asteroidC.png" type="Texture" id=4]
+[ext_resource path="res://common/asteroids/asteroidA.png" type="Texture" id=5]
+
+[node name="MousePan" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 960, 540 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+process_mode = 0
+script = ExtResource( 2 )
+
+[node name="AsteroidA" type="Sprite" parent="."]
+position = Vector2( 203.187, 107.943 )
+texture = ExtResource( 5 )
+
+[node name="AsteroidB" type="Sprite" parent="."]
+position = Vector2( 1431.84, -120.642 )
+texture = ExtResource( 3 )
+
+[node name="AsteroidC" type="Sprite" parent="."]
+position = Vector2( 987.152, 1188.86 )
+texture = ExtResource( 4 )

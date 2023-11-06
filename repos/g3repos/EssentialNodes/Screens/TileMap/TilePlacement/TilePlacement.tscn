@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/TileMap/TilePlacement/TilePlacementTiles.tres" type="TileSet" id=1]
+[ext_resource path="res://Screens/TileMap/TilePlacement/TilePlacement.gd" type="Script" id=2]
+[ext_resource path="res://common/Utility/GridDrawer.gd" type="Script" id=3]
+[ext_resource path="res://Screens/TileMap/TilePlacement/TilePlacementTiles.png" type="Texture" id=4]
+
+[node name="TilePlacement" type="Node2D"]
+self_modulate = Color( 1, 1, 1, 0.215686 )
+script = ExtResource( 2 )
+
+[node name="GridDrawer" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0.215686 )
+position = Vector2( -32, -32 )
+script = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+
+[node name="Preview" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.231373 )
+texture = ExtResource( 4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )

@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=1]
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=2]
+[ext_resource path="res://Screens/Tween/CollectibleUITween/CollectibleUITween.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/Tween/SpringAnimation3D/SpringAnimation3D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/Tween/PoppingUI/PoppingUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/Tween/Movement/Movement.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/Tween/ProgressBar/ProgressBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/Tween/DynamicStrength/DynamicStrength.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Screens/Tween/CardDraw3D/CardDraw3D.tscn" type="PackedScene" id=9]
+
+[node name="Tween" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Movement" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 6 )
+controls = [ "move_to_target" ]
+
+[node name="DynamicStrength" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 8 )
+
+[node name="ProgressBar" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 7 )
+
+[node name="PoppingUI" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 5 )
+
+[node name="SpringAnimation3D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 4 )
+controls = [ "click" ]
+force_confined_mouse_mode = true
+
+[node name="CollectibleUITween" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 3 )
+force_confined_mouse_mode = true
+
+[node name="CardDraw3D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 9 )
+controls = [ "click" ]
+force_confined_mouse_mode = true

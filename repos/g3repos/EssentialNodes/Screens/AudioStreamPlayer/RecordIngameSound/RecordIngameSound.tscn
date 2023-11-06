@@ -1,0 +1,176 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Screens/AudioStreamPlayer/RecordIngameSound/RecordableInstrumentButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/AudioStreamPlayer/RecordIngameSound/RecordIngameSound.gd" type="Script" id=2]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=4]
+[ext_resource path="res://common/UI/arrowRightPressed.png" type="Texture" id=5]
+[ext_resource path="res://common/UI/arrowRight.png" type="Texture" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.278431, 0.231373, 0.470588, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.294118, 0.356863, 0.670588, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="InputEventKey" id=2]
+scancode = 87
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
+
+[sub_resource type="InputEventKey" id=4]
+scancode = 69
+
+[sub_resource type="ShortCut" id=5]
+shortcut = SubResource( 4 )
+
+[sub_resource type="InputEventKey" id=6]
+scancode = 82
+
+[sub_resource type="ShortCut" id=7]
+shortcut = SubResource( 6 )
+
+[sub_resource type="InputEventKey" id=8]
+scancode = 84
+
+[sub_resource type="ShortCut" id=9]
+shortcut = SubResource( 8 )
+
+[sub_resource type="InputEventKey" id=10]
+scancode = 89
+
+[sub_resource type="ShortCut" id=11]
+shortcut = SubResource( 10 )
+
+[sub_resource type="InputEventKey" id=12]
+scancode = 85
+
+[sub_resource type="ShortCut" id=13]
+shortcut = SubResource( 12 )
+
+[sub_resource type="InputEventKey" id=14]
+scancode = 73
+
+[sub_resource type="ShortCut" id=15]
+shortcut = SubResource( 14 )
+
+[node name="RecordInGameSound" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="RecordButton" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 760.0
+margin_top = 416.0
+margin_right = 903.0
+margin_bottom = 544.0
+theme = ExtResource( 4 )
+toggle_mode = true
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 924.0
+margin_top = 424.0
+margin_right = 1124.0
+margin_bottom = 538.0
+theme = ExtResource( 4 )
+action_mode = 0
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 408.0
+margin_top = 600.0
+margin_right = 1496.0
+margin_bottom = 984.0
+theme = ExtResource( 4 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+margin_left = 160.0
+margin_top = 136.0
+margin_right = 928.0
+margin_bottom = 360.0
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RecordableInstrumentButton" parent="Panel/HBoxContainer" instance=ExtResource( 1 )]
+margin_right = 69.0
+
+[node name="RecordableInstrumentButton2" parent="Panel/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 99.0
+margin_right = 169.0
+shortcut = SubResource( 3 )
+text = "D"
+pitch = 1.13
+
+[node name="RecordableInstrumentButton3" parent="Panel/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 199.0
+margin_right = 269.0
+shortcut = SubResource( 5 )
+text = "E"
+pitch = 1.25
+
+[node name="RecordableInstrumentButton4" parent="Panel/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 299.0
+margin_right = 369.0
+shortcut = SubResource( 7 )
+text = "F"
+pitch = 1.333
+
+[node name="RecordableInstrumentButton5" parent="Panel/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 399.0
+margin_right = 468.0
+shortcut = SubResource( 9 )
+text = "G"
+pitch = 1.5
+
+[node name="RecordableInstrumentButton6" parent="Panel/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 498.0
+margin_right = 568.0
+shortcut = SubResource( 11 )
+text = "A"
+pitch = 1.667
+
+[node name="RecordableInstrumentButton7" parent="Panel/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 598.0
+margin_right = 668.0
+shortcut = SubResource( 13 )
+text = "B"
+pitch = 1.875
+
+[node name="RecordableInstrumentButton8" parent="Panel/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 698.0
+shortcut = SubResource( 15 )
+pitch = 2.0

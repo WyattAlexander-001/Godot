@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://common/UI/textFrame.png" type="Texture" id=1]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Screens/RichTextLabel/ChatBox/ChatBox.gd" type="Script" id=3]
+
+[node name="ChatBox" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 428.315
+margin_top = 287.017
+margin_right = 1508.31
+margin_bottom = 814.017
+rect_min_size = Vector2( 1080, 480 )
+rect_pivot_offset = Vector2( 540, 180 )
+theme = ExtResource( 2 )
+texture = ExtResource( 1 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -12.0
+rect_min_size = Vector2( 1048, 328 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChatLog" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
+margin_right = 1048.0
+margin_bottom = 369.0
+rect_min_size = Vector2( 1048, 360 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "[color=#00fa99]Arthur[/color]: So this is it,
+[color=#00fa99]Arthur[/color]: We are going to die.
+[color=#ff69b5]Ford[/color]: Yes,
+[color=#ff69b5]Ford[/color]: except... no! Wait a minute!
+[color=#ff69b5]Ford[/color]: What's this switch? 
+[color=#00fa99]Arthur[/color]: What? Where?
+[color=#ff69b5]Ford[/color]: No, I was only fooling, 
+[color=#ff69b5]Ford[/color]: we are going to die after all.
+"
+meta_underlined = false
+text = "Arthur: So this is it,
+Arthur: We are going to die.
+Ford: Yes,
+Ford: except... no! Wait a minute!
+Ford: What's this switch? 
+Arthur: What? Where?
+Ford: No, I was only fooling, 
+Ford: we are going to die after all.
+"
+scroll_following = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+margin_top = 385.0
+margin_right = 1048.0
+margin_bottom = 499.0
+rect_min_size = Vector2( 0, 88 )
+
+[node name="LineEdit" type="LineEdit" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+margin_right = 872.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+max_length = 42
+caret_blink = true
+
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+margin_left = 888.0
+margin_right = 1048.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 160, 80 )
+text = "Send"
+
+[connection signal="text_entered" from="NinePatchRect/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]

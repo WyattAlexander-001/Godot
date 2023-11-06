@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://common/UI/fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Screens/AudioStreamPlayer/PitchShifting/piccolo_c5.tres" type="AudioStream" id=2]
+[ext_resource path="res://Screens/AudioStreamPlayer/RecordIngameSound/RecordableInstrumentButton.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="InputEventKey" id=2]
+scancode = 81
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
+
+[node name="RecordableInstrumentButton" type="Button"]
+margin_right = 768.0
+margin_bottom = 224.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.376471, 0.376471, 0.439216, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+shortcut = SubResource( 3 )
+text = "C"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+sample = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "Record"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )

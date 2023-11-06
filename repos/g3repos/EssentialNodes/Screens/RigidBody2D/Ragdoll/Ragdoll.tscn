@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://common/Player/RigidPlayer2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Player/player.png" type="Texture" id=2]
+[ext_resource path="res://Screens/RigidBody2D/Ragdoll/Ragdoll.gd" type="Script" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 1.0
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.119565, 0.416667, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 0, 1, 1, 0.415686, 0.0470588, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+min_value = -1.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 2.40541, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 250.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 200.0
+damping_random = 1.0
+scale = 150.0
+scale_random = 1.0
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 3 )
+hue_variation_curve = SubResource( 5 )
+
+[node name="Ragdoll" instance=ExtResource( 1 )]
+position = Vector2( 955.747, 549.955 )
+script = ExtResource( 3 )
+
+[node name="Cockpit" type="RigidBody2D" parent="." index="3"]
+visible = false
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 6
+mode = 3
+mass = 5.0
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Cockpit" index="0"]
+position = Vector2( 0, -40 )
+polygon = PoolVector2Array( -24, -20, -32, -8, -32, 16, -32, 32, -24, 40, 24, 40, 32, 32, 32, 16, 32, -8, 24, -20, 12, -20, 0, -32, -12, -20 )
+
+[node name="Cockpit" type="Polygon2D" parent="Cockpit/CollisionPolygon2D" index="0"]
+position = Vector2( -64, -32 )
+texture = ExtResource( 2 )
+texture_offset = Vector2( 0, -8 )
+polygon = PoolVector2Array( 48, 0, 32, 0, 32, 48, 32, 64, 40, 72, 88, 72, 96, 64, 96, 47.1143, 96, 0 )
+
+[node name="RightWing" type="RigidBody2D" parent="." index="4"]
+visible = false
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 6
+mode = 3
+mass = 5.0
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightWing" index="0"]
+position = Vector2( -64, -72 )
+polygon = PoolVector2Array( 64, 72, 64, 128, 88, 128, 105.602, 126.82, 124, 116, 128, 100, 128.436, 86.143, 95.0615, 39.0882, 96, 64, 88, 72 )
+
+[node name="RightWing" type="Polygon2D" parent="RightWing/CollisionPolygon2D" index="0"]
+texture = ExtResource( 2 )
+texture_offset = Vector2( 0, -8 )
+polygon = PoolVector2Array( 64, 72, 64, 128, 128, 128, 128.436, 86.143, 95.0615, 39.0882, 95.7553, 63.0782, 88, 72 )
+
+[node name="LeftWing" type="RigidBody2D" parent="." index="5"]
+visible = false
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 6
+mode = 3
+mass = 5.0
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LeftWing" index="0"]
+position = Vector2( -64, -72 )
+polygon = PoolVector2Array( 64, 72, 64, 128, 25.6358, 129.133, 9.41118, 121.599, 0.951939, 105.837, 0.489349, 89.8437, 31.0882, 40.9386, 32, 64, 40, 72 )
+
+[node name="LeftWing" type="Polygon2D" parent="LeftWing/CollisionPolygon2D" index="0"]
+texture = ExtResource( 2 )
+texture_offset = Vector2( 0, -8 )
+polygon = PoolVector2Array( 0.489349, 89.8437, 0.951939, 105.837, 9.41118, 121.599, 25.6358, 129.133, 64, 128, 64, 72, 40, 72, 31.7821, 64.9285, 31.0882, 40.9386 )
+
+[node name="Particles2D" type="Particles2D" parent="." index="6"]
+rotation = 1.5708
+emitting = false
+amount = 16
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+process_material = SubResource( 8 )

@@ -1,0 +1,164 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=2]
+[ext_resource path="res://common/Player/player.png" type="Texture" id=3]
+[ext_resource path="res://common/enemy/enemy.png" type="Texture" id=4]
+[ext_resource path="res://Screens/LineEdit/CharacterName/CharacterPanel.gd" type="Script" id=5]
+[ext_resource path="res://common/UI/progressbar_back.png" type="Texture" id=6]
+[ext_resource path="res://common/UI/progressbar_fill.png" type="Texture" id=7]
+[ext_resource path="res://common/UI/progressbar_top.png" type="Texture" id=8]
+[ext_resource path="res://common/UI/textFrame.png" type="Texture" id=9]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "appearance",
+"speed": 5.0
+} ]
+
+[node name="CharacterName" type="Node2D"]
+
+[node name="CharacterPanel" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 270.0
+margin_top = 240.0
+margin_right = 810.0
+margin_bottom = 840.0
+rect_min_size = Vector2( 600, 600 )
+rect_pivot_offset = Vector2( 300, 300 )
+theme = ExtResource( 2 )
+texture = ExtResource( 9 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="CharacterPanel/VBoxContainer"]
+margin_right = 568.0
+margin_bottom = 45.0
+text = "Customize your character"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="CharacterPanel/VBoxContainer"]
+margin_top = 61.0
+margin_right = 568.0
+margin_bottom = 65.0
+
+[node name="LineEdit" type="LineEdit" parent="CharacterPanel/VBoxContainer"]
+margin_left = 14.0
+margin_top = 81.0
+margin_right = 554.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 540, 0 )
+size_flags_horizontal = 6
+max_length = 12
+context_menu_enabled = false
+placeholder_text = "Enter character name..."
+
+[node name="Appearance" type="Label" parent="CharacterPanel/VBoxContainer"]
+margin_top = 152.0
+margin_right = 568.0
+margin_bottom = 197.0
+text = "appearance"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CharacterPanel/VBoxContainer"]
+margin_top = 213.0
+margin_right = 568.0
+margin_bottom = 318.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Style1" type="Button" parent="CharacterPanel/VBoxContainer/HBoxContainer"]
+margin_left = 70.0
+margin_right = 205.0
+margin_bottom = 105.0
+size_flags_horizontal = 6
+toggle_mode = true
+pressed = true
+group = SubResource( 1 )
+text = "style 1"
+
+[node name="Style2" type="Button" parent="CharacterPanel/VBoxContainer/HBoxContainer"]
+margin_left = 359.0
+margin_right = 500.0
+margin_bottom = 105.0
+size_flags_horizontal = 6
+toggle_mode = true
+group = SubResource( 1 )
+text = "style 2"
+
+[node name="Color" type="Label" parent="CharacterPanel/VBoxContainer"]
+margin_top = 334.0
+margin_right = 568.0
+margin_bottom = 379.0
+text = "color"
+align = 1
+
+[node name="ColorSlider" type="HSlider" parent="CharacterPanel/VBoxContainer"]
+margin_left = 28.0
+margin_top = 395.0
+margin_right = 540.0
+margin_bottom = 491.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 6
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CharacterPanel"]
+position = Vector2( 1080, 264 )
+frames = SubResource( 2 )
+animation = "appearance"
+frame = 1
+
+[node name="NameLabel" type="Label" parent="CharacterPanel/AnimatedSprite"]
+margin_left = -128.0
+margin_top = -150.0
+margin_right = 128.0
+margin_bottom = -105.0
+rect_min_size = Vector2( 256, 0 )
+rect_pivot_offset = Vector2( 128, 0 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Progress" type="TextureProgress" parent="CharacterPanel/AnimatedSprite"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -164.0
+margin_top = -164.0
+margin_right = 916.0
+margin_bottom = -12.0
+rect_min_size = Vector2( 1080, 152 )
+rect_scale = Vector2( 0.2, 0.2 )
+value = 100.0
+texture_under = ExtResource( 6 )
+texture_over = ExtResource( 8 )
+texture_progress = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

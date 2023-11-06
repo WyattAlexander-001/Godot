@@ -1,0 +1,103 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Screens/AudioStreamPlayer/Dialogues/Dialogues.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/AudioStreamPlayer/PlayLoopMusic/PlayLoopMusic.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/AudioStreamPlayer/OneOffSoundEffect/OneOffSoundEffect.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/AudioStreamPlayer/PositionalSound/PositionalSound.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/AudioStreamPlayer/StereoAudio3D/StereoAudio3D.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=7]
+[ext_resource path="res://Screens/AudioStreamPlayer/PositionalSound3D/PositionalSound3D.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Screens/AudioStreamPlayer/ChargingEffect/ChargingEffect.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Screens/AudioStreamPlayer/EnvironmentEffects/EnvironmentEffects.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Screens/AudioStreamPlayer/SoundEffectArray/SoundEffectArray.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Screens/AudioStreamPlayer/PitchShifting/PitchShiftingSamples.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Screens/AudioStreamPlayer/RandomPitchedSound/RandomPitchedSound.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Screens/AudioStreamPlayer/RecordIngameSound/RecordIngameSound.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Screens/AudioStreamPlayer/RecordPlayMicrophone/RecordPlayMicrophone.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Screens/AudioStreamPlayer/SecurityCamera/SecurityCamera.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Screens/AudioStreamPlayer/DopplerEffect/DopplerEffect.tscn" type="PackedScene" id=17]
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=18]
+
+[node name="AudioStreamPlayer" type="Node2D"]
+script = ExtResource( 18 )
+
+[node name="PlayLoopMusic" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 3 )
+
+[node name="OneOffSoundEffect" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 4 )
+
+[node name="Dialogues" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 2 )
+
+[node name="PositionalSound" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 5 )
+
+[node name="SoundEffectArray" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 11 )
+movement_scheme = 2
+
+[node name="RandomPitchedSound" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 13 )
+
+[node name="ChargingEffect" type="Node2D" parent="."]
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+scene = ExtResource( 9 )
+
+[node name="PitchShiftingSamples" type="Node2D" parent="."]
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+scene = ExtResource( 12 )
+
+[node name="EnvironmentEffects" type="Node2D" parent="."]
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+scene = ExtResource( 10 )
+movement_scheme = 2
+
+[node name="RecordIngameSound" type="Node2D" parent="."]
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+scene = ExtResource( 14 )
+
+[node name="RecordPlayMicrophone" type="Node2D" parent="."]
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+scene = ExtResource( 15 )
+
+[node name="PositionalSound3D" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 8 )
+
+[node name="StereoAudio3D" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 6 )
+movement_scheme = 3
+
+[node name="SecurityCamera" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 16 )
+controls = [ "click" ]
+movement_scheme = 3
+
+[node name="DopplerEffect" type="Node2D" parent="."]
+script = ExtResource( 7 )
+scene = ExtResource( 17 )
+movement_scheme = 3

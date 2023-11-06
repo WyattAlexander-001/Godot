@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Screens/Line2D/ArcAttack/ArcWeapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/Area2D/Enemies/Enemy.tscn" type="PackedScene" id=3]
+
+[node name="ArcAttack" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 472.575, 270 )
+
+[node name="Weapon" parent="Player" instance=ExtResource( 1 )]
+enemy_path = NodePath("../../Enemy")
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1266.51, 447.142 )

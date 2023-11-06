@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://common/Player3D/Player3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=2]
+[ext_resource path="res://common/Environment/space_environment_meshlib.tres" type="MeshLibrary" id=4]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 50, 1, 50 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer1" type="ViewportContainer" parent="CanvasLayer/GridContainer"]
+margin_right = 960.0
+margin_bottom = 1080.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="CanvasLayer/GridContainer/ViewportContainer1"]
+size = Vector2( 960, 1080 )
+handle_input_locally = false
+fxaa = true
+hdr = false
+render_target_update_mode = 3
+
+[node name="Player3D" parent="CanvasLayer/GridContainer/ViewportContainer1/Viewport" instance=ExtResource( 1 )]
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="CanvasLayer/GridContainer"]
+margin_left = 960.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="CanvasLayer/GridContainer/ViewportContainer2"]
+size = Vector2( 960, 1080 )
+handle_input_locally = false
+msaa = 4
+hdr = false
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="CanvasLayer/GridContainer/ViewportContainer2/Viewport"]
+transform = Transform( -3.20838e-08, -0.679158, 0.733992, -2.96869e-08, 0.733992, 0.679158, -1, 0, -4.37114e-08, 5.205, 4.986, 0 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -1, 8.66078e-08, -1.23689e-07, 0, 0.819152, 0.573577, 1.50996e-07, 0.573577, -0.819152, 0.007, 4.765, -4.203 )
+shadow_enabled = true
+
+[node name="LevelGridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 4 )
+cell_center_y = false
+collision_mask = 0
+data = {
+"cells": PoolIntArray( 3, 0, 1441815, 65532, 0, 1048599, 65533, 0, 655381, 65539, 0, 655385, 131068, 0, 655385, 131069, 0, 655385, -65536, 0, 9, -65535, 0, 9, -65534, 0, 9, -65533, 0, 9, -65532, 0, 16, -5, 0, 655376, -4, 0, 655375, -3, 0, 9, -2, 0, 9, -1, 0, 9, 65532, 1, 655381, 65533, 1, 655381, 65534, 1, 655385, 65535, 1, 2, 131068, 1, 655385, 131069, 1, 655385, -65536, 1, 9, -65535, 1, 1441807, -65534, 1, 9, -65533, 1, 15, -65532, 1, 16, -5, 1, 655376, -4, 1, 1048591, -3, 1, 15, -2, 1, 9, -1, 1, 9, 4, 2, 1048577, 65532, 2, 655381, 65534, 2, 655383, 65535, 2, 1048577, 131068, 2, 655385, 131070, 2, 655385, -65536, 2, 9, -65535, 2, 9, -65534, 2, 9, -65533, 2, 9, -65532, 2, 10, -5, 2, 655370, -4, 2, 9, -3, 2, 9, -2, 2, 9, -1, 2, 9, 0, 3, 38, 1, 3, 38, 2, 3, 38, 3, 3, 39, 65532, 3, 1048581, 65533, 3, 1048580, 65534, 3, 38, 65535, 3, 38, -65536, 3, 9, -65535, 3, 9, -65534, 3, 1441807, -65533, 3, 15, -65532, 3, 16, -5, 3, 655370, -4, 3, 9, -3, 3, 9, -2, 3, 9, -1, 3, 9, -65536, 4, 1441802, -65535, 4, 1441802, -65534, 4, 1441802, -65533, 4, 1441808, -65532, 4, 14, -5, 4, 1441800, -4, 4, 1441802, -3, 4, 1441802, -2, 4, 1441802, -1, 4, 1441802, -65536, 65531, 1048586, -65535, 65531, 1048586, -65534, 65531, 1048586, -65533, 65531, 1048586, -65532, 65531, 1048584, -5, 65531, 655368, -4, 65531, 1048586, -3, 65531, 1048586, -2, 65531, 1048586, -1, 65531, 1048586, 0, 65532, 655385, 1, 65532, 655385, 2, 65532, 655385, 3, 65532, 655385, 65530, 65532, 655367, 65531, 65532, 1048589, 65532, 65532, 1048589, 65533, 65532, 1048589, 65534, 65532, 1048583, 65535, 65532, 655381, 131071, 65532, 655385, -65536, 65532, 9, -65535, 65532, 9, -65534, 65532, 9, -65533, 65532, 9, -65532, 65532, 10, -6, 65532, 1048621, -5, 65532, 655372, -4, 65532, 9, -3, 65532, 9, -2, 65532, 9, -1, 65532, 9, 3, 65533, 655384, 4, 65533, 655361, 65530, 65533, 655377, 65531, 65533, 1441804, 65532, 65533, 1048582, 65533, 65533, 1441804, 65534, 65533, 17, 65535, 65533, 1048579, 65539, 65533, 655385, -65536, 65533, 1048591, -65535, 65533, 1441807, -65534, 65533, 9, -65533, 65533, 9, -65532, 65533, 10, -6, 65533, 655372, -5, 65533, 655372, -4, 65533, 9, -3, 65533, 9, -2, 65533, 9, -1, 65533, 9, 3, 65534, 655385, 65530, 65534, 1441803, 65531, 65534, 1441805, 65532, 65534, 1441809, 65533, 65534, 1441809, 65534, 65534, 7, -65536, 65534, 9, -65535, 65534, 9, -65534, 65534, 9, -65533, 65534, 9, -65532, 65534, 10, -6, 65534, 655405, -5, 65534, 655372, -4, 65534, 9, -3, 65534, 1441807, -2, 65534, 9, -1, 65534, 9, 3, 65535, 655385, -65536, 65535, 9, -65535, 65535, 9, -65534, 65535, 9, -65533, 65535, 9, -65532, 65535, 10, -5, 65535, 655370, -4, 65535, 15, -3, 65535, 1048591, -2, 65535, 9, -1, 65535, 9 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 3 )

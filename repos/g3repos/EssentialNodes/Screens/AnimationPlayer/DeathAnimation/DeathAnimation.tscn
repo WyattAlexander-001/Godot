@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/UI/TextButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/AnimationPlayer/DeathAnimation/DeathAnimation.gd" type="Script" id=3]
+[ext_resource path="res://common/explosion/explosion.png" type="Texture" id=4]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=5]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0.506757 ), 0.0, 1.2476, 0, 0, Vector2( 1, 1 ), -8.77814e-07, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 66.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 2.0
+scale_random = 0.5
+scale_curve = SubResource( 2 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.278986, 0.503623, 0.768116, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 0, 1, 1, 0.632812, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 800.0
+initial_velocity_random = 0.8
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 250.0
+damping_random = 1.0
+angle = 720.0
+angle_random = 1.0
+scale = 25.0
+scale_random = 0.5
+color_ramp = SubResource( 5 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/ScreenFader:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0.0177778 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/ScreenFader:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="DeathAnimation" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 957.48, 495.553 )
+
+[node name="BlastParticles" type="Particles2D" parent="Player"]
+emitting = false
+amount = 3
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 3 )
+texture = ExtResource( 4 )
+
+[node name="ExplosionParticles" type="Particles2D" parent="Player"]
+emitting = false
+amount = 64
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 6 )
+
+[node name="SelfDestructButton" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 801.0
+margin_top = 801.0
+margin_right = 1119.0
+margin_bottom = 953.0
+theme = ExtResource( 5 )
+text = "self destruct"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScreenFader" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fade_in"
+anims/fade_in = SubResource( 7 )
+anims/fade_out = SubResource( 8 )
+
+[connection signal="pressed" from="SelfDestructButton" to="." method="_on_SelfDestructButton_pressed"]

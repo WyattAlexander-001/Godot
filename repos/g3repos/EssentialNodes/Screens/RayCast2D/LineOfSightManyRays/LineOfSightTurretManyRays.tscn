@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://common/turrets/turret_gun_green.png" type="Texture" id=1]
+[ext_resource path="res://Screens/RayCast2D/LineOfSightManyRays/LineOfSightTurretManyRays.gd" type="Script" id=2]
+[ext_resource path="res://common/turrets/turret_gun.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "turret_mode",
+"speed": 5.0
+} ]
+
+[node name="LineOfSightTurretManyRays" type="Node2D"]
+script = ExtResource( 2 )
+vision_range = 800.0
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Turret" type="AnimatedSprite" parent="Pivot"]
+rotation = 1.5708
+frames = SubResource( 1 )
+animation = "turret_mode"
+flip_v = true

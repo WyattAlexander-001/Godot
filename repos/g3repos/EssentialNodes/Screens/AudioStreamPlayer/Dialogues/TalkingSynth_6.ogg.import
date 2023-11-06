@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/TalkingSynth_6.ogg-ff440786116172be49b67f2d0e9bb0da.oggstr"
+
+[deps]
+
+source_file="res://Screens/AudioStreamPlayer/Dialogues/TalkingSynth_6.ogg"
+dest_files=[ "res://.import/TalkingSynth_6.ogg-ff440786116172be49b67f2d0e9bb0da.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

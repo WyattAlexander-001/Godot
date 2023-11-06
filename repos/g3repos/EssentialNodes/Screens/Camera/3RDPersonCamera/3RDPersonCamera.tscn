@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Astronaut/AstronautSkin.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+margin = 0.5
+
+[sub_resource type="Animation" id=2]
+resource_name = "CameraSpin"
+length = 18.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpringArm:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 18 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -10, 0, 0 ), Vector3( -10, 360, 0 ) ]
+}
+
+[node name="3RDPersonCamera" type="Spatial"]
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 1 )]
+data = {
+"cells": PoolIntArray( 0, 0, 1441836, 3, 0, 1441830, 65532, 0, 1048614, 65535, 0, 655404, 65536, 0, 14, 131071, 0, 1441806, 196607, 0, 655360, -65536, 0, 9, -65535, 0, 15, -65534, 0, 9, -65533, 0, 16, -4, 0, 655370, -3, 0, 9, -2, 0, 9, -1, 0, 9, 2, 1, 1048577, 3, 1, 1441830, 65532, 1, 1048614, 65533, 1, 1048580, -65536, 1, 9, -65535, 1, 1048591, -65534, 1, 1441807, -65533, 1, 10, -4, 1, 655370, -3, 1, 1048591, -2, 1, 1441807, -1, 1, 9, 2, 2, 1441796, 3, 2, 1441830, 65532, 2, 1048614, 65533, 2, 1048577, -65536, 2, 9, -65535, 2, 15, -65534, 2, 9, -65533, 2, 10, -4, 2, 655376, -3, 2, 15, -2, 2, 655375, -1, 2, 9, 0, 3, 655398, 1, 3, 655398, 2, 3, 655398, 65533, 3, 655398, 65534, 3, 655398, 65535, 3, 655398, 196606, 3, 655402, 196607, 3, 1048618, 262142, 3, 655367, 262143, 3, 1048583, 327678, 3, 1048576, 327679, 3, 0, -65536, 3, 1441802, -65535, 3, 1441802, -65534, 3, 1441808, -65533, 3, 14, -4, 3, 1441806, -3, 3, 1441802, -2, 3, 1441802, -1, 3, 1441802, 196606, 4, 1441834, 196607, 4, 42, 262142, 4, 1441799, 262143, 4, 7, 327678, 4, 655360, 327679, 4, 1441792, 0, 65532, 38, 1, 65532, 38, 2, 65532, 38, 65532, 65532, 1441793, 65533, 65532, 38, 65534, 65532, 38, 65535, 65532, 38, -65536, 65532, 1048586, -65535, 65532, 1048586, -65534, 65532, 1048586, -65533, 65532, 1048584, -4, 65532, 655374, -3, 65532, 1048586, -2, 65532, 1048586, -1, 65532, 1048586, 1, 65533, 1048617, 2, 65533, 32, 3, 65533, 1441830, 65532, 65533, 1048614, 65533, 65533, 1048577, 65537, 65533, 1048617, 65538, 65533, 32, 131073, 65533, 1048617, 131074, 65533, 32, 196609, 65533, 1048617, 196610, 65533, 1048607, -65536, 65533, 9, -65535, 65533, 9, -65534, 65533, 9, -65533, 65533, 10, -4, 65533, 655370, -3, 65533, 655375, -2, 65533, 9, -1, 65533, 9, 2, 65534, 655365, 3, 65534, 1441830, 65532, 65534, 1048614, 65535, 65534, 3, -65536, 65534, 9, -65535, 65534, 9, -65534, 65534, 9, -65533, 65534, 10, -4, 65534, 655370, -3, 65534, 9, -2, 65534, 9, -1, 65534, 9, 0, 65535, 44, 2, 65535, 1441793, 3, 65535, 1441830, 65532, 65535, 1048614, 65535, 65535, 1048620, 65536, 65535, 1048590, 131071, 65535, 655374, -65536, 65535, 9, -65535, 65535, 9, -65534, 65535, 15, -65533, 65535, 10, -4, 65535, 655370, -3, 65535, 9, -2, 65535, 655375, -1, 65535, 9 )
+}
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="AstronautSkin" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.12941, 0, -0.482963, 0, 0.5, 0, 0.482963, 0, 0.12941, 0, 4, 0 )
+
+[node name="SpringArm" type="SpringArm" parent="AstronautSkin"]
+transform = Transform( 1, -3.03616e-08, 1.72189e-07, 0, 0.984808, 0.173648, -1.74846e-07, -0.173648, 0.984808, 0, 2, 0 )
+shape = SubResource( 1 )
+spring_length = 15.0
+margin = 0.5
+
+[node name="ClippedCamera" type="ClippedCamera" parent="AstronautSkin/SpringArm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15 )
+current = true
+margin = 0.5
+
+[node name="Animator" type="AnimationPlayer" parent="AstronautSkin"]
+autoplay = "CameraSpin"
+anims/CameraSpin = SubResource( 2 )

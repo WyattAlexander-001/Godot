@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=1]
+[ext_resource path="res://Screens/RemoteTransform2D/ClawArm/ClawArmScreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=3]
+[ext_resource path="res://Screens/RemoteTransform2D/UiOnPlayer/UiOnPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/RemoteTransform2D/LockOnCrosshair/LockOnCrosshair.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/RemoteTransform2D/MapView/MapView.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/RemoteTransform2D/Zipline/Zipline.tscn" type="PackedScene" id=8]
+
+[node name="RemoteTransform2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ClawArmScreen" type="Node2D" parent="."]
+script = ExtResource( 3 )
+scene = ExtResource( 2 )
+
+[node name="UiOnPlayer" type="Node2D" parent="."]
+script = ExtResource( 3 )
+scene = ExtResource( 4 )
+movement_scheme = 1
+
+[node name="LockOnCrosshair" type="Node2D" parent="."]
+script = ExtResource( 3 )
+scene = ExtResource( 6 )
+controls = [ "reset_crosshair" ]
+
+[node name="MapView" type="Node2D" parent="."]
+script = ExtResource( 3 )
+scene = ExtResource( 7 )
+movement_scheme = 1
+
+[node name="Zipline" type="Node2D" parent="."]
+script = ExtResource( 3 )
+scene = ExtResource( 8 )
+controls = [ "interact" ]
+movement_scheme = 2

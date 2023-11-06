@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Screens/PanelContainer/KeepControlChildren/Contents.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/PanelContainer/KeepControlChildren/KeepControlChildren.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "scale_windows"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 928, 560 ), Vector2( 160, 120 ), Vector2( 928, 560 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PanelContainer:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 928, 560 ), Vector2( 160, 120 ), Vector2( 928, 560 ) ]
+}
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.294118, 0.356863, 0.670588, 1 )
+
+[node name="KeepControlChildren" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Labels" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 227.0
+rect_min_size = Vector2( 1920, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Labels"]
+margin_right = 952.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "PanelContainer"
+align = 1
+
+[node name="Label1" type="Label" parent="Labels"]
+margin_left = 968.0
+margin_right = 1920.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Panel"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/scale_windows = SubResource( 1 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 16.0
+margin_top = 301.0
+margin_right = 944.0
+margin_bottom = 861.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" parent="PanelContainer" instance=ExtResource( 2 )]
+margin_left = 14.0
+margin_top = 18.0
+margin_right = 914.0
+margin_bottom = 542.0
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 976.0
+margin_top = 301.0
+margin_right = 1904.0
+margin_bottom = 861.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" parent="Panel" instance=ExtResource( 2 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="Button" type="Button" parent="."]
+margin_left = 700.0
+margin_top = 880.0
+margin_right = 1240.0
+margin_bottom = 994.0
+text = "Scale Windows"
+__meta__ = {
+"_edit_use_anchors_": false
+}

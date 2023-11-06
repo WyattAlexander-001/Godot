@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/asteroids/asteroidA.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[node name="Rock" type="KinematicBody2D" groups=[
+"rock",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
+"Draw",
+"Interactive",
+]]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )

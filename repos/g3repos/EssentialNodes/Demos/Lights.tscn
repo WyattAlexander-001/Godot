@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Screens/Light/DayNightCycle/DayNightCycle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Light/Torchlight/Torchlight.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/Light/Flashlight/Flashlight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/Light/ShootLights/ShootLights.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/Light/Muzzleflash/Muzzleflash.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/Light/OutdoorHDRi/OutdoorHDRi.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/Light/InteriorLighting/InteriorLighting.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=9]
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=10]
+
+[node name="Light" type="Node2D"]
+script = ExtResource( 10 )
+
+[node name="Muzzleflash" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 6 )
+controls = [ "shoot_3d" ]
+
+[node name="Torchlight" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 2 )
+
+[node name="OutdoorHDRi" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 7 )
+
+[node name="DayNightCycle" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 1 )
+
+[node name="Flashlight" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 3 )
+controls = [ "interact" ]
+movement_scheme = 3
+
+[node name="ShootLights" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 5 )
+controls = [ "shoot_3d" ]
+movement_scheme = 3
+
+[node name="InteriorLighting" type="Node2D" parent="."]
+script = ExtResource( 9 )
+scene = ExtResource( 8 )
+controls = [ "toggle_gi_probe" ]
+movement_scheme = 3

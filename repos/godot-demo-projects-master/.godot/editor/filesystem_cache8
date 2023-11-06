@@ -1,0 +1,10 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1699155706
+bullet.png::CompressedTexture2D::2556222391780183856::1699155688::1699155707::1::::<><>::
+bullets.gd::GDScript::-1::1699155688::0::1::::<>Node2D<>::
+face_happy.png::CompressedTexture2D::9167799393604337806::1699155688::1699155707::1::::<><>::
+face_sad.png::CompressedTexture2D::2336560288098396304::1699155688::1699155707::1::::<><>::
+icon.webp::CompressedTexture2D::3626017087650301524::1699155688::1699155707::1::::<><>::
+player.gd::GDScript::-1::1699155688::0::1::::<>Node2D<>::
+README.md::TextFile::-1::1699155688::0::1::::<><>::
+shower.tscn::PackedScene::7087114097424366251::1699155688::0::1::::<><>::res://bullets.gd<>uid://d3u7k0742d5ug::::res://face_happy.png<>uid://8j32onnr4qo3::::res://face_sad.png<>res://player.gd

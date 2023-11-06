@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Screens/RayCast2D/DetectFloor/GravityPlanet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/RayCast2D/DetectFloor/PlayerGravitySideScroller.tscn" type="PackedScene" id=3]
+
+[node name="DetectFloor" type="Node2D"]
+
+[node name="Asteroids" type="Node2D" parent="."]
+
+[node name="GravityPlanet" parent="Asteroids" instance=ExtResource( 2 )]
+position = Vector2( 1014.89, 822.43 )
+
+[node name="GravityPlanet2" parent="Asteroids" instance=ExtResource( 2 )]
+position = Vector2( 344.785, 474.469 )
+
+[node name="GravityPlanet3" parent="Asteroids" instance=ExtResource( 2 )]
+position = Vector2( 1670.32, 412.218 )
+
+[node name="GravitySideScroller" parent="." instance=ExtResource( 3 )]
+position = Vector2( 593.339, 213.816 )

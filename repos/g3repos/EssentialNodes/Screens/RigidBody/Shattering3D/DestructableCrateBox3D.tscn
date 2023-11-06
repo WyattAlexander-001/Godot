@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Screens/RigidBody/CrateBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/RigidBody/Shattering3D/DestructableCrateBox3D.gd" type="Script" id=2]
+[ext_resource path="res://Screens/RigidBody/Shattering3D/ShatteredCrateGreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/RigidBody/Highlight.tres" type="Material" id=4]
+
+[sub_resource type="Animation" id=2]
+resource_name = "highlight"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "enable_material_highlight"
+}, {
+"args": [ false ],
+"method": "enable_material_highlight"
+} ]
+}
+
+[node name="DestructableCrateBox3D" instance=ExtResource( 1 )]
+collision_layer = 1
+collision_mask = 32769
+script = ExtResource( 2 )
+shattered_crate_scene = ExtResource( 3 )
+highlight_material = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+anims/highlight = SubResource( 2 )

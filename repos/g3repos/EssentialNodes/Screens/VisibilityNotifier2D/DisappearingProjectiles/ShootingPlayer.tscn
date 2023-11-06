@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Screens/VisibilityNotifier2D/DisappearingProjectiles/BulletSpawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=3]
+
+[node name="ShootingPlayer" instance=ExtResource( 3 )]
+
+[node name="BulletSpawner" parent="Sprite" index="3" instance=ExtResource( 1 )]
+position = Vector2( 0.00040156, -64 )
+rotation = -1.5708

@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Player3D/Player3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/MeshInstance/HeightMapShader/ShaderMaterial.tres" type="Material" id=3]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=4]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 10, 10 )
+subdivide_width = 6
+subdivide_depth = 6
+
+[sub_resource type="PlaneMesh" id=2]
+size = Vector2( 10, 10 )
+subdivide_width = 20
+subdivide_depth = 20
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 10, 10 )
+subdivide_width = 128
+subdivide_depth = 128
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 50, 1, 50 )
+
+[node name="HeightMapShader" type="Spatial"]
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 1 )]
+data = {
+"cells": PoolIntArray( 0, 0, 1048582, 1, 0, 13, 65534, 0, 655373, 65535, 0, 12, 0, 1, 1441805, 1, 1, 7, 65534, 1, 1441803, 65535, 1, 1441809, 0, 65534, 1048593, 1, 65534, 1048583, 65534, 65534, 655371, 65535, 65534, 1048589, 0, 65535, 12, 1, 65535, 17, 65534, 65535, 655373, 65535, 65535, 655366 )
+}
+
+[node name="Player3D" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57668, 0 )
+
+[node name="Plane" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, -10 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 3 )
+
+[node name="Plane2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 3 )
+
+[node name="Plane3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -10 )
+mesh = SubResource( 3 )
+material/0 = ExtResource( 3 )
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 4 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0

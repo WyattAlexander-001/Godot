@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/GridMap/RaceTrackEditor/assets/race_track.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://Screens/GridMap/RaceTrackEditor/RaceTrackEditor.gd" type="Script" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+albedo_color = Color( 0.56, 0.87, 0.36, 0.6 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[node name="RaceTrackEditior" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 1 )
+cell_center_y = false
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -15, 15, 15 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.906002, -0.25707, -0.336267, -0.0712307, -0.690514, 0.719803, -0.417237, 0.676095, 0.607296, 0, 24.4759, 0 )
+light_color = Color( 1, 0.894118, 0.470588, 1 )
+shadow_enabled = true
+shadow_color = Color( 0.278431, 0.231373, 0.470588, 1 )
+
+[node name="Preview" type="MeshInstance" parent="."]
+material_override = SubResource( 1 )
+mesh = SubResource( 2 )
+material/0 = null

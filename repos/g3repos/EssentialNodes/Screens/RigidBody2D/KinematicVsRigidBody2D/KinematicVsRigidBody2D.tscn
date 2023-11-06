@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Player/RigidPlayer2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/RigidBody2D/ShootingRocket/Asteroid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.8
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 540 )
+
+[node name="KinematicVsRigidBody2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 448, 640 )
+
+[node name="RigidPlayer2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1536, 640 )
+
+[node name="Asteroid1" parent="." instance=ExtResource( 3 )]
+position = Vector2( 704, 320 )
+mass = 3.0
+physics_material_override = SubResource( 1 )
+
+[node name="Asteroid4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 180.742, 773.846 )
+mass = 3.0
+physics_material_override = SubResource( 1 )
+
+[node name="Asteroid2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1216, 320 )
+mass = 3.0
+physics_material_override = SubResource( 1 )
+
+[node name="Asteroid3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1685.86, 752.489 )
+mass = 3.0
+physics_material_override = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" groups=[
+"Collision",
+"Draw",
+]]
+position = Vector2( 960, 540 )
+shape = SubResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1920, 1080 )
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control"]
+margin_left = 296.0
+margin_top = 128.0
+margin_right = 599.0
+margin_bottom = 173.0
+text = "Kinematic Body"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Control"]
+margin_left = 1400.0
+margin_top = 128.0
+margin_right = 1607.0
+margin_bottom = 173.0
+text = "Rigid Body"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

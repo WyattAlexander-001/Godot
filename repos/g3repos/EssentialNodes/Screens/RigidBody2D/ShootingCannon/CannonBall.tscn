@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://common/ball_green_small.png" type="Texture" id=2]
+[ext_resource path="res://Screens/RigidBody2D/ShootingCannon/CannonBall.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.5
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 33.0
+scale_random = 0.33
+scale_curve = SubResource( 3 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 25.0
+
+[node name="CannonBall" type="RigidBody2D"]
+mass = 2.0
+physics_material_override = SubResource( 1 )
+applied_force = Vector2( 0, 1960 )
+script = ExtResource( 4 )
+
+[node name="Trail" type="Particles2D" parent="."]
+amount = 32
+local_coords = false
+process_material = SubResource( 4 )
+
+[node name="GrenadeSprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_Grenade_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

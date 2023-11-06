@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://common/PatrollingEnemy/PatrollingEnemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Screens/Button/Hotkey/Airstrike.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Curve2D" id=1]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array( -0.7937, 315.893, 0.7937, -315.893, -320, 0, -320.655, 0, 320.655, 0, 0, -320, -0.7937, -321.449, 0.7937, 321.449, 320, 0, 316.686, 3.1748, -316.686, -3.1748, 0, 328, 1.5874, 332.56, -1.5874, -332.56, -320, 0 )
+}
+
+[sub_resource type="Curve2D" id=2]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array( -0.7937, 315.893, 0.7937, -315.893, -320, 0, -320.655, 0, 320.655, 0, 0, -320, -0.7937, -321.449, 0.7937, 321.449, 320, 0, 316.686, 3.1748, -316.686, -3.1748, 0, 328, 1.5874, 332.56, -1.5874, -332.56, -320, 0 )
+}
+
+[sub_resource type="Curve2D" id=3]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array( -0.7937, 315.893, 0.7937, -315.893, -320, 0, -320.655, 0, 320.655, 0, 0, -320, -0.7937, -321.449, 0.7937, 321.449, 320, 0, 316.686, 3.1748, -316.686, -3.1748, 0, 328, 1.5874, 332.56, -1.5874, -332.56, -320, 0 )
+}
+
+[sub_resource type="Curve2D" id=4]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array( -0.7937, 315.893, 0.7937, -315.893, -320, 0, -320.655, 0, 320.655, 0, 0, -320, -0.7937, -321.449, 0.7937, 321.449, 320, 0, 316.686, 3.1748, -316.686, -3.1748, 0, 328, 1.5874, 332.56, -1.5874, -332.56, -320, 0 )
+}
+
+[sub_resource type="Curve2D" id=5]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array( -0.7937, 315.893, 0.7937, -315.893, -320, 0, -320.655, 0, 320.655, 0, 0, -320, -0.7937, -321.449, 0.7937, 321.449, 320, 0, 316.686, 3.1748, -316.686, -3.1748, 0, 328, 1.5874, 332.56, -1.5874, -332.56, -320, 0 )
+}
+
+[sub_resource type="InputEventAction" id=6]
+action = "shoot"
+pressed = true
+
+[sub_resource type="ShortCut" id=7]
+shortcut = SubResource( 6 )
+
+[node name="Hotkey" type="Node2D"]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="PatrollingEnemy" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1384, 600 )
+rotation = 0.772147
+curve = SubResource( 1 )
+
+[node name="PatrollingEnemy2" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 576, 568 )
+rotation = 2.57978
+curve = SubResource( 2 )
+
+[node name="PatrollingEnemy3" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 976, 496 )
+rotation = -3.13749
+curve = SubResource( 3 )
+
+[node name="PatrollingEnemy4" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 656, 553.311 )
+rotation = -0.00731528
+scale = Vector2( 1, -1 )
+curve = SubResource( 4 )
+
+[node name="PatrollingEnemy5" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1336, 585.311 )
+rotation = 1.55596
+scale = Vector2( 1, -1 )
+curve = SubResource( 5 )
+
+[node name="Airstrike" parent="." instance=ExtResource( 5 )]
+visible = false
+button_path = NodePath("../HBoxContainer/HotkeyButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 704.0
+margin_top = 952.0
+margin_right = 1216.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 512, 128 )
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HotkeyButton" type="Button" parent="HBoxContainer"]
+margin_left = 171.0
+margin_right = 341.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+focus_mode = 0
+size_flags_horizontal = 6
+toggle_mode = true
+enabled_focus_mode = 0
+shortcut = SubResource( 7 )
+text = "Airstrike"
+
+[connection signal="toggled" from="HBoxContainer/HotkeyButton" to="Airstrike" method="_on_HotkeyButton_toggled"]

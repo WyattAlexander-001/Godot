@@ -1,0 +1,54 @@
+[gd_scene format=2]
+
+[node name="CSGWindow" type="Spatial"]
+
+[node name="CSGPolygon" type="CSGPolygon" parent="."]
+polygon = PoolVector2Array( 0.7, 0, 0.7, 1.8, 0.3, 2.3, 0, 2.4, -0.3, 2.3, -0.7, 1.9, -0.7, 0, -1, 0, -1, 2, -0.5, 2.6, 0, 2.8, 0.5, 2.6, 1, 2, 1, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0.200001, -0.5 )
+width = 0.6
+height = 0.4
+depth = 1.0
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 1.2, -0.5 )
+width = 0.6
+height = 0.4
+depth = 1.0
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0.700001, -0.5 )
+width = 0.8
+height = 0.4
+depth = 1.0
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 1.7, -0.5 )
+width = 0.8
+height = 0.4
+depth = 1.0
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0.700001, -0.5 )
+width = 0.6
+height = 0.4
+depth = 1.0
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 1.7, -0.5 )
+width = 0.6
+height = 0.4
+depth = 1.0
+
+[node name="CSGBox7" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0.200001, -0.5 )
+width = 0.8
+height = 0.4
+depth = 1.0
+
+[node name="CSGBox8" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 1.2, -0.5 )
+width = 0.8
+height = 0.4
+depth = 1.0

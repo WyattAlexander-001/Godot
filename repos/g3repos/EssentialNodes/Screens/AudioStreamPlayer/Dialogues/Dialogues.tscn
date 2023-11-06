@@ -1,0 +1,234 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Screens/AudioStreamPlayer/Dialogues/TalkingSynth_5.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Screens/AudioStreamPlayer/Dialogues/TalkingSynth_21.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Screens/AudioStreamPlayer/Dialogues/TalkingSynth_6.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Screens/AudioStreamPlayer/Dialogues/TalkingSynth_19.ogg" type="AudioStream" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.278431, 0.231373, 0.470588, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.294118, 0.356863, 0.670588, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Animation" id=2]
+resource_name = "00.dialogue"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 0.659754, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Now, let's suppose this is a dialogue." ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "01.dialogue"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.1, 1.6, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.68, 0.68, 1.0 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+}, {
+"end_offset": 0.47,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0, 0.6, 1.7 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Important dialogue line here. Pay attention!" ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "02.dialogue"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.6, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.487, 0.487, 1.0 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.25,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 2.03,
+"start_offset": 0.0,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 0, 1.1 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Well, that's about it. Move on to the next screen." ]
+}
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends AnimationPlayer
+
+var animation_index := 0
+
+
+func play_next() -> void:
+	var animations := get_animation_list()
+	animation_index = wrapi(animation_index + 1, 0, get_animation_list().size())
+	play(animations[animation_index])
+
+
+func skip() -> void:
+	if is_playing():
+		seek(current_animation_length, true)
+	else:
+		play_next()
+"
+
+[node name="Dialogues" type="Node2D"]
+
+[node name="DialogueBox" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 416.0
+margin_top = 412.0
+margin_right = 1504.0
+margin_bottom = 668.0
+rect_pivot_offset = Vector2( 544, 128 )
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="DialogueBox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 48.0
+margin_right = -40.0
+margin_bottom = -48.0
+text = "Now, let's suppose this is a dialogue."
+align = 1
+valign = 1
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogueBox"]
+autoplay = "00.dialogue"
+anims/00.dialogue = SubResource( 2 )
+anims/01.dialogue = SubResource( 3 )
+anims/02.dialogue = SubResource( 4 )
+script = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogueBox"]
+stream = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="DialogueBox"]
+margin_left = 920.0
+margin_top = 284.0
+margin_right = 1055.0
+margin_bottom = 398.0
+text = "Next"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="DialogueBox/Button" to="DialogueBox/AnimationPlayer" method="skip"]

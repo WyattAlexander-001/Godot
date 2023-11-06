@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Screens/Viewport/Portals/Portal.gd" type="Script" id=1]
+[ext_resource path="res://Screens/Viewport/Portals/Portal.shader" type="Shader" id=2]
+
+[sub_resource type="QuadMesh" id=1]
+resource_local_to_scene = true
+size = Vector2( 10, 6 )
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/portal_texture = SubResource( 2 )
+
+[sub_resource type="SphereMesh" id=4]
+radius = 0.5
+height = 1.0
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.560784, 0.870588, 0.364706, 1 )
+
+[sub_resource type="PrismMesh" id=6]
+size = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.921569, 0.337255, 0.294118, 1 )
+
+[node name="Portal" type="Spatial"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ScreenMesh" type="MeshInstance" parent="."]
+layers = 2
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+handle_input_locally = false
+msaa = 4
+keep_3d_linear = true
+gui_disable_input = true
+shadow_atlas_size = 1024
+
+[node name="Camera" type="Camera" parent="Viewport"]
+cull_mask = 1048573
+current = true
+fov = 90.0
+
+[node name="Sphere" type="MeshInstance" parent="Viewport/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.067 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="Arrow" type="MeshInstance" parent="Viewport/Camera"]
+transform = Transform( 1, 0, 0, 0, -4.09683e-06, 1, 0, -1, -4.09683e-06, 0.005, 0, 0.436 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )

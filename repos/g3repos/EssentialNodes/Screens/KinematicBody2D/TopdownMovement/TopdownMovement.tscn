@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Screens/KinematicBody2D/TopdownMovement/PlayerTopDownSteering.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/asteroids/asteroidB.png" type="Texture" id=2]
+[ext_resource path="res://common/asteroids/asteroidA.png" type="Texture" id=3]
+[ext_resource path="res://common/asteroids/asteroidC.png" type="Texture" id=4]
+[ext_resource path="res://common/sidescroll_tileset/tileset_sidescroll-tileset.tres" type="TileSet" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 16.0
+
+[node name="TopdownMovement" type="Node2D"]
+
+[node name="PlayerTopDownSteering" parent="." instance=ExtResource( 1 )]
+position = Vector2( 300.82, 352.453 )
+
+[node name="Rock" type="StaticBody2D" parent="."]
+position = Vector2( 600, 408 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock" groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Rock"]
+texture = ExtResource( 3 )
+
+[node name="Rock2" type="StaticBody2D" parent="."]
+position = Vector2( 448, 704 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock2" groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Rock2"]
+texture = ExtResource( 2 )
+
+[node name="Rock3" type="StaticBody2D" parent="."]
+position = Vector2( 832, 648 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock3" groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Rock3"]
+texture = ExtResource( 4 )
+
+[node name="Rock4" type="StaticBody2D" parent="."]
+position = Vector2( 904, 544 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock4" groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Rock4"]
+texture = ExtResource( 4 )
+
+[node name="Rock5" type="StaticBody2D" parent="."]
+position = Vector2( 1008, 704 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock5" groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Rock5"]
+texture = ExtResource( 4 )
+
+[node name="Rock6" type="StaticBody2D" parent="."]
+position = Vector2( 1016, 592 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock6" groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Rock6"]
+texture = ExtResource( 4 )
+
+[node name="Rock7" type="StaticBody2D" parent="."]
+position = Vector2( 1088, 488 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock7" groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Rock7"]
+texture = ExtResource( 4 )
+
+[node name="Rock8" type="StaticBody2D" parent="."]
+position = Vector2( 1192, 648 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock8" groups=[
+"Collision",
+"Draw",
+]]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Rock8"]
+texture = ExtResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 80, 80 )
+format = 1

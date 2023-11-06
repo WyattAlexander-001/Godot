@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=2]
+[ext_resource path="res://Screens/RemoteTransform/GrindRail/GrindPlayer3D.gd" type="Script" id=3]
+[ext_resource path="res://common/Player3D/Player3D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/RemoteTransform/GrindRail/GrindRailInstance.tscn" type="PackedScene" id=6]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 50, 1, 50 )
+
+[node name="GrindRail" type="Spatial"]
+
+[node name="Player3D" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+script = ExtResource( 3 )
+acceleration = 4.0
+rotation_speed = 12.0
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 1 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="GrindRail" parent="." instance=ExtResource( 6 )]
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1 )
+data = {
+"cells": PoolIntArray( 11, 0, 1048578, -131071, 0, 12, -131063, 0, 9, -131062, 0, 9, -131060, 0, 9, -65538, 0, 12, -65536, 0, 655372, -65535, 0, 13, -65527, 0, 655370, -65526, 0, 1048591, -65525, 0, 1048591, -65524, 0, 16, -2, 0, 655377, -1, 0, 655372, 10, 1, 655360, -131072, 1, 12, -131071, 1, 1441837, -131063, 1, 655404, -131062, 1, 9, -131061, 1, 9, -131060, 1, 1441836, -65538, 1, 655405, -65537, 1, 12, -65536, 1, 1441805, -65535, 1, 11, -65527, 1, 1441806, -65526, 1, 1441808, -65525, 1, 1441808, -65524, 1, 14, -2, 1, 1441803, -1, 1, 1441805, 11, 65535, 1048576, 65534, 65535, 1048576, -131072, 65535, 12, -131071, 65535, 45, -131063, 65535, 1048620, -131062, 65535, 9, -131061, 65535, 9, -131060, 65535, 44, -65538, 65535, 1048621, -65537, 65535, 12, -65536, 65535, 1048593, -65535, 65535, 1048587, -65527, 65535, 655368, -65526, 65535, 1048586, -65525, 65535, 1048586, -65524, 65535, 1048590, -2, 65535, 655367, -1, 65535, 1048593 )
+}

@@ -1,0 +1,150 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/UI/fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://common/UI/textFrame.png" type="Texture" id=2]
+[ext_resource path="res://Screens/Label/DisplayText/DisplayText.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 36
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "bounce"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.66, 2 ),
+"update": 0,
+"values": [ Vector2( 342, 580 ), Vector2( 342, 560 ) ]
+}
+
+[node name="DisplayText" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainRect" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -552.0
+margin_top = -231.578
+margin_right = 552.0
+margin_bottom = -62.5781
+rect_pivot_offset = Vector2( 552, 84 )
+texture = ExtResource( 2 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainRect"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -542.0
+margin_top = -70.0
+margin_right = 533.0
+margin_bottom = 91.0
+rect_pivot_offset = Vector2( 537, 161 )
+custom_fonts/font = SubResource( 1 )
+text = "Labels are used in all part's of a game. Any time you want to show text to a player you can use a label like this one."
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SecondRect" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -618.0
+margin_top = 40.0
+margin_right = -250.0
+margin_bottom = 209.001
+rect_pivot_offset = Vector2( 184, 84 )
+texture = ExtResource( 2 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SecondRect"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 537, 161 )
+custom_fonts/font = SubResource( 1 )
+text = "Or this one!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SecondRect"]
+autoplay = "bounce"
+anims/bounce = SubResource( 2 )
+
+[node name="TimeRect" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 120.0
+margin_top = 40.0
+margin_right = 620.0
+margin_bottom = 209.0
+rect_pivot_offset = Vector2( 250, 84 )
+texture = ExtResource( 2 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TimeRect"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 537, 161 )
+custom_fonts/font = SubResource( 1 )
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

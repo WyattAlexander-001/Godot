@@ -1,0 +1,174 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://common/VFX/CollisionParticles/CollisionParticles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Light/ShootLights/FlorescentLight.gd" type="Script" id=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.5, 0.09, 0.215 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 3, 0.08, 0.4 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 3.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightMeshes/Light1:mesh:material:emission_energy")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7, 2, 2.2, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.8, 0.4, 0.8, 0.4, 0.8, 0.4, 0.8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpotLight:light_energy")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7, 2, 2.2, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.8, 0.4, 0.8, 0.4, 0.8, 0.4, 0.8 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "shot"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightMeshes/Light1:mesh:material:emission_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.6 ),
+"transitions": PoolRealArray( 0.3, 0.3, 1 ),
+"update": 0,
+"values": [ 0.8, 2.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpotLight:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.6 ),
+"transitions": PoolRealArray( 0.3, 0.3, 1 ),
+"update": 0,
+"values": [ 0.8, 2.0, 0.0 ]
+}
+
+[sub_resource type="SpatialMaterial" id=5]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color( 2, 1.3, 0.08, 1 )
+emission_energy = 0.8
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="CylinderMesh" id=6]
+resource_local_to_scene = true
+material = SubResource( 5 )
+top_radius = 0.08
+bottom_radius = 0.08
+height = 2.9
+radial_segments = 6
+rings = 1
+
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 1 ), 0.0, -0.129864, 0, 0, Vector2( 1, 0.626126 ), -0.934871, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+trail_divisor = 16
+direction = Vector3( 0, 0, -1 )
+spread = 22.0
+gravity = Vector3( 0, -5, 0 )
+initial_velocity = 3.0
+initial_velocity_random = 0.3
+scale = 0.1
+scale_random = 0.05
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
+
+[sub_resource type="SpatialMaterial" id=12]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 4, 4, 4, 1 )
+
+[sub_resource type="QuadMesh" id=13]
+material = SubResource( 12 )
+
+[node name="FlorescentLight" type="StaticBody"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0799999, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0599999, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.2, -0.256213, 0 )
+light_color = Color( 1, 0.647059, 0.0352941, 1 )
+light_energy = 0.8
+shadow_enabled = true
+shadow_reverse_cull_face = true
+spot_attenuation = 0.5
+spot_angle = 60.0
+spot_angle_attenuation = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 3 )
+anims/shot = SubResource( 4 )
+
+[node name="LightMeshes" type="Spatial" parent="."]
+
+[node name="Light1" type="MeshInstance" parent="LightMeshes"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.1, -0.08 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="Light2" type="MeshInstance" parent="LightMeshes"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.1, 0.08 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="CollisionParticles" type="Spatial" parent="."]
+
+[node name="CollisionParticles1" parent="CollisionParticles" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.08, -0.18, -0.0344989 )
+process_material = SubResource( 11 )
+draw_pass_1 = SubResource( 13 )
+
+[node name="CollisionParticles2" parent="CollisionParticles" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.12, -0.18, -0.0344989 )
+process_material = SubResource( 11 )
+draw_pass_1 = SubResource( 13 )

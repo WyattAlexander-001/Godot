@@ -1,0 +1,145 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Screens/CanvasLayer/SideScrollTileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/PlayerSideScroll/PlayerSideScroll.tscn" type="PackedScene" id=2]
+[ext_resource path="res://common/UI/fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Screens/CanvasLayer/HeadsUpDisplay/PlayerUI.gd" type="Script" id=4]
+[ext_resource path="res://Screens/Area2D/Coins/coin.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.301961, 0.65098, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0980392, 0.0823529, 0.141176, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.301961, 0.65098, 1, 1 )
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.160784, 0.145098, 0.2, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.294118, 0.356863, 0.670588, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_bottom = 12.0
+
+[sub_resource type="DynamicFont" id=5]
+size = 48
+font_data = ExtResource( 3 )
+
+[node name="HeadsUpDisplay" type="Node2D"]
+
+[node name="SideScrollTileMap" parent="." instance=ExtResource( 1 )]
+
+[node name="PlayerSideScroll" parent="." instance=ExtResource( 2 )]
+position = Vector2( 281.682, 650.265 )
+
+[node name="Camera2D" type="Camera2D" parent="PlayerSideScroll"]
+current = true
+limit_left = -160
+limit_right = 2640
+limit_bottom = 1120
+editor_draw_limits = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" type="Control" parent="CanvasLayer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/PlayerUI"]
+margin_left = 64.0
+margin_top = 168.0
+margin_right = 448.0
+margin_bottom = 232.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+value = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelHEalth" type="Label" parent="CanvasLayer/PlayerUI"]
+margin_left = 88.0
+margin_top = 120.0
+margin_right = 280.0
+margin_bottom = 190.0
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+text = "Health"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelTime" type="Label" parent="CanvasLayer/PlayerUI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 544.0
+margin_top = 160.0
+margin_right = 736.0
+margin_bottom = 230.0
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+text = "Time"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="CanvasLayer/PlayerUI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 768.0
+margin_top = 167.0
+margin_right = 896.0
+margin_bottom = 237.0
+custom_fonts/font = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinTexture" type="TextureRect" parent="CanvasLayer/PlayerUI"]
+margin_left = 1728.0
+margin_top = 952.0
+margin_right = 1792.0
+margin_bottom = 1016.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Coins" type="Label" parent="CanvasLayer/PlayerUI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 832.0
+margin_top = 952.0
+margin_right = 896.0
+margin_bottom = 1022.0
+custom_fonts/font = SubResource( 5 )
+text = "0"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

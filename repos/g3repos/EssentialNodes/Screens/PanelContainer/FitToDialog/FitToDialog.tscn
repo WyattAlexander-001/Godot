@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Screens/PanelContainer/FitToDialog/FitToDialog.gd" type="Script" id=2]
+
+[node name="FitToDialog" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+margin_left = 723.0
+margin_top = 499.0
+margin_right = 1197.0
+margin_bottom = 580.0
+grow_horizontal = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer"]
+margin_left = 14.0
+margin_top = 18.0
+margin_right = 460.0
+margin_bottom = 63.0
+text = "Press 'E' for new dialog."
+align = 1
+
+[node name="Tween" type="Tween" parent="."]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/Weapons/Spray/HitScanWeapon.gd" type="Script" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[node name="Weapon" type="Node2D"]
+show_behind_parent = true
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Raycasts are very very fast, making them great for high firerate \"hit-scan\" weapons. press z to fire."
+}
+noise = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+__meta__ = {
+"_editor_description_": "Raycasts are very very fast, making them great for high firerate \"hit-scan\" weapons. press z to fire."
+}
+
+[node name="RayCast2D" type="RayCast2D" parent="."]

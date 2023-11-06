@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://common/PlayerFPS3D/FPSPlayer.gd" type="Script" id=1]
+[ext_resource path="res://common/PlayerFPS3D/ShakingCamera3D.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 0.6
+
+[node name="FPSPlayer" type="KinematicBody"]
+collision_layer = 2
+script = ExtResource( 1 )
+rotation_speed = 2.0
+tilt_speed = 2.0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.8, 0 )
+shape = SubResource( 1 )
+
+[node name="TiltPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+
+[node name="Camera" type="Camera" parent="TiltPivot"]
+script = ExtResource( 2 )
+max_amplitude = null
+
+[node name="RayCast" type="RayCast" parent="TiltPivot/Camera"]
+cast_to = Vector3( 0, 0, -50 )

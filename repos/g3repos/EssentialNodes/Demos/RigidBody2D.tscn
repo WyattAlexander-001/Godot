@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/DemoScreen2D.gd" type="Script" id=1]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenNavigator.gd" type="Script" id=2]
+[ext_resource path="res://Screens/RigidBody2D/DelaunayExplosion/DelaunayExplosion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/RigidBody2D/ShootingCannon/ShootingCannon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/RigidBody2D/KinematicVsRigidBody2D/KinematicVsRigidBody2D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/RigidBody2D/ShootingRocket/ShootingRocket.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/RigidBody2D/Ragdoll/Ragdoll.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Screens/RigidBody2D/SidescrollerRigid/SidescrollerRigid.tscn" type="PackedScene" id=9]
+
+[node name="RigidBody2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="KinematicVsRigidBody2D" type="Node2D" parent="."]
+script = ExtResource( 1 )
+scene = ExtResource( 5 )
+movement_scheme = 1
+
+[node name="SidescrollerRigid" type="Node2D" parent="."]
+position = Vector2( 1920, 0 )
+script = ExtResource( 1 )
+scene = ExtResource( 9 )
+movement_scheme = 2
+
+[node name="ShootingRocket" type="Node2D" parent="."]
+position = Vector2( 3840, 0 )
+script = ExtResource( 1 )
+scene = ExtResource( 6 )
+controls = [ "shoot" ]
+movement_scheme = 1
+
+[node name="ShootingCannon" type="Node2D" parent="."]
+position = Vector2( 0, 1080 )
+script = ExtResource( 1 )
+scene = ExtResource( 4 )
+controls = [ "throw_ball" ]
+
+[node name="Ragdoll" type="Node2D" parent="."]
+position = Vector2( 1920, 1080 )
+script = ExtResource( 1 )
+scene = ExtResource( 8 )
+controls = [ "shoot" ]
+
+[node name="DelaunayExplosion" type="Node2D" parent="."]
+position = Vector2( 3840, 1080 )
+script = ExtResource( 1 )
+scene = ExtResource( 3 )
+controls = [ "click" ]

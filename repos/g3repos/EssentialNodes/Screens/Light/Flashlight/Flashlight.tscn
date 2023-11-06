@@ -1,0 +1,311 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://common/PlayerFPS3D/FPSPlayer.gd" type="Script" id=1]
+[ext_resource path="res://Screens/Light/Flashlight/Flashlight.gd" type="Script" id=2]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=3]
+[ext_resource path="res://Screens/Light/Flashlight/FlashlightModel.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 0.6
+
+[sub_resource type="Animation" id=3]
+resource_name = "turn_off"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpotLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 0.3, 1 ),
+"update": 3,
+"values": [ 1.0, 2.0, 1.5, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "turn_on"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpotLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.3, 1 ),
+"update": 3,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 20, 1, 20 )
+
+[sub_resource type="Environment" id=6]
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 20, 1, 20 )
+
+[sub_resource type="ConvexPolygonShape" id=8]
+points = PoolVector3Array( -10, 0.5, 10, 10, 0.5, -10, 10, 0.5, 10, -10, 0.5, -10, -10, -0.5, 10, 10, -0.5, -10, 10, -0.5, 10, -10, -0.5, -10, 10, 0.5, 10, -10, 0.5, -10, 10, 0.5, -10, -10, 0.5, 10, 10, -0.5, 10, -10, -0.5, -10, 10, -0.5, -10, -10, -0.5, 10, 10, 0.5, 10, -10, -0.5, 10, -10, 0.5, 10, 10, -0.5, 10, 10, 0.5, -10, -10, -0.5, -10, -10, 0.5, -10, 10, -0.5, -10 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="FPSPlayer" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.68352 )
+collision_layer = 2
+script = ExtResource( 1 )
+rotation_speed = 2.0
+tilt_speed = 2.0
+
+[node name="CollisionShape" type="CollisionShape" parent="FPSPlayer"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.8, 0 )
+shape = SubResource( 1 )
+
+[node name="TiltPivot" type="Spatial" parent="FPSPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+
+[node name="Camera" type="Camera" parent="FPSPlayer/TiltPivot"]
+
+[node name="RayCast" type="RayCast" parent="FPSPlayer/TiltPivot/Camera"]
+cast_to = Vector3( 0, 0, -50 )
+
+[node name="Flashlight" type="Spatial" parent="FPSPlayer"]
+script = ExtResource( 2 )
+
+[node name="Flashlight2" parent="FPSPlayer/Flashlight" instance=ExtResource( 4 )]
+transform = Transform( -0.25, 0, -3.7749e-08, 0, 0.25, 0, 3.7749e-08, 0, -0.25, 0.242067, 1.40011, -0.31167 )
+
+[node name="SpotLight" type="SpotLight" parent="FPSPlayer/Flashlight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239018, 1.4, -0.58798 )
+shadow_enabled = true
+shadow_reverse_cull_face = true
+spot_range = 10.0
+spot_attenuation = 2.5
+spot_angle = 45.3
+spot_angle_attenuation = 1.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FPSPlayer/Flashlight"]
+autoplay = "turn_on"
+anims/turn_off = SubResource( 3 )
+anims/turn_on = SubResource( 4 )
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.61864, 0 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+shape = SubResource( 5 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 6 )
+
+[node name="Floor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 8 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+width = 0.2
+depth = 0.2
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0 )
+width = 0.2
+depth = 0.2
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0 )
+width = 0.2
+depth = 0.2
+
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0 )
+width = 0.2
+depth = 0.2
+
+[node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 1, 0 )
+width = 0.2
+depth = 0.2
+
+[node name="CSGBox11" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 2.1, -2.9 )
+width = 4.0
+height = 4.2
+depth = 3.0
+
+[node name="Hollow" type="CSGBox" parent="CSGCombiner/CSGBox11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, 2.38419e-07 )
+operation = 2
+width = 5.0
+depth = 2.7
+
+[node name="CSGBox8" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.4, -3.51811 )
+width = 0.2
+height = 0.8
+depth = 1.4
+
+[node name="CSGBox9" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -2.9 )
+width = 0.2
+depth = 3.0
+
+[node name="BarWall" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.4, -2.9 )
+width = 0.2
+height = 0.8
+depth = 3.0
+
+[node name="CSGBox15" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.3 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox16" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.3 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox17" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.2 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox18" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.2 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox19" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.0999997 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox20" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.1 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox21" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 4.76837e-07 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox22" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.4 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox23" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 1 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox24" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.5 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox25" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.9 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox26" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.6 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox27" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.8 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox28" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, 0.700001 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox29" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -1 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox30" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.4 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox31" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.9 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox32" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.5 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox33" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.8 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox34" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.599999 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox35" type="CSGBox" parent="CSGCombiner/BarWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0.8, -0.699999 )
+width = 0.05
+height = 0.8
+depth = 0.05
+
+[node name="CSGBox12" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.4, -1.5 )
+height = 0.8
+depth = 0.2
+
+[node name="CSGBox13" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -4.35 )
+depth = 0.2

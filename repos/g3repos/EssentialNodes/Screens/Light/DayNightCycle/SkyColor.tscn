@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Screens/Light/DayNightCycle/SkyHorizon.shader" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/sky_color = Color( 1, 1, 1, 1 )
+shader_param/horizon_color = Color( 0.478431, 0.478431, 0.478431, 1 )
+shader_param/horizon_top_height = 0.35
+shader_param/horizon_bottom_height = 0.4
+
+[node name="SkyColor" type="ColorRect"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

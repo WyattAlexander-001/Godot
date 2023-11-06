@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://common/UI/textFrame.png" type="Texture" id=1]
+[ext_resource path="res://Screens/RichTextLabel/Tooltip/Tooltip.gd" type="Script" id=2]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Screens/RichTextLabel/Tooltip/TooltipDisplay.tscn" type="PackedScene" id=4]
+
+[node name="Tooltip" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -1851.09, -910.932 )
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = 420.0
+margin_top = 360.0
+margin_right = 1500.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 1080, 360 )
+rect_pivot_offset = Vector2( 540, 180 )
+texture = ExtResource( 1 )
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = -12.0
+bbcode_enabled = true
+bbcode_text = "The mighty ships tore across the empty wastes of space and finally dived screaming on to the first planet they came across - which happened to be the Earth - where due to a terrible miscalculation of scale the entire battle fleet was accidentally swallowed by a small dog."
+meta_underlined = false
+text = "The mighty ships tore across the empty wastes of space and finally dived screaming on to the first planet they came across - which happened to be the Earth - where due to a terrible miscalculation of scale the entire battle fleet was accidentally swallowed by a small dog."
+fit_content_height = true
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TooltipDisplay" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_bottom = 276.0
+
+[connection signal="meta_hover_ended" from="NinePatchRect/RichTextLabel" to="." method="_on_RichTextLabel_meta_hover_ended"]
+[connection signal="meta_hover_started" from="NinePatchRect/RichTextLabel" to="." method="_on_RichTextLabel_meta_hover_started"]

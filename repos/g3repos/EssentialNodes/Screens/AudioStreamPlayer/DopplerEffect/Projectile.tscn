@@ -1,0 +1,187 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Screens/AudioStreamPlayer/ChargingEffect/spaceEngine_003.ogg" type="AudioStream" id=1]
+[ext_resource path="res://common/explosion/explosion_alt.png" type="Texture" id=2]
+[ext_resource path="res://Screens/AudioStreamPlayer/DopplerEffect/explosionCrunch_000.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Screens/AudioStreamPlayer/DopplerEffect/Projectile.gd" type="Script" id=4]
+
+[sub_resource type="BoxShape" id=17]
+extents = Vector3( 0.15, 0.15, 0.15 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+trail_divisor = 16
+gravity = Vector3( 0, 0, 0 )
+scale_curve = SubResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.921569, 0.337255, 0.294118, 1 )
+
+[sub_resource type="SphereMesh" id=7]
+material = SubResource( 6 )
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Curve" id=8]
+max_value = 2.0
+_data = [ Vector2( 0, 2 ), 0.199926, -0.0101347, 0, 0, Vector2( 1, 0 ), -2.72973, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+gravity = Vector3( 0, 0, 0 )
+angle = 720.0
+angle_random = 1.0
+scale = 1.5
+scale_random = 1.0
+scale_curve = SubResource( 9 )
+
+[sub_resource type="SpatialMaterial" id=11]
+flags_transparent = true
+flags_unshaded = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=12]
+material = SubResource( 11 )
+
+[sub_resource type="AudioStreamRandomPitch" id=16]
+audio_stream = ExtResource( 3 )
+random_pitch = 2.0
+
+[sub_resource type="Animation" id=14]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer3D:unit_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "explode"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("DamageAudio:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("DamageParticles")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "restart"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_physics_process"
+}, {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Particles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="Projectile" type="Area"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 17 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 1 )
+unit_size = 3.0
+max_db = 6.0
+autoplay = true
+doppler_tracking = 2
+
+[node name="Particles" type="Particles" parent="."]
+amount = 16
+lifetime = 0.5
+speed_scale = 5.0
+local_coords = false
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )
+
+[node name="DamageParticles" type="Particles" parent="."]
+emitting = false
+amount = 3
+one_shot = true
+speed_scale = 2.5
+explosiveness = 1.0
+process_material = SubResource( 10 )
+draw_pass_1 = SubResource( 12 )
+
+[node name="DamageAudio" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 16 )
+volume_db = -10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/RESET = SubResource( 14 )
+anims/explode = SubResource( 15 )

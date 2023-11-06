@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://common/Player3D/Player3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/Camera/CameraInterpolate3D/InterpolatedThirdPersonCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/Area/Coins3D/Coin3D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=6]
+[ext_resource path="res://Screens/Camera/CameraInterpolate3D/InterpolatedPlayer3D.gd" type="Script" id=7]
+[ext_resource path="res://Screens/Camera/CameraInterpolate3D/InterpolatedCameraArea.gd" type="Script" id=8]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 2.62019, 0.761513, 9.04219 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 50, 1, 50 )
+
+[node name="CameraInterpolate3D" type="Spatial"]
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.999918, 0.00068263, -0.0127484, -0.000686229, 1, -0.000277951, 0.0127482, 0.000286678, 0.999918, 0, 0, 0 )
+data = {
+"cells": PoolIntArray( 65532, 0, 1441830, 65534, 0, 655389, 65535, 0, 655389, 131071, 0, 655385, -65536, 0, 655369, -65535, 0, 655369, -65534, 0, 655369, -65533, 0, 655369, -65532, 0, 10, -5, 0, 655370, -4, 0, 655369, -3, 0, 655369, -2, 0, 655369, -1, 0, 655369, 65532, 1, 1441830, 65534, 1, 655389, 65535, 1, 655389, 131071, 1, 655385, -65536, 1, 655369, -65535, 1, 655369, -65534, 1, 655369, -65533, 1, 655369, -65532, 1, 10, -5, 1, 655370, -4, 1, 655369, -3, 1, 655369, -2, 1, 655369, -1, 1, 655369, 65532, 2, 1441830, 65534, 2, 655389, 65535, 2, 655389, 131071, 2, 655385, -65536, 2, 655369, -65535, 2, 655369, -65534, 2, 1441807, -65533, 2, 655369, -65532, 2, 10, -5, 2, 655370, -4, 2, 655369, -3, 2, 1441807, -2, 2, 655369, -1, 2, 655375, 0, 3, 38, 1, 3, 38, 2, 3, 38, 3, 3, 38, 65532, 3, 1441831, 65533, 3, 38, 65534, 3, 655389, 65535, 3, 655389, -65536, 3, 655369, -65535, 3, 655369, -65534, 3, 655375, -65533, 3, 15, -65532, 3, 10, -5, 3, 655370, -4, 3, 655369, -3, 3, 1441807, -2, 3, 1048591, -1, 3, 655375, -65536, 4, 1441808, -65535, 4, 1441802, -65534, 4, 1441802, -65533, 4, 1441802, -65532, 4, 14, -5, 4, 1441800, -4, 4, 1441802, -3, 4, 1441802, -2, 4, 1441808, -1, 4, 1441808, -65536, 65531, 1048586, -65535, 65531, 1048586, -65534, 65531, 1048592, -65533, 65531, 1048592, -65532, 65531, 1048590, -5, 65531, 655368, -4, 65531, 1048586, -3, 65531, 1048586, -2, 65531, 1048586, -1, 65531, 1048586, -65536, 65532, 655369, -65535, 65532, 1048591, -65534, 65532, 655375, -65533, 65532, 15, -65532, 65532, 10, -5, 65532, 655370, -4, 65532, 655369, -3, 65532, 655369, -2, 65532, 655369, -1, 65532, 655369, -65536, 65533, 655369, -65535, 65533, 655369, -65534, 65533, 1441807, -65533, 65533, 655369, -65532, 65533, 10, -5, 65533, 655370, -4, 65533, 655369, -3, 65533, 655369, -2, 65533, 655369, -1, 65533, 655369, 65532, 65534, 1441830, -65536, 65534, 655369, -65535, 65534, 655369, -65534, 65534, 655369, -65533, 65534, 655369, -65532, 65534, 10, -5, 65534, 655370, -4, 65534, 655369, -3, 65534, 655369, -2, 65534, 655369, -1, 65534, 655369, 65532, 65535, 1441830, 65534, 65535, 655389, -65536, 65535, 655369, -65535, 65535, 655369, -65534, 65535, 655369, -65533, 65535, 655369, -65532, 65535, 10, -5, 65535, 655370, -4, 65535, 655369, -3, 65535, 655369, -2, 65535, 655369, -1, 65535, 655369 )
+}
+
+[node name="CameraController" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.51529, 0.952342, 0.15502 )
+player_path = NodePath("../Player3D")
+
+[node name="Player3D" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.55192, 0.000187993, 0.288762 )
+script = ExtResource( 7 )
+camera_path = NodePath("../CameraController")
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.71057, 1.15365, 0 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.535365, -0.505395, 0 )
+shape = SubResource( 1 )
+
+[node name="Position3D" type="Position3D" parent="Area"]
+transform = Transform( -0.876365, 0, -0.481647, 0, 1, 0, 0.481647, 0, -0.876365, -2.40807, 0.283506, -9.75883 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 2 )
+
+[node name="Coin3D" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73398, 0.843578, 3.85521 )

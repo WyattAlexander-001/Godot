@@ -1,0 +1,164 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Screens/Path2D/BoardOfCards/BoardOfCards.gd" type="Script" id=1]
+[ext_resource path="res://common/enemy.png" type="Texture" id=2]
+[ext_resource path="res://Screens/Path2D/BoardOfCards/Path2DCard.gd" type="Script" id=3]
+[ext_resource path="res://common/Player/player.png" type="Texture" id=4]
+[ext_resource path="res://Screens/Path2D/BoardOfCards/BoardCard.gd" type="Script" id=5]
+[ext_resource path="res://Screens/PanelContainer/CardBorder/Card.tscn" type="PackedScene" id=6]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=7]
+[ext_resource path="res://common/blackhole.png" type="Texture" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.921569, 0.337255, 0.294118, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 5
+shadow_offset = Vector2( 2, 2 )
+
+[sub_resource type="Curve2D" id=2]
+bake_interval = 150.0
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=3]
+bake_interval = 150.0
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Curve2D" id=4]
+bake_interval = 150.0
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[node name="BoardOfCards" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Slots" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 581.0
+margin_top = 95.0
+margin_right = 1339.0
+margin_bottom = 445.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot1" type="PanelContainer" parent="Slots"]
+modulate = Color( 1, 1, 1, 0.215686 )
+margin_right = 250.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 250, 350 )
+rect_pivot_offset = Vector2( 125, 175 )
+theme = ExtResource( 7 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="PanelContainer" parent="Slots"]
+modulate = Color( 1, 1, 1, 0.215686 )
+margin_left = 254.0
+margin_right = 504.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 250, 350 )
+rect_pivot_offset = Vector2( 125, 175 )
+theme = ExtResource( 7 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="PanelContainer" parent="Slots"]
+modulate = Color( 1, 1, 1, 0.215686 )
+margin_left = 508.0
+margin_right = 758.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 250, 350 )
+rect_pivot_offset = Vector2( 125, 175 )
+theme = ExtResource( 7 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hand" type="Node2D" parent="."]
+
+[node name="Path2DCard1" type="Path2D" parent="Hand" groups=[
+"Draw",
+]]
+self_modulate = Color( 1, 1, 1, 1 )
+curve = SubResource( 2 )
+script = ExtResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Hand/Path2DCard1"]
+position = Vector2( 860, 920 )
+rotate = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="BoardCard" parent="Hand/Path2DCard1/PathFollow2D" instance=ExtResource( 6 )]
+script = ExtResource( 5 )
+card_art = ExtResource( 8 )
+rules_text = "Destroy all [color=red]Ships[/color]."
+name_text = "Black Hole"
+
+[node name="Tween" type="Tween" parent="Hand/Path2DCard1"]
+
+[node name="Path2DCard2" type="Path2D" parent="Hand" groups=[
+"Draw",
+]]
+self_modulate = Color( 1, 1, 1, 1 )
+curve = SubResource( 3 )
+script = ExtResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Hand/Path2DCard2"]
+position = Vector2( 960, 920 )
+rotate = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="BoardCard" parent="Hand/Path2DCard2/PathFollow2D" instance=ExtResource( 6 )]
+script = ExtResource( 5 )
+card_art = ExtResource( 4 )
+rules_text = "When played: Gain 3 [color=aqua]Shields[/color]."
+name_text = "Hero Ship"
+
+[node name="Tween" type="Tween" parent="Hand/Path2DCard2"]
+
+[node name="Path2DCard3" type="Path2D" parent="Hand" groups=[
+"Draw",
+]]
+self_modulate = Color( 1, 1, 1, 1 )
+curve = SubResource( 4 )
+script = ExtResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Hand/Path2DCard3"]
+position = Vector2( 1060, 920 )
+rotate = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="BoardCard" parent="Hand/Path2DCard3/PathFollow2D" instance=ExtResource( 6 )]
+script = ExtResource( 5 )
+card_art = ExtResource( 2 )
+rules_text = "When played: Deal 2 [color=red]Damage[/color]."
+name_text = "Enemy Ship"
+
+[node name="Tween" type="Tween" parent="Hand/Path2DCard3"]

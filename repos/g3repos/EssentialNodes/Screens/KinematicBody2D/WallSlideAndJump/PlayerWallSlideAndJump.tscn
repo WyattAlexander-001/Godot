@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Screens/KinematicBody2D/WallSlideAndJump/PlayerWallSlideAndJump.gd" type="Script" id=1]
+[ext_resource path="res://common/PlayerSideScroll/PlayerSideSkin.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40, 95.5 )
+
+[node name="PlayerWallSlideAndJump" type="KinematicBody2D"]
+collision_mask = 8
+script = ExtResource( 1 )
+wall_jump_strength = 3000.0
+
+[node name="PlayerSideSkin" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -96 )
+shape = SubResource( 1 )
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.2
+one_shot = true

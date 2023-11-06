@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Screens/RigidBody2D/DelaunayExplosion/DestructibleAsteroid.tscn" type="PackedScene" id=1]
+
+[node name="DelaunayExplosion" type="Node2D"]
+
+[node name="DestructibleAsteroid" parent="." instance=ExtResource( 1 )]
+position = Vector2( 960, 540 )
+
+[node name="DestructibleAsteroid2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1122.57, 723.315 )
+
+[node name="DestructibleAsteroid7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1273.93, 723.315 )
+
+[node name="DestructibleAsteroid8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1241.97, 602.226 )
+
+[node name="DestructibleAsteroid3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1161.3, 845.125 )
+
+[node name="DestructibleAsteroid4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1406.16, 352.704 )
+
+[node name="DestructibleAsteroid5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 355.76, 402.106 )
+
+[node name="DestructibleAsteroid9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 569.348, 881.417 )
+
+[node name="DestructibleAsteroid6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 718.443, 573.903 )

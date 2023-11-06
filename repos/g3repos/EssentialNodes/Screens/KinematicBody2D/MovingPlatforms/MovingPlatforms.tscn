@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/sidescroll_tileset/tileset_sidescroll-tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Screens/KinematicBody2D/MovingPlatforms/PlayerMovingPlatforms.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 112, 48 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Move"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 688, 304 ), Vector2( 688, 800 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Move"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 944, 504 ), Vector2( 1552, 504 ) ]
+}
+
+[node name="MovingPlatforms" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 80, 80 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 1, 12, 0, 1, 13, 0, 1, 14, 0, 1, 15, 0, 1, 16, 0, 1, 17, 0, 1, 18, 0, 1, 19, 0, 1, 20, 0, 1, 21, 0, 1, 22, 0, 1, 23, 0, 2, 65536, 0, 65536, 65537, 0, 65541, 65538, 0, 131073, 65539, 0, 131073, 65540, 0, 131073, 65541, 0, 131073, 65542, 0, 131073, 65543, 0, 131073, 65544, 0, 131073, 65545, 0, 131073, 65546, 0, 131073, 65547, 0, 131073, 65548, 0, 131073, 65549, 0, 131073, 65550, 0, 131073, 65551, 0, 131073, 65552, 0, 131073, 65553, 0, 131073, 65554, 0, 131073, 65555, 0, 131073, 65556, 0, 131073, 65557, 0, 131073, 65558, 0, 65542, 65559, 0, 65538, 131072, 0, 65536, 131073, 0, 65538, 131094, 0, 65536, 131095, 0, 65538, 196608, 0, 65536, 196609, 0, 65538, 196630, 0, 65536, 196631, 0, 65538, 262144, 0, 65536, 262145, 0, 65538, 262159, 0, 196611, 262166, 0, 65536, 262167, 0, 65538, 327680, 0, 65536, 327681, 0, 65538, 327701, 0, 0, 327702, 0, 131078, 327703, 0, 65538, 393216, 0, 65536, 393217, 0, 65538, 393237, 0, 65536, 393238, 0, 65537, 393239, 0, 65538, 458752, 0, 65536, 458753, 0, 65538, 458772, 0, 0, 458773, 0, 131078, 458774, 0, 65537, 458775, 0, 65538, 524288, 0, 65536, 524289, 0, 65538, 524307, 0, 0, 524308, 0, 131078, 524309, 0, 65537, 524310, 0, 65537, 524311, 0, 65538, 589824, 0, 65536, 589825, 0, 131077, 589826, 0, 1, 589827, 0, 1, 589828, 0, 1, 589829, 0, 1, 589830, 0, 1, 589831, 0, 1, 589832, 0, 1, 589833, 0, 1, 589834, 0, 1, 589835, 0, 1, 589836, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 589840, 0, 1, 589841, 0, 1, 589842, 0, 1, 589843, 0, 131078, 589844, 0, 65537, 589845, 0, 65537, 589846, 0, 65537, 589847, 0, 65538, 655360, 0, 65536, 655361, 0, 65537, 655362, 0, 65537, 655363, 0, 65537, 655364, 0, 65537, 655365, 0, 65537, 655366, 0, 65537, 655367, 0, 65537, 655368, 0, 65537, 655369, 0, 65537, 655370, 0, 65537, 655371, 0, 65537, 655372, 0, 65537, 655373, 0, 65537, 655374, 0, 65537, 655375, 0, 65537, 655376, 0, 65537, 655377, 0, 65537, 655378, 0, 65537, 655379, 0, 65537, 655380, 0, 65537, 655381, 0, 65537, 655382, 0, 65537, 655383, 0, 65538, 720896, 0, 65536, 720897, 0, 65537, 720898, 0, 65537, 720899, 0, 65537, 720900, 0, 65537, 720901, 0, 65537, 720902, 0, 65537, 720903, 0, 65537, 720904, 0, 65537, 720905, 0, 65537, 720906, 0, 65537, 720907, 0, 65537, 720908, 0, 65537, 720909, 0, 65537, 720910, 0, 65537, 720911, 0, 65537, 720912, 0, 65537, 720913, 0, 65537, 720914, 0, 65537, 720915, 0, 65537, 720916, 0, 65537, 720917, 0, 65537, 720918, 0, 65537, 720919, 0, 65538, 786432, 0, 65536, 786433, 0, 65537, 786434, 0, 65537, 786435, 0, 65537, 786436, 0, 65537, 786437, 0, 65537, 786438, 0, 65537, 786439, 0, 65537, 786440, 0, 65537, 786441, 0, 65537, 786442, 0, 65537, 786443, 0, 65537, 786444, 0, 65537, 786445, 0, 65537, 786446, 0, 65537, 786447, 0, 65537, 786448, 0, 65537, 786449, 0, 65537, 786450, 0, 65537, 786451, 0, 65537, 786452, 0, 65537, 786453, 0, 65537, 786454, 0, 65537, 786455, 0, 65538, 851968, 0, 131072, 851969, 0, 131073, 851970, 0, 131073, 851971, 0, 131073, 851972, 0, 131073, 851973, 0, 131073, 851974, 0, 131073, 851975, 0, 131073, 851976, 0, 131073, 851977, 0, 131073, 851978, 0, 131073, 851979, 0, 131073, 851980, 0, 131073, 851981, 0, 131073, 851982, 0, 131073, 851983, 0, 131073, 851984, 0, 131073, 851985, 0, 131073, 851986, 0, 131073, 851987, 0, 131073, 851988, 0, 131073, 851989, 0, 131073, 851990, 0, 131073, 851991, 0, 131074 )
+
+[node name="PlayerMovingPlatforms" parent="." instance=ExtResource( 2 )]
+position = Vector2( 682.458, 725.111 )
+
+[node name="VerticalMovingPlatform" type="KinematicBody2D" parent="."]
+position = Vector2( 688, 800 )
+collision_layer = 8
+collision_mask = 0
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VerticalMovingPlatform" groups=[
+"Draw",
+"Interactive",
+]]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="TileMap" type="TileMap" parent="VerticalMovingPlatform"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 80, 80 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -2, 0, 0, -1, 0, 1, -65536, 0, 1, -65535, 0, 2, 65534, 0, 131072, 65535, 0, 131073, 0, 0, 131073, 1, 0, 131074 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VerticalMovingPlatform"]
+autoplay = "Move"
+playback_process_mode = 0
+anims/Move = SubResource( 2 )
+
+[node name="HorizontalMovingPlatform" type="KinematicBody2D" parent="."]
+position = Vector2( 944, 504 )
+collision_layer = 8
+collision_mask = 0
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalMovingPlatform" groups=[
+"Draw",
+"Interactive",
+]]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="TileMap" type="TileMap" parent="HorizontalMovingPlatform"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 80, 80 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -2, 0, 0, -1, 0, 1, -65536, 0, 1, -65535, 0, 2, 65534, 0, 131072, 65535, 0, 131073, 0, 0, 131073, 1, 0, 131074 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HorizontalMovingPlatform"]
+autoplay = "Move"
+playback_process_mode = 0
+anims/Move = SubResource( 3 )

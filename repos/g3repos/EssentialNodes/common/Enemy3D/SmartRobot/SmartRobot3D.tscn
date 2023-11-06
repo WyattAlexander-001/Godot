@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://common/Robot/RobotSkin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Enemy3D/SmartRobot/SmartRobot3D.gd" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="SphereShape" id=2]
+radius = 0.25
+
+[node name="SmartRobot3D" type="RigidBody"]
+collision_layer = 4
+collision_mask = 5
+physics_material_override = SubResource( 1 )
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+linear_damp = 8.0
+angular_damp = 8.0
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+shape = SubResource( 2 )
+
+[node name="RobotSkin" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0 )
+
+[node name="Rays" type="Spatial" parent="."]
+
+[node name="RayCast1" type="RayCast" parent="Rays" groups=[
+"Draw",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+enabled = true
+cast_to = Vector3( 1.5, 0, 1.5 )
+collision_mask = 7
+
+[node name="RayCast2" type="RayCast" parent="Rays" groups=[
+"Draw",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+enabled = true
+cast_to = Vector3( 1, 0, 2 )
+collision_mask = 7
+
+[node name="RayCast3" type="RayCast" parent="Rays" groups=[
+"Draw",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+enabled = true
+cast_to = Vector3( 0.4, 0, 2.2 )
+collision_mask = 7
+
+[node name="RayCast4" type="RayCast" parent="Rays" groups=[
+"Draw",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+enabled = true
+cast_to = Vector3( -0.4, 0, 2.2 )
+collision_mask = 7
+
+[node name="RayCast5" type="RayCast" parent="Rays" groups=[
+"Draw",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+enabled = true
+cast_to = Vector3( -1, 0, 2 )
+collision_mask = 7
+
+[node name="RayCast6" type="RayCast" parent="Rays" groups=[
+"Draw",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+enabled = true
+cast_to = Vector3( -1.5, 0, 1.5 )
+collision_mask = 7

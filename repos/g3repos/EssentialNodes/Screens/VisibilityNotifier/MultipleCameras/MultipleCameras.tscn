@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=2]
+[ext_resource path="res://Screens/VisibilityNotifier/MultipleCameras/SmartVisiblityRobot3D.gd" type="Script" id=3]
+[ext_resource path="res://common/Player3D/Player3D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://common/Enemy3D/SmartRobot/SmartRobot3D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=6]
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 50, 1, 50 )
+
+[sub_resource type="PlaneMesh" id=5]
+size = Vector2( 50, 50 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 0.921569, 0.337255, 0.294118, 0.392157 )
+
+[node name="MultipleCameras" type="Spatial"]
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 4 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="Player3D" parent="." instance=ExtResource( 4 )]
+acceleration = 4.0
+rotation_speed = 12.0
+
+[node name="Camera" parent="Player3D/ThirdPersonCamera/CameraTiltPivot/SpringArm" index="0"]
+cull_mask = 1048573
+
+[node name="PlayerFOVMesh" type="MeshInstance" parent="Player3D/ThirdPersonCamera" index="1"]
+transform = Transform( 0.707107, 2.49182e-08, -0.707107, -8.9407e-08, 1, -5.41673e-08, 0.707107, 1.01522e-07, 0.707107, 0, -0.494057, -30.04 )
+layers = 2
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player3D"]
+
+[node name="PanelContainer" type="PanelContainer" parent="Player3D/CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -604.0
+margin_top = -180.0
+margin_bottom = 180.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Player3D/CanvasLayer/PanelContainer"]
+margin_left = 14.0
+margin_top = 18.0
+margin_right = 590.0
+margin_bottom = 342.0
+rect_min_size = Vector2( 576, 324 )
+rect_pivot_offset = Vector2( 288, 162 )
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Player3D/CanvasLayer/PanelContainer/ViewportContainer"]
+size = Vector2( 576, 324 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="Player3D/CanvasLayer/PanelContainer/ViewportContainer/Viewport" groups=[
+"debug_camera",
+]]
+transform = Transform( 4, 0, 0, 0, -1.74846e-07, 4, 0, -4, -1.74846e-07, 0, 14, 0 )
+current = true
+
+[node name="Robots" type="Spatial" parent="."]
+
+[node name="SmartRobot3D" parent="Robots" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7 )
+script = ExtResource( 3 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="Robots/SmartRobot3D"]
+
+[node name="SmartRobot3D2" parent="Robots" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 7 )
+script = ExtResource( 3 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="Robots/SmartRobot3D2"]
+
+[node name="SmartRobot3D3" parent="Robots" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="Robots/SmartRobot3D3"]
+
+[node name="SmartRobot3D4" parent="Robots" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="Robots/SmartRobot3D4"]
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 6 )]
+data = {
+"cells": PoolIntArray( 4, 0, 1441830, 65531, 0, 1048614, -65536, 0, 1048585, -65535, 0, 1048585, -65534, 0, 1048585, -65533, 0, 1048585, -65532, 0, 10, -5, 0, 655370, -4, 0, 1048585, -3, 0, 1048585, -2, 0, 1048585, -1, 0, 1048585, 4, 1, 1441830, 65531, 1, 1048614, -65536, 1, 1048585, -65535, 1, 1048585, -65534, 1, 1048585, -65533, 1, 655375, -65532, 1, 10, -5, 1, 655376, -4, 1, 1048585, -3, 1, 1048585, -2, 1, 1048585, -1, 1, 1048585, 2, 2, 1048602, 4, 2, 1441830, 65531, 2, 1048614, 65532, 2, 655362, 65533, 2, 655364, -65536, 2, 1048585, -65535, 2, 15, -65534, 2, 1048585, -65533, 2, 1048585, -65532, 2, 10, -5, 2, 655376, -4, 2, 1048585, -3, 2, 1048585, -2, 2, 1048585, -1, 2, 1048585, 1, 3, 1048577, 4, 3, 1441830, 65531, 3, 1048614, -65536, 3, 1048585, -65535, 3, 1048585, -65534, 3, 1048591, -65533, 3, 1441807, -65532, 3, 16, -5, 3, 655370, -4, 3, 1048585, -3, 3, 1048585, -2, 3, 1048585, -1, 3, 1048585, 0, 4, 655398, 1, 4, 655398, 2, 4, 655398, 3, 4, 655398, 65532, 4, 655398, 65533, 4, 655398, 65534, 4, 655398, 65535, 4, 655398, -65536, 4, 1441802, -65535, 4, 1441808, -65534, 4, 1441808, -65533, 4, 1441808, -65532, 4, 14, -5, 4, 1441800, -4, 4, 1441802, -3, 4, 1441802, -2, 4, 1441802, -1, 4, 1441802, 0, 65531, 38, 1, 65531, 38, 2, 65531, 38, 3, 65531, 38, 65532, 65531, 38, 65533, 65531, 38, 65534, 65531, 38, 65535, 65531, 38, -65536, 65531, 1048586, -65535, 65531, 1048586, -65534, 65531, 1048586, -65533, 65531, 1048592, -65532, 65531, 1048590, -5, 65531, 655374, -4, 65531, 1048592, -3, 65531, 1048586, -2, 65531, 1048586, -1, 65531, 1048586, 1, 65532, 1441793, 2, 65532, 1, 4, 65532, 1441830, 65531, 65532, 1048614, 65532, 65532, 655362, 65533, 65532, 655361, -65536, 65532, 1048585, -65535, 65532, 1048585, -65534, 65532, 15, -65533, 65532, 1441807, -65532, 65532, 10, -5, 65532, 655376, -4, 65532, 1441807, -3, 65532, 1048585, -2, 65532, 1048585, -1, 65532, 1048585, 1, 65533, 1441796, 3, 65533, 1441797, 4, 65533, 1441830, 65531, 65533, 1048614, 65533, 65533, 1441818, -65536, 65533, 1048585, -65535, 65533, 1048585, -65534, 65533, 655375, -65533, 65533, 1048585, -65532, 65533, 10, -5, 65533, 655370, -4, 65533, 655375, -3, 65533, 1048585, -2, 65533, 1048585, -1, 65533, 1048585, 4, 65534, 1441830, 65531, 65534, 1048614, -65536, 65534, 1048585, -65535, 65534, 1048585, -65534, 65534, 1048585, -65533, 65534, 1048585, -65532, 65534, 10, -5, 65534, 655370, -4, 65534, 1048585, -3, 65534, 1048585, -2, 65534, 1048585, -1, 65534, 1048585, 4, 65535, 1441830, 65531, 65535, 1048614, -65536, 65535, 1048585, -65535, 65535, 1048585, -65534, 65535, 1048585, -65533, 65535, 1048585, -65532, 65535, 10, -5, 65535, 655370, -4, 65535, 1048585, -3, 65535, 1048585, -2, 65535, 1048585, -1, 65535, 1048585 )
+}
+
+[editable path="Player3D"]
+[editable path="Player3D/ThirdPersonCamera"]

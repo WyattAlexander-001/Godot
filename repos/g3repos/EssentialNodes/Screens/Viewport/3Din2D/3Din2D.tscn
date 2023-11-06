@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/Astronaut/AstronautSkin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Viewport/3Din2D/Simple3DPlayer.gd" type="Script" id=2]
+[ext_resource path="res://common/sidescroll_tileset/tileset_sidescroll-tileset.tres" type="TileSet" id=3]
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Player/Viewport")
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 63.068
+height = 130.104
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 286.932, 330.12 )
+script = ExtResource( 2 )
+
+[node name="Viewport" type="Viewport" parent="Player"]
+size = Vector2( 480, 480 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Camera" type="Camera" parent="Player/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )
+current = true
+fov = 40.0
+
+[node name="AstronautSkin" parent="Player/Viewport" instance=ExtResource( 1 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.75, -1 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+texture = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 3 )
+
+[node name="Pivot" type="Node2D" parent="Player"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 80, 80 )
+format = 1
+tile_data = PoolIntArray( 196607, 0, 0, 131072, 0, 2, 131095, 0, 0, 131096, 0, 2, 262143, 0, 65536, 196608, 0, 65538, 196631, 0, 65536, 196632, 0, 65538, 327679, 0, 65536, 262144, 0, 65538, 262167, 0, 65536, 262168, 0, 65538, 393215, 0, 65536, 327680, 0, 65538, 327686, 0, 0, 327687, 0, 1, 327688, 0, 1, 327689, 0, 1, 327690, 0, 2, 327703, 0, 65536, 327704, 0, 65538, 458751, 0, 65536, 393216, 0, 65538, 393222, 0, 131072, 393223, 0, 131073, 393224, 0, 131073, 393225, 0, 131073, 393226, 0, 131074, 393231, 0, 196611, 393239, 0, 65536, 393240, 0, 65538, 524287, 0, 65536, 458752, 0, 65538, 458775, 0, 65536, 458776, 0, 65538, 589823, 0, 65536, 524288, 0, 131077, 524289, 0, 1, 524290, 0, 2, 524309, 0, 0, 524310, 0, 1, 524311, 0, 131078, 524312, 0, 65538, 655359, 0, 65536, 589824, 0, 65537, 589825, 0, 65537, 589826, 0, 65538, 589845, 0, 65536, 589846, 0, 65537, 589847, 0, 65537, 589848, 0, 65538, 720895, 0, 65536, 655360, 0, 65537, 655361, 0, 65537, 655362, 0, 65538, 655381, 0, 65536, 655382, 0, 65537, 655383, 0, 65537, 655384, 0, 65538, 786431, 0, 65536, 720896, 0, 65537, 720897, 0, 65537, 720898, 0, 65538, 720917, 0, 65536, 720918, 0, 65537, 720919, 0, 65537, 720920, 0, 65538, 851967, 0, 65536, 786432, 0, 65537, 786433, 0, 65537, 786434, 0, 131077, 786435, 0, 1, 786436, 0, 1, 786437, 0, 1, 786438, 0, 1, 786439, 0, 1, 786440, 0, 1, 786441, 0, 1, 786442, 0, 1, 786443, 0, 1, 786444, 0, 1, 786445, 0, 1, 786446, 0, 1, 786447, 0, 1, 786448, 0, 1, 786449, 0, 1, 786450, 0, 1, 786451, 0, 1, 786452, 0, 1, 786453, 0, 131078, 786454, 0, 65537, 786455, 0, 65537, 786456, 0, 65538, 917503, 0, 131072, 851968, 0, 131073, 851969, 0, 131073, 851970, 0, 131073, 851971, 0, 131073, 851972, 0, 131073, 851973, 0, 131073, 851974, 0, 131073, 851975, 0, 131073, 851976, 0, 131073, 851977, 0, 131073, 851978, 0, 131073, 851979, 0, 131073, 851980, 0, 131073, 851981, 0, 131073, 851982, 0, 131073, 851983, 0, 131073, 851984, 0, 131073, 851985, 0, 131073, 851986, 0, 131073, 851987, 0, 131073, 851988, 0, 131073, 851989, 0, 131073, 851990, 0, 131073, 851991, 0, 131073, 851992, 0, 131074 )

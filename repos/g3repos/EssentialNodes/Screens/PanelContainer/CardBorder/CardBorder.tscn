@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/PanelContainer/CardBorder/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/blackhole.png" type="Texture" id=2]
+[ext_resource path="res://common/enemy.png" type="Texture" id=3]
+[ext_resource path="res://common/Player/player.png" type="Texture" id=4]
+
+[node name="CardBorder" type="Node2D"]
+
+[node name="Card1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 590.774 )
+card_art = ExtResource( 2 )
+rules_text = "Destroy all [color=yellow]Ships[/color]."
+name_text = "Black Hole"
+
+[node name="Card2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 960, 590.774 )
+card_art = ExtResource( 3 )
+rules_text = "When played: Deal 2 [color=red]Damage[/color]."
+name_text = "Enemy Ship"
+
+[node name="Card3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1280, 590.774 )
+card_art = ExtResource( 4 )
+rules_text = "When played: Gain 3 [color=aqua]Shields[/color]."
+name_text = "Hero Ship"

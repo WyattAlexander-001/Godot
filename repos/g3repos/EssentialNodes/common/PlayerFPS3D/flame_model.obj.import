@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/flame_model.obj-34e100a0895f8cf01106542ffd3e4413.mesh"
+
+[deps]
+
+files=[ "res://.import/flame_model.obj-34e100a0895f8cf01106542ffd3e4413.mesh" ]
+
+source_file="res://common/PlayerFPS3D/flame_model.obj"
+dest_files=[ "res://.import/flame_model.obj-34e100a0895f8cf01106542ffd3e4413.mesh", "res://.import/flame_model.obj-34e100a0895f8cf01106542ffd3e4413.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=5]
+[ext_resource path="res://Screens/NinePatchRect/StylizedWindows/Window.tscn" type="PackedScene" id=6]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StylizedWindow1" parent="." instance=ExtResource( 6 )]
+margin_left = 108.69
+margin_top = 138.98
+margin_right = 881.69
+margin_bottom = 521.98
+
+[node name="StylizedWindow2" parent="." instance=ExtResource( 6 )]
+margin_left = 591.301
+margin_top = 374.355
+margin_right = 1392.3
+margin_bottom = 763.355
+
+[node name="PanelContainer" parent="StylizedWindow2" index="0"]
+margin_right = 800.0
+margin_bottom = 388.0
+
+[node name="VBoxContainer" parent="StylizedWindow2/PanelContainer" index="0"]
+margin_right = 794.0
+margin_bottom = 382.0
+
+[node name="Toolbar" parent="StylizedWindow2/PanelContainer/VBoxContainer" index="0"]
+margin_right = 788.0
+
+[node name="Label" parent="StylizedWindow2/PanelContainer/VBoxContainer/Toolbar" index="0"]
+margin_right = 386.0
+
+[node name="Close" parent="StylizedWindow2/PanelContainer/VBoxContainer/Toolbar" index="1"]
+margin_left = 740.0
+margin_top = 4.0
+margin_right = 788.0
+margin_bottom = 40.0
+
+[node name="Inside" parent="StylizedWindow2/PanelContainer/VBoxContainer" index="1"]
+margin_right = 788.0
+margin_bottom = 271.0
+
+[node name="VBoxContainer" parent="StylizedWindow2/PanelContainer/VBoxContainer/Inside" index="0"]
+margin_right = 782.0
+margin_bottom = 216.0
+
+[node name="Description" parent="StylizedWindow2/PanelContainer/VBoxContainer/Inside/VBoxContainer" index="0"]
+margin_right = 776.0
+text = "Rush to finish building the farm?"
+
+[node name="ProgressBar" parent="StylizedWindow2/PanelContainer/VBoxContainer/Inside/VBoxContainer" index="1"]
+margin_right = 776.0
+value = 25.0
+
+[node name="Cost" parent="StylizedWindow2/PanelContainer/VBoxContainer/Inside/VBoxContainer" index="2"]
+margin_right = 776.0
+bbcode_text = "[color=black]This will cost:[/color] [color=green]€200 [/color]"
+text = "This will cost: €200 "
+
+[node name="Buttons" parent="StylizedWindow2/PanelContainer/VBoxContainer" index="2"]
+margin_top = 275.0
+margin_right = 788.0
+margin_bottom = 380.0
+
+[node name="Ok" parent="StylizedWindow2/PanelContainer/VBoxContainer/Buttons" index="0"]
+margin_left = 106.0
+margin_right = 280.0
+margin_bottom = 105.0
+
+[node name="Cancel" parent="StylizedWindow2/PanelContainer/VBoxContainer/Buttons" index="1"]
+margin_left = 508.0
+margin_right = 682.0
+margin_bottom = 105.0
+
+[node name="Draggers" parent="StylizedWindow2" index="1"]
+margin_right = 800.0
+margin_bottom = 388.0
+
+[node name="Left" parent="StylizedWindow2/Draggers" index="0"]
+margin_bottom = 392.0
+
+[node name="Right" parent="StylizedWindow2/Draggers" index="1"]
+margin_left = 804.0
+margin_right = 804.0
+margin_bottom = 392.0
+
+[node name="Top" parent="StylizedWindow2/Draggers" index="2"]
+margin_right = 804.0
+
+[node name="Bottom" parent="StylizedWindow2/Draggers" index="3"]
+margin_top = 392.0
+margin_right = 804.0
+margin_bottom = 392.0
+
+[node name="TopRight" parent="StylizedWindow2/Draggers" index="5"]
+margin_left = 804.0
+margin_right = 804.0
+
+[node name="BottomLeft" parent="StylizedWindow2/Draggers" index="6"]
+margin_top = 392.0
+margin_bottom = 392.0
+
+[node name="BottomRight" parent="StylizedWindow2/Draggers" index="7"]
+margin_left = 804.0
+margin_top = 392.0
+margin_right = 804.0
+margin_bottom = 392.0
+
+[editable path="StylizedWindow2"]

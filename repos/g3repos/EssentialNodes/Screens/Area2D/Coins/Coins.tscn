@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/Area2D/Coins/Coin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/node-essential-helpers/debug_drawing/DebugDrawCollisionShape2D.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 349.5
+
+[node name="Coins" type="Node2D"]
+
+[node name="Coin" parent="." instance=ExtResource( 1 )]
+position = Vector2( 960, 320 )
+
+[node name="Coin2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 960, 420 )
+
+[node name="Coin3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 960, 520 )
+
+[node name="Coin4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 960, 620 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 256, 540 )
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource( 1 )
+
+[node name="DemoCollisionShapeDebug" type="Node2D" parent="Player/Area2D/CollisionShape2D"]
+script = ExtResource( 3 )
+shape_type = 2
+outline_color = Color( 0.301961, 0.65098, 1, 1 )
+shape_size = Vector2( 349.5, 349.5 )

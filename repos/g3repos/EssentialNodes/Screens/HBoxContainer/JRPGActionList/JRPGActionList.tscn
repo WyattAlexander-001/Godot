@@ -1,0 +1,149 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Screens/HBoxContainer/JRPGActionList/ActionButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/HBoxContainer/JRPGActionList/JRPGActionList.gd" type="Script" id=2]
+[ext_resource path="res://common/UI/completionmark_gem_blue.png" type="Texture" id=3]
+[ext_resource path="res://Screens/HBoxContainer/JRPGActionList/menu_selection_arrow.png" type="Texture" id=4]
+[ext_resource path="res://common/UI/completionmark_gem_blue_alt.png" type="Texture" id=5]
+[ext_resource path="res://common/UI/completionmark_gem_yellow.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Fire"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("AttackIndicator:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 0.5, 5, 1 ),
+"update": 0,
+"values": [ Color( 0.94902, 0.6, 0, 0 ), Color( 0.94902, 0.6, 0, 1 ), Color( 0.94902, 0.6, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Icestorm"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("AttackIndicator:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 0.5, 5, 1 ),
+"update": 0,
+"values": [ Color( 0.152, 0.7136, 0.8, 0 ), Color( 0.152941, 0.713726, 0.8, 1 ), Color( 0.152, 0.7136, 0.8, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Snowstorm"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("AttackIndicator:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 0.5, 5, 1 ),
+"update": 0,
+"values": [ Color( 0.8, 0.8, 0.8, 0 ), Color( 0.8, 0.8, 0.8, 1 ), Color( 0.8, 0.8, 0.8, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AttackIndicator:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="JRPGActionList" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttackIndicator" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_bottom = 300.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -167.0
+margin_top = -157.0
+margin_right = 167.0
+margin_bottom = 157.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActionButton1" parent="VBoxContainer" instance=ExtResource( 1 )]
+size_flags_horizontal = 4
+icon = ExtResource( 3 )
+text = "Icestorm"
+
+[node name="ActionButton2" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 100.0
+margin_bottom = 196.0
+size_flags_horizontal = 4
+icon = ExtResource( 6 )
+text = "Fire"
+
+[node name="ActionButton3" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 200.0
+margin_bottom = 296.0
+size_flags_horizontal = 4
+icon = ExtResource( 5 )
+text = "Snowstorm"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+margin_top = 300.0
+margin_right = 334.0
+margin_bottom = 324.0
+rect_min_size = Vector2( 0, 24 )
+percent_visible = false
+
+[node name="Cursor" type="Position2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Cursor"]
+margin_left = -140.0
+margin_right = -6.0
+margin_bottom = 88.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Cursor"]
+
+[node name="DisableTween" type="Tween" parent="."]
+
+[node name="AttackAnimations" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/Fire = SubResource( 1 )
+anims/Icestorm = SubResource( 2 )
+anims/Snowstorm = SubResource( 3 )
+anims/idle = SubResource( 4 )

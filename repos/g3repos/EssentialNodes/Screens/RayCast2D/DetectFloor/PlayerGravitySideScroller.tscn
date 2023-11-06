@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/RayCast2D/DetectFloor/PlayerGravitySideScroller.gd" type="Script" id=2]
+[ext_resource path="res://common/PlayerSideScroll/PlayerSideSkin.tscn" type="PackedScene" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 88.0
+
+[node name="GravitySideScroller" type="RigidBody2D"]
+mode = 2
+physics_material_override = SubResource( 1 )
+gravity_scale = 128.0
+contacts_reported = 3
+contact_monitor = true
+can_sleep = false
+linear_damp = 10.0
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+cast_to = Vector2( 128, 0 )
+
+[node name="Character" type="Node2D" parent="."]
+
+[node name="Skin" parent="Character" instance=ExtResource( 3 )]
+position = Vector2( 0, 88 )

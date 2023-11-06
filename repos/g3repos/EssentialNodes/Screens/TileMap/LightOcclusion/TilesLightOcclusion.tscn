@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/background.png" type="Texture" id=2]
+[ext_resource path="res://common/PatrollingEnemy/PatrollingEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/Light/radial_light.png" type="Texture" id=4]
+[ext_resource path="res://common/sidescroll_tileset/tileset_sidescroll-tileset.tres" type="TileSet" id=5]
+
+[sub_resource type="Curve2D" id=1]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array( -0.7937, 315.893, 0.7937, -315.893, -320, 0, -320.655, 0, 320.655, 0, 0, -320, -0.7937, -321.449, 0.7937, 321.449, 320, 0, 316.686, 3.1748, -316.686, -3.1748, 0, 328, 1.5874, 332.56, -1.5874, -332.56, -320, 0 )
+}
+
+[node name="TilesLightOcclusion" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 80, 80 )
+show_collision = true
+format = 1
+tile_data = PoolIntArray( 196621, 0, 0, 196622, 0, 2, 262151, 0, 0, 262152, 0, 2, 262157, 0, 131072, 262158, 0, 9, 262159, 0, 2, 327686, 0, 0, 327687, 0, 131078, 327688, 0, 65538, 327690, 0, 0, 327691, 0, 2, 327694, 0, 65536, 327695, 0, 65538, 393222, 0, 65536, 393223, 0, 65537, 393224, 0, 65538, 393226, 0, 65536, 393227, 0, 131077, 393228, 0, 1, 393229, 0, 1, 393230, 0, 131078, 393231, 0, 65538, 458758, 0, 65536, 458759, 0, 65537, 458760, 0, 65538, 458762, 0, 65536, 458763, 0, 65541, 458764, 0, 131073, 458765, 0, 131073, 458766, 0, 65542, 458767, 0, 65538, 524294, 0, 65536, 524295, 0, 65537, 524296, 0, 65538, 524298, 0, 131072, 524299, 0, 131074, 524302, 0, 131072, 524303, 0, 131074, 589828, 0, 0, 589829, 0, 1, 589830, 0, 131078, 589831, 0, 65537, 589832, 0, 65538, 655364, 0, 131072, 655365, 0, 131073, 655366, 0, 131073, 655367, 0, 131073, 655368, 0, 131074, 655370, 0, 0, 655371, 0, 2, 720905, 0, 0, 720906, 0, 65545, 720907, 0, 131074, 786441, 0, 131072, 786442, 0, 131074 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 283.887, 302.191 )
+
+[node name="Light2D" type="Light2D" parent="Player"]
+texture = ExtResource( 4 )
+texture_scale = 10.0
+mode = 2
+shadow_enabled = true
+shadow_color = Color( 0.105882, 0.0745098, 0.184314, 1 )
+shadow_gradient_length = 1.5
+shadow_filter = 1
+
+[node name="PatrollingEnemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1079.59, 458.748 )
+curve = SubResource( 1 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 0.5 )

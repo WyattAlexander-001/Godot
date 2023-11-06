@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Screens/RayCast/LineOfSight3DManyRays/LineOfSightTurretManyRays3D.gd" type="Script" id=1]
+[ext_resource path="res://common/Turret3D/Turret.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SphereShape" id=7]
+radius = 8.0
+
+[sub_resource type="CapsuleShape" id=8]
+radius = 0.5
+height = 3.0
+
+[node name="LineOfSightTurret3D" type="StaticBody"]
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="RayCastPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0 )
+
+[node name="Turret" parent="." instance=ExtResource( 2 )]
+
+[node name="ViewArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98452, 0 )
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="ViewArea" groups=["AIVision", "Draw"]]
+shape = SubResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0 )
+shape = SubResource( 8 )

@@ -1,0 +1,672 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=1]
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://common/PlayerFPS3D/FPSPlayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/AudioStreamPlayer/SecurityCamera/SecutityMonitor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/AudioStreamPlayer/SecurityCamera/FPSSecurityPlayer.gd" type="Script" id=5]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=6]
+[ext_resource path="res://Screens/AudioStreamPlayer/SecurityCamera/spaceEngineLow_000.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Screens/AudioStreamPlayer/SecurityCamera/thrusterFire_003.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Screens/AudioStreamPlayer/SecurityCamera/computerNoise_003.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Screens/AudioStreamPlayer/SecurityCamera/engineCircular_001.ogg" type="AudioStream" id=10]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 50, 1, 50 )
+
+[sub_resource type="Shader" id=2]
+code = "/*
+Shader from Godot Shaders - the free shader library.
+godotshaders.com/shader/VHS-and-CRT-monitor-effect
+
+This shader is under CC0 license. Feel free to use, improve and 
+change this shader according to your needs and consider sharing 
+the modified result to godotshaders.com.
+*/
+
+shader_type canvas_item;
+
+//*** IMPORTANT! ***/ 
+// - If you are using this shader to affect the node it is applied to set 'overlay' to false (unchecked in the instepctor).
+// - If you are using this shader as an overlay, and want the shader to affect the nodes below in the Scene hierarchy,
+//   set 'overlay' to true (checked in the inspector).
+// On Mac there is potentially a bug causing this to not work properly. If that is the case and you want to use the shader as an overlay
+// change all \"overlay ? SCREEN_TEXTURE : TEXTURE\" to only \"SCREEN_TEXTURE\" on lines 129-140, and \"vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV);\"
+// to \"vec2 uv = warp(SCREEN_UV);\" on line 98.
+uniform bool overlay = false;
+
+uniform float scanlines_opacity : hint_range(0.0, 1.0) = 0.4;
+uniform float scanlines_width : hint_range(0.0, 0.5) = 0.25;
+uniform float grille_opacity : hint_range(0.0, 1.0) = 0.3;
+uniform vec2 resolution = vec2(640.0, 480.0); // Set the number of rows and columns the texture will be divided in. Scanlines and grille will make a square based on these values
+
+uniform bool pixelate = true; // Fill each square (\"pixel\") with a sampled color, creating a pixel look and a more accurate representation of how a CRT monitor would work.
+
+uniform bool roll = true;
+uniform float roll_speed = 8.0; // Positive values are down, negative are up
+uniform float roll_size : hint_range(0.0, 100.0) = 15.0;
+uniform float roll_variation : hint_range(0.1, 5.0) = 1.8; // This valie is not an exact science. You have to play around with the value to find a look you like. How this works is explained in the code below.
+uniform float distort_intensity : hint_range(0.0, 0.2) = 0.05; // The distortion created by the rolling effect.
+
+uniform float noise_opacity : hint_range(0.0, 1.0) = 0.4;
+uniform float noise_speed = 5.0; // There is a movement in the noise pattern that can be hard to see first. This sets the speed of that movement.
+
+uniform float static_noise_intensity : hint_range(0.0, 1.0) = 0.06;
+
+uniform float aberration : hint_range(-1.0, 1.0) = 0.03; // Chromatic aberration, a distortion on each color channel.
+uniform float brightness = 1.4; // When adding scanline gaps and grille the image can get very dark. Brightness tries to compensate for that.
+uniform bool discolor = true; // Add a discolor effect simulating a VHS
+
+uniform float warp_amount :hint_range(0.0, 5.0) = 1.0; // Warp the texture edges simulating the curved glass of a CRT monitor or old TV.
+uniform bool clip_warp = false;
+
+uniform float vignette_intensity = 0.4; // Size of the vignette, how far towards the middle it should go.
+uniform float vignette_opacity : hint_range(0.0, 1.0) = 0.5;
+
+// Used by the noise functin to generate a pseudo random value between 0.0 and 1.0
+vec2 random(vec2 uv){
+    uv = vec2( dot(uv, vec2(127.1,311.7) ),
+               dot(uv, vec2(269.5,183.3) ) );
+    return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
+}
+
+// Generate a Perlin noise used by the distortion effects
+float noise(vec2 uv) {
+    vec2 uv_index = floor(uv);
+    vec2 uv_fract = fract(uv);
+
+    vec2 blur = smoothstep(0.0, 1.0, uv_fract);
+
+    return mix( mix( dot( random(uv_index + vec2(0.0,0.0) ), uv_fract - vec2(0.0,0.0) ),
+                     dot( random(uv_index + vec2(1.0,0.0) ), uv_fract - vec2(1.0,0.0) ), blur.x),
+                mix( dot( random(uv_index + vec2(0.0,1.0) ), uv_fract - vec2(0.0,1.0) ),
+                     dot( random(uv_index + vec2(1.0,1.0) ), uv_fract - vec2(1.0,1.0) ), blur.x), blur.y) * 0.5 + 0.5;
+}
+
+// Takes in the UV and warps the edges, creating the spherized effect
+vec2 warp(vec2 uv){
+	vec2 delta = uv - 0.5;
+	float delta2 = dot(delta.xy, delta.xy);
+	float delta4 = delta2 * delta2;
+	float delta_offset = delta4 * warp_amount;
+	
+	return uv + delta * delta_offset;
+}
+
+// Adds a black border to hide stretched pixel created by the warp effect
+float border (vec2 uv){
+	float radius = min(warp_amount, 0.08);
+	radius = max(min(min(abs(radius * 2.0), abs(1.0)), abs(1.0)), 1e-5);
+	vec2 abs_uv = abs(uv * 2.0 - 1.0) - vec2(1.0, 1.0) + radius;
+	float dist = length(max(vec2(0.0), abs_uv)) / radius;
+	float square = smoothstep(0.96, 1.0, dist);
+	return clamp(1.0 - square, 0.0, 1.0);
+}
+
+// Adds a vignette shadow to the edges of the image
+float vignette(vec2 uv){
+	uv *= 1.0 - uv.xy;
+	float vignette = uv.x * uv.y * 15.0;
+	return pow(vignette, vignette_intensity * vignette_opacity);
+}
+
+void fragment()
+{
+	vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV); // Warp the uv. uv will be used in most cases instead of UV to keep the warping
+	vec2 text_uv = uv;
+	vec2 roll_uv = vec2(0.0);
+	float time = roll ? TIME : 0.0;
+	
+
+	// Pixelate the texture based on the given resolution.
+	if (pixelate)
+	{
+		text_uv = ceil(uv * resolution) / resolution;
+	}
+	
+	// Create the rolling effect. We need roll_line a bit later to make the noise effect.
+	// That is why this runs if roll is true OR noise_opacity is over 0.
+	float roll_line = 0.0;
+	if (roll || noise_opacity > 0.0)
+	{
+		// Create the areas/lines where the texture will be distorted.
+		roll_line = smoothstep(0.3, 0.9, sin(uv.y * roll_size - (time * roll_speed) ) );
+		// Create more lines of a different size and apply to the first set of lines. This creates a bit of variation.
+		roll_line *= roll_line * smoothstep(0.3, 0.9, sin(uv.y * roll_size * roll_variation - (time * roll_speed * roll_variation) ) );
+		// Distort the UV where where the lines are
+		roll_uv = vec2(( roll_line * distort_intensity * (1.-UV.x)), 0.0);
+	}
+	
+	vec4 text;
+	if (roll)
+	{
+		// If roll is true distort the texture with roll_uv. The texture is split up into RGB to 
+		// make some chromatic aberration. We apply the aberration to the red and green channels accorging to the aberration parameter
+		// and intensify it a bit in the roll distortion.
+		text.r = texture(SCREEN_TEXTURE, text_uv + roll_uv * 0.8 + vec2(aberration, 0.0) * .1).r;
+		text.g = texture(SCREEN_TEXTURE, text_uv + roll_uv * 1.2 - vec2(aberration, 0.0) * .1 ).g;
+		text.b = texture(SCREEN_TEXTURE, text_uv + roll_uv).b;
+		text.a = 1.0;
+	}
+	else
+	{
+		// If roll is false only apply the aberration without any distorion. The aberration values are very small so the .1 is only 
+		// to make the slider in the Inspector less sensitive.
+		text.r = texture(SCREEN_TEXTURE, text_uv + vec2(aberration, 0.0) * .1).r;
+		text.g = texture(SCREEN_TEXTURE, text_uv - vec2(aberration, 0.0) * .1).g;
+		text.b = texture(SCREEN_TEXTURE, text_uv).b;
+		text.a = 1.0;
+	}
+	
+	float r = text.r;
+	float g = text.g;
+	float b = text.b;
+	
+	uv = warp(UV);
+	
+	// CRT monitors don't have pixels but groups of red, green and blue dots or lines, called grille. We isolate the texture's color channels 
+	// and divide it up in 3 offsetted lines to show the red, green and blue colors next to each other, with a small black gap between.
+	if (grille_opacity > 0.0){
+		
+		float g_r = smoothstep(0.85, 0.95, abs(sin(uv.x * (resolution.x * 3.14159265))));
+		r = mix(r, r * g_r, grille_opacity);
+		
+		float g_g = smoothstep(0.85, 0.95, abs(sin(1.05 + uv.x * (resolution.x * 3.14159265))));
+		g = mix(g, g * g_g, grille_opacity);
+		
+		float b_b = smoothstep(0.85, 0.95, abs(sin(2.1 + uv.x * (resolution.x * 3.14159265))));
+		b = mix(b, b * b_b, grille_opacity);
+		
+	}
+	
+	// Apply the grille to the texture's color channels and apply Brightness. Since the grille and the scanlines (below) make the image very dark you
+	// can compensate by increasing the brightness.
+	text.r = clamp(r * brightness, 0.0, 1.0);
+	text.g = clamp(g * brightness, 0.0, 1.0);
+	text.b = clamp(b * brightness, 0.0, 1.0);
+	
+	// Scanlines are the horizontal lines that make up the image on a CRT monitor. 
+	// Here we are actual setting the black gap between each line, which I guess is not the right definition of the word, but you get the idea  
+	float scanlines = 0.5;
+	if (scanlines_opacity > 0.0)
+	{
+		// Same technique as above, create lines with sine and applying it to the texture. Smoothstep to allow setting the line size.
+		scanlines = smoothstep(scanlines_width, scanlines_width + 0.5, abs(sin(uv.y * (resolution.y * 3.14159265))));
+		text.rgb = mix(text.rgb, text.rgb * vec3(scanlines), scanlines_opacity);
+	}
+	
+	// Apply the banded noise.
+	if (noise_opacity > 0.0)
+	{
+		// Generate a noise pattern that is very stretched horizontally, and animate it with noise_speed
+		float noise = smoothstep(0.4, 0.5, noise(uv * vec2(2.0, 200.0) + vec2(10.0, (TIME * (noise_speed))) ) );
+		
+		// We use roll_line (set above) to define how big the noise should be vertically (multiplying cuts off all black parts).
+		// We also add in some basic noise with random() to break up the noise pattern above. The noise is sized according to 
+		// the resolution value set in the inspector. If you don't like this look you can 
+		// change \"ceil(uv * resolution) / resolution\" to only \"uv\" to make it less pixelated. Or multiply resolution with som value
+		// greater than 1.0 to make them smaller.
+		roll_line *= noise * scanlines * clamp(random((ceil(uv * resolution) / resolution) + vec2(TIME * 0.8, 0.0)).x + 0.8, 0.0, 1.0);
+		// Add it to the texture based on noise_opacity
+		text.rgb = clamp(mix(text.rgb, text.rgb + roll_line, noise_opacity), vec3(0.0), vec3(1.0));
+	}
+	
+	// Apply static noise by generating it over the whole screen in the same way as above
+	if (static_noise_intensity > 0.0)
+	{
+		text.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
+	}
+	
+	// Apply a black border to hide imperfections caused by the warping.
+	// Also apply the vignette
+	text.rgb *= border(uv);
+	text.rgb *= vignette(uv);
+	// Hides the black border and make that area transparent. Good if you want to add the the texture on top an image of a TV or monitor.
+	if (clip_warp)
+	{
+		text.a = border(uv);
+	}
+	
+	// Apply discoloration to get a VHS look (lower saturation and higher contrast)
+	// You can play with the values below or expose them in the Inspector.
+	float saturation = 0.5;
+	float contrast = 1.2;
+	if (discolor)
+	{
+		// Saturation
+		vec3 greyscale = vec3(text.r + text.g + text.b) / 3.;
+		text.rgb = mix(text.rgb, greyscale, saturation);
+		
+		// Contrast
+		float midpoint = pow(0.5, 2.2);
+		text.rgb = (text.rgb - vec3(midpoint)) * contrast + midpoint;
+	}
+	
+	COLOR = text;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.267
+shader_param/scanlines_width = 0.205
+shader_param/grille_opacity = 0.201
+shader_param/resolution = Vector2( 960, 540 )
+shader_param/pixelate = true
+shader_param/roll = true
+shader_param/roll_speed = 3.0
+shader_param/roll_size = 8.0
+shader_param/roll_variation = 1.8
+shader_param/distort_intensity = 0.006
+shader_param/noise_opacity = 0.219
+shader_param/noise_speed = 2.978
+shader_param/static_noise_intensity = 0.06
+shader_param/aberration = 0.01
+shader_param/brightness = 1.675
+shader_param/discolor = true
+shader_param/warp_amount = 0.179
+shader_param/clip_warp = false
+shader_param/vignette_intensity = 0.403
+shader_param/vignette_opacity = 0.532
+
+[sub_resource type="Animation" id=4]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CRTEffect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CRTEffect:material:shader_param/brightness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.675 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CRTEffect:material:shader_param/warp_amount")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.179 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("../../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_physics_process"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Click to view
+security feed" ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../../../../DirectionalLight:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "SwapToSecurityCamera"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("CRTEffect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CRTEffect:material:shader_param/brightness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 33.0, 1.675 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CRTEffect:material:shader_param/warp_amount")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.179 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("../../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_physics_process"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Click to exit" ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 4, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("../../../../DirectionalLight:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("TiltPivot/Camera/CanvasLayer/Label:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 0.5, 2, 0.5 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.3, 1.3 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TiltPivot/Camera/CanvasLayer/Label:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.5 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=8]
+flags_disable_ambient_light = true
+albedo_color = Color( 0.262745, 0.262745, 0.309804, 1 )
+
+[sub_resource type="Animation" id=9]
+length = 7.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("OmniLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ 2.0, 3.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("OmniLight:omni_range")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2, 7 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ 9.0, 12.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 11.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5.5 ),
+"transitions": PoolRealArray( 0.9, 0.9 ),
+"update": 0,
+"values": [ Vector3( -15, -15, 0 ), Vector3( -15, -75, 0 ) ]
+}
+
+[node name="SecurityCameraListener" type="Spatial"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 2 )]
+data = {
+"cells": PoolIntArray( 3, 0, 1441830, 65532, 0, 1048614, 65534, 0, 1441792, -196608, 0, 1441801, -196607, 0, 1441801, -196606, 0, 1441801, -196605, 0, 1441801, -131076, 0, 1441801, -131075, 0, 1441801, -131074, 0, 1441801, -131073, 0, 1441801, -131072, 0, 1441801, -131071, 0, 1441801, -131070, 0, 1441801, -131069, 0, 1441801, -65540, 0, 1441801, -65539, 0, 1441801, -65538, 0, 1441801, -65537, 0, 1441801, -65536, 0, 9, -65535, 0, 9, -65534, 0, 15, -65533, 0, 10, -4, 0, 655370, -3, 0, 15, -2, 0, 9, -1, 0, 9, 1, 1, 1048577, 2, 1, 5, 3, 1, 1441830, 65532, 1, 1048614, 65533, 1, 655365, -196608, 1, 1441801, -196607, 1, 1441801, -196606, 1, 1441801, -196605, 1, 1441801, -131076, 1, 1441801, -131075, 1, 1441801, -131074, 1, 1441801, -131073, 1, 1441801, -131072, 1, 1441801, -131071, 1, 1441801, -131070, 1, 1441801, -131069, 1, 1441801, -65540, 1, 1441801, -65539, 1, 1441801, -65538, 1, 1441801, -65537, 1, 1441801, -65536, 1, 9, -65535, 1, 9, -65534, 1, 9, -65533, 1, 10, -4, 1, 655370, -3, 1, 9, -2, 1, 9, -1, 1, 9, 0, 2, 655364, 2, 2, 2, 3, 2, 1441830, 65532, 2, 1048614, 65533, 2, 655361, 65534, 2, 1441795, 65535, 2, 2, -196608, 2, 1441801, -196607, 2, 1441801, -196606, 2, 1441801, -196605, 2, 1441801, -131076, 2, 1441801, -131075, 2, 1441801, -131074, 2, 1441801, -131073, 2, 1441801, -131072, 2, 1441801, -131071, 2, 1441801, -131070, 2, 1441801, -131069, 2, 1441801, -65540, 2, 1441801, -65539, 2, 1441801, -65538, 2, 1441801, -65537, 2, 1441801, -65536, 2, 9, -65535, 2, 9, -65534, 2, 9, -65533, 2, 10, -4, 2, 655370, -3, 2, 9, -2, 2, 9, -1, 2, 9, 0, 3, 655398, 1, 3, 655398, 2, 3, 655398, 65533, 3, 655398, 65534, 3, 655398, 65535, 3, 655398, -196608, 3, 1441801, -196607, 3, 1441801, -196606, 3, 1441801, -196605, 3, 1441836, -131076, 3, 655404, -131075, 3, 1441801, -131074, 3, 1441801, -131073, 3, 1441801, -131072, 3, 1441801, -131071, 3, 1441801, -131070, 3, 1441801, -131069, 3, 1441836, -65540, 3, 655404, -65539, 3, 1441801, -65538, 3, 1441801, -65537, 3, 1441801, -65536, 3, 1441802, -65535, 3, 1441802, -65534, 3, 1441802, -65533, 3, 8, -4, 3, 1441800, -3, 3, 1441802, -2, 3, 1441802, -1, 3, 1441802, 0, 65531, 38, 1, 65531, 38, 2, 65531, 38, 65533, 65531, 38, 65534, 65531, 38, 65535, 65531, 38, -196608, 65531, 1441801, -196607, 65531, 1441801, -196606, 65531, 1441801, -196605, 65531, 44, -131076, 65531, 1048620, -131075, 65531, 1441801, -131074, 65531, 1441801, -131073, 65531, 1441801, -131072, 65531, 1441801, -131071, 65531, 1441801, -131070, 65531, 1441801, -131069, 65531, 44, -65540, 65531, 1048620, -65539, 65531, 1441801, -65538, 65531, 1441801, -65537, 65531, 1441801, -65536, 65531, 1048586, -65535, 65531, 1048592, -65534, 65531, 1048592, -65533, 65531, 1048590, -4, 65531, 655368, -3, 65531, 1048586, -2, 65531, 1048586, -1, 65531, 1048586, 1, 65532, 3, 2, 65532, 1048581, 3, 65532, 1441830, 65532, 65532, 1048614, 65534, 65532, 1441794, -196608, 65532, 1441801, -196607, 65532, 1441801, -196606, 65532, 1441801, -196605, 65532, 1441801, -131076, 65532, 1441801, -131075, 65532, 1441801, -131074, 65532, 1441801, -131073, 65532, 1441801, -131072, 65532, 1441801, -131071, 65532, 1441801, -131070, 65532, 1441801, -131069, 65532, 1441801, -65540, 65532, 1441801, -65539, 65532, 1441801, -65538, 65532, 1441801, -65537, 65532, 1441801, -65536, 65532, 9, -65535, 65532, 9, -65534, 65532, 9, -65533, 65532, 16, -4, 65532, 655370, -3, 65532, 1441807, -2, 65532, 9, -1, 65532, 9, 2, 65533, 655362, 3, 65533, 1441830, 65532, 65533, 1048614, 65533, 65533, 655363, -196608, 65533, 1441801, -196607, 65533, 1441801, -196606, 65533, 1441801, -196605, 65533, 1441801, -131076, 65533, 1441801, -131075, 65533, 1441801, -131074, 65533, 1441801, -131073, 65533, 1441801, -131072, 65533, 1441801, -131071, 65533, 1441801, -131070, 65533, 1441801, -131069, 65533, 1441801, -65540, 65533, 1441801, -65539, 65533, 1441801, -65538, 65533, 1441801, -65537, 65533, 1441801, -65536, 65533, 9, -65535, 65533, 9, -65534, 65533, 1441807, -65533, 65533, 10, -4, 65533, 655370, -3, 65533, 9, -2, 65533, 9, -1, 65533, 9, 2, 65534, 1048579, 3, 65534, 1441830, 65532, 65534, 1048614, 65533, 65534, 655365, 65534, 65534, 0, -196608, 65534, 1441801, -196607, 65534, 1441801, -196606, 65534, 1441801, -196605, 65534, 1441801, -131076, 65534, 1441801, -131075, 65534, 1441801, -131074, 65534, 1441801, -131073, 65534, 1441801, -131072, 65534, 1441801, -131071, 65534, 1441801, -131070, 65534, 1441801, -131069, 65534, 1441801, -65540, 65534, 1441801, -65539, 65534, 1441801, -65538, 65534, 1441801, -65537, 65534, 1441801, -65536, 65534, 9, -65535, 65534, 9, -65534, 65534, 1441807, -65533, 65534, 10, -4, 65534, 655376, -3, 65534, 9, -2, 65534, 15, -1, 65534, 9, 1, 65535, 0, 2, 65535, 1441792, 3, 65535, 1441830, 65532, 65535, 1048614, 65533, 65535, 1441792, -196608, 65535, 1441801, -196607, 65535, 1441801, -196606, 65535, 1441801, -196605, 65535, 1441801, -131076, 65535, 1441801, -131075, 65535, 1441801, -131074, 65535, 1441801, -131073, 65535, 1441801, -131072, 65535, 1441801, -131071, 65535, 1441801, -131070, 65535, 1441801, -131069, 65535, 1441801, -65540, 65535, 1441801, -65539, 65535, 1441801, -65538, 65535, 1441801, -65537, 65535, 1441801, -65536, 65535, 9, -65535, 65535, 9, -65534, 65535, 9, -65533, 65535, 10, -4, 65535, 655376, -3, 65535, 15, -2, 65535, 9, -1, 65535, 9 )
+}
+
+[node name="AudioStreamPlayer3DL" type="AudioStreamPlayer3D" parent="LevelGridMap"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 0 )
+stream = ExtResource( 8 )
+unit_size = 2.0
+autoplay = true
+
+[node name="AudioStreamPlayer3DR" type="AudioStreamPlayer3D" parent="LevelGridMap"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0 )
+stream = ExtResource( 8 )
+unit_size = 2.0
+autoplay = true
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 1 )
+
+[node name="FPSPlayer" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 5 )
+rotation_speed = 1.0
+tilt_speed = 1.0
+security_camera_nodepath = NodePath("../SecurityRoom/Camera")
+
+[node name="RayCast" parent="FPSPlayer/TiltPivot/Camera" index="0"]
+enabled = true
+cast_to = Vector3( 0, 0, -2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="FPSPlayer/TiltPivot/Camera" index="1"]
+
+[node name="CRTEffect" type="ColorRect" parent="FPSPlayer/TiltPivot/Camera/CanvasLayer"]
+visible = false
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="FPSPlayer/TiltPivot/Camera/CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -120.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 960, 240 )
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 480, 120 )
+theme = ExtResource( 6 )
+text = "Click to view
+security feed"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FPSPlayer/TiltPivot/Camera/CanvasLayer"]
+autoplay = "RESET"
+anims/RESET = SubResource( 4 )
+anims/SwapToSecurityCamera = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FPSPlayer/TiltPivot/Camera/CanvasLayer"]
+stream = ExtResource( 9 )
+pitch_scale = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FPSPlayer"]
+autoplay = "RESET"
+anims/Popup = SubResource( 6 )
+anims/RESET = SubResource( 7 )
+
+[node name="InteractionTimer" type="Timer" parent="FPSPlayer"]
+wait_time = 0.4
+one_shot = true
+
+[node name="SecutityMonitor" parent="." instance=ExtResource( 4 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -7.46784 )
+
+[node name="SecurityRoom" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
+invert_faces = true
+width = 12.0
+height = 8.0
+depth = 12.0
+material = SubResource( 8 )
+
+[node name="OmniLight" type="OmniLight" parent="SecurityRoom"]
+light_color = Color( 0.811765, 1, 0.439216, 1 )
+light_energy = 2.0
+omni_range = 12.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SecurityRoom"]
+anims/Glow = SubResource( 9 )
+
+[node name="Camera" type="Camera" parent="SecurityRoom"]
+transform = Transform( 0.965926, 0.0669873, -0.25, 0, 0.965926, 0.258819, 0.258819, -0.25, 0.933013, -5, 2, 5 )
+fov = 80.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SecurityRoom/Camera"]
+autoplay = "Idle"
+anims/Idle = SubResource( 10 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="SecurityRoom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3 )
+stream = ExtResource( 7 )
+unit_db = 1.0
+unit_size = 2.0
+autoplay = true
+max_distance = 10.0
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="SecurityRoom"]
+stream = ExtResource( 10 )
+unit_db = 2.0
+unit_size = 3.0
+pitch_scale = 0.5
+autoplay = true
+max_distance = 10.0
+
+[editable path="FPSPlayer"]

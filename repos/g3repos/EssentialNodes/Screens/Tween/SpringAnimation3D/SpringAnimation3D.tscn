@@ -1,0 +1,245 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Screens/Tween/SpringAnimation3D/spring_texture.svg" type="Texture" id=1]
+[ext_resource path="res://common/Basic3D/Neutral.tres" type="Material" id=2]
+[ext_resource path="res://Screens/Tween/SpringAnimation3D/SpringTween3D.gd" type="Script" id=3]
+[ext_resource path="res://Screens/Tween/SpringAnimation3D/SpringAnimation3D.gd" type="Script" id=4]
+[ext_resource path="res://Screens/Tween/SpringAnimation3D/PanelButtonTween3D.gd" type="Script" id=5]
+[ext_resource path="res://common/UI/Slider.tscn" type="PackedScene" id=6]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 16, 16 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 8, 1, 8 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 5, 2, 2 )
+
+[sub_resource type="CylinderShape" id=4]
+radius = 0.1
+height = 0.1
+
+[sub_resource type="CylinderMesh" id=5]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.2
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.262745, 0.262745, 0.309804, 1 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "push"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape/MeshInstance:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.15, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape/MeshInstance:material/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.890196, 0.411765, 0.337255, 1 ), Color( 0.262745, 0.262745, 0.309804, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "reset"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape/MeshInstance:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.138696, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.15, 0 ), Vector3( 0, 0.05, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape/MeshInstance:material/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.262745, 0.262745, 0.309804, 1 ), Color( 0.890196, 0.411765, 0.337255, 1 ) ]
+}
+
+[sub_resource type="CylinderMesh" id=9]
+top_radius = 0.5
+bottom_radius = 0.5
+height = 0.2
+
+[sub_resource type="CylinderMesh" id=10]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 1.0
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="CylinderShape" id=12]
+radius = 0.5
+height = 0.5
+
+[sub_resource type="SphereShape" id=13]
+radius = 0.25
+
+[sub_resource type="SphereMesh" id=14]
+radius = 0.25
+height = 0.5
+
+[node name="SpringAnimation3D" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="GroundMeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="GroundMeshInstance2" type="MeshInstance" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -5.5399 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.972174, 0.23426, 0, -0.23426, 0.972174, 0, 2.343, 2 )
+current = true
+fov = 50.0
+
+[node name="Panel" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="PanelButton" type="StaticBody" parent="Panel"]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.749, -0.888 )
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Panel/PanelButton"]
+transform = Transform( 1.5, 0, 0, 0, 0.707107, -1.06066, 0, 0.707107, 1.06066, 0, -0.618, -0.367 )
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Panel/PanelButton/CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/PanelButton"]
+anims/push = SubResource( 7 )
+anims/reset = SubResource( 8 )
+
+[node name="Spring" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5 )
+script = ExtResource( 3 )
+
+[node name="Top" type="MeshInstance" parent="Spring"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+mesh = SubResource( 9 )
+material/0 = null
+
+[node name="Body" type="Spatial" parent="Spring"]
+transform = Transform( 1, 0, 0, 0, -0.2, 8.74228e-08, 0, -1.74846e-08, -1, 0, 0, 0 )
+
+[node name="Bottom" type="MeshInstance" parent="Spring/Body"]
+transform = Transform( 1, 0, 0, 0, 1.00022, 0, 0, 0, 0.999837, 0, -0.5, -2.38419e-07 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="Tween" type="Tween" parent="Spring"]
+
+[node name="StaticBody" type="StaticBody" parent="Spring"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spring/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0504242, 0 )
+shape = SubResource( 12 )
+
+[node name="Ball" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3.5 )
+contacts_reported = 1
+contact_monitor = true
+
+[node name="CollisionShape" type="CollisionShape" parent="Ball"]
+shape = SubResource( 13 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Ball"]
+mesh = SubResource( 14 )
+material/0 = null
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HSlider" parent="CanvasLayer" instance=ExtResource( 6 )]
+margin_left = 148.84
+margin_top = 343.318
+margin_right = 660.84
+margin_bottom = 441.318
+min_value = 0.5
+max_value = 1.5
+value = 1.0
+
+[node name="Label" type="Label" parent="CanvasLayer/HSlider"]
+margin_left = 115.494
+margin_top = -61.3568
+margin_right = 419.494
+margin_bottom = -16.3568
+custom_colors/font_color = Color( 0.152941, 0.152941, 0.211765, 1 )
+text = "Spring Strength"
+__meta__ = {
+"_edit_use_anchors_": false
+}

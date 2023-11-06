@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/engineCircular_001.ogg-cc1c00e9165787e5e743ebc464d93cf6.oggstr"
+
+[deps]
+
+source_file="res://Screens/AudioStreamPlayer/SecurityCamera/engineCircular_001.ogg"
+dest_files=[ "res://.import/engineCircular_001.ogg-cc1c00e9165787e5e743ebc464d93cf6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

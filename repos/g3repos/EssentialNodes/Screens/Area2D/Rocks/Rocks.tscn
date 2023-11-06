@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Area2D/Rocks/BlackHole.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/Area2D/Rocks/Rock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://common/PressurePlate/PressurePlate.tscn" type="PackedScene" id=5]
+
+[node name="Rocks" type="Node2D"]
+
+[node name="BlackHole" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1091.68, 539.93 )
+
+[node name="PressurePlate2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 600.598, 539.93 )
+target_path = NodePath("../BlackHole")
+
+[node name="Rocks" type="Node2D" parent="."]
+
+[node name="Rock" parent="Rocks" instance=ExtResource( 4 )]
+position = Vector2( 1011.68, 180.067 )
+
+[node name="Rock2" parent="Rocks" instance=ExtResource( 4 )]
+position = Vector2( 1440.6, 651.793 )
+
+[node name="Rock3" parent="Rocks" instance=ExtResource( 4 )]
+position = Vector2( 840.598, 780.067 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 275.688, 503.431 )

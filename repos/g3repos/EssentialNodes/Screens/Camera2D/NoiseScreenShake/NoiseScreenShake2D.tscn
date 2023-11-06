@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://common/PressurePlate/pressurePlate.png" type="Texture" id=3]
+[ext_resource path="res://Screens/Camera2D/NoiseScreenShake/NoiseShakingCamera2D.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.8768, 33.6214 )
+
+[node name="ScreenShake" type="Node2D"]
+
+[node name="Mine" type="Area2D" parent="."]
+position = Vector2( 893.116, 549.161 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mine"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Mine"]
+texture = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 496.568, 541.444 )
+
+[node name="NoiseShakingCamera2D" type="Camera2D" parent="Player"]
+current = true
+process_mode = 0
+script = ExtResource( 4 )
+
+[node name="Background" parent="." instance=ExtResource( 2 )]
+
+[connection signal="body_entered" from="Mine" to="Player/NoiseShakingCamera2D" method="_on_Mine_body_entered"]

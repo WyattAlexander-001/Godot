@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/explosionCrunch_000.ogg-c20e8feedb71ea3507d37ad039724494.oggstr"
+
+[deps]
+
+source_file="res://Screens/AudioStreamPlayer/DopplerEffect/explosionCrunch_000.ogg"
+dest_files=[ "res://.import/explosionCrunch_000.ogg-c20e8feedb71ea3507d37ad039724494.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

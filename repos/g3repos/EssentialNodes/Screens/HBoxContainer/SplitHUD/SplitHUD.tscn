@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Screens/HBoxContainer/SplitHUD/SplitHUD.gd" type="Script" id=2]
+
+[node name="SplitHUD" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+theme = ExtResource( 1 )
+custom_constants/margin_right = 100
+custom_constants/margin_top = 200
+custom_constants/margin_left = 100
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 100.0
+margin_top = 200.0
+margin_right = 1820.0
+margin_bottom = 1080.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthTitle" type="Label" parent="HBoxContainer"]
+margin_right = 126.0
+margin_bottom = 45.0
+size_flags_vertical = 0
+text = "Health"
+
+[node name="HealthBar" type="ProgressBar" parent="HBoxContainer"]
+margin_left = 142.0
+margin_right = 442.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 2
+value = 75.0
+
+[node name="ScoreTitle" type="Label" parent="HBoxContainer"]
+margin_left = 1377.0
+margin_right = 1484.0
+margin_bottom = 45.0
+size_flags_vertical = 0
+text = "Score"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+margin_left = 1500.0
+margin_right = 1504.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 45 )
+size_flags_vertical = 0
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer"]
+margin_left = 1520.0
+margin_right = 1720.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_vertical = 0
+text = "0000000"
+align = 2
+
+[node name="Tween" type="Tween" parent="HBoxContainer"]
+
+[node name="PlayAnimations" type="Button" parent="."]
+margin_left = 780.0
+margin_top = 587.0
+margin_right = 1139.0
+margin_bottom = 692.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Play HUD Animations"

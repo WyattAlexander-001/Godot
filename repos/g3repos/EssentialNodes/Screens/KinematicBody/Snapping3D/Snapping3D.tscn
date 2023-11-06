@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Screens/KinematicBody/Snapping3D/PlayerSnapping3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/UI/fonts/ExtraLargeFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://common/Environment/dirt_alt.material" type="Material" id=3]
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=6]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 50, 1, 50 )
+
+[sub_resource type="PrismMesh" id=2]
+size = Vector3( 4, 2, 4 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( 0, 1, 2, 0, 1, -2, 0, 1, 2, 0, 1, -2, -2, -1, 2, 2, -1, -2, 2, -1, 2, -2, -1, -2, 0, 1, 2, 0, 1, -2, 0, 1, -2, 0, 1, 2, 2, -1, 2, -2, -1, -2, 2, -1, -2, -2, -1, 2, -2, -1, 2, 2, -1, 2, -2, -1, -2, 2, -1, -2 )
+
+[sub_resource type="PrismMesh" id=4]
+size = Vector3( 2, 0.5, 4 )
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( 0, 0.25, 2, 0, 0.25, -2, 0, 0.25, 2, 0, 0.25, -2, -1, -0.25, 2, 1, -0.25, -2, 1, -0.25, 2, -1, -0.25, -2, 0, 0.25, 2, 0, 0.25, -2, 0, 0.25, -2, 0, 0.25, 2, 1, -0.25, 2, -1, -0.25, -2, 1, -0.25, -2, -1, -0.25, 2, -1, -0.25, 2, 1, -0.25, 2, -1, -0.25, -2, 1, -0.25, -2 )
+
+[node name="Snapping3D" type="Spatial"]
+
+[node name="PlayerSnapping3D" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4 )
+move_speed = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PlayerSnapping3D"]
+
+[node name="Label" type="Label" parent="PlayerSnapping3D/CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -133.0
+custom_fonts/font = ExtResource( 2 )
+text = "Snap vector:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 1 )
+
+[node name="Obstacles" type="Spatial" parent="."]
+
+[node name="Hill" type="StaticBody" parent="Obstacles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Obstacles/Hill"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Obstacles/Hill"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 3 )
+
+[node name="Hill2" type="StaticBody" parent="Obstacles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Obstacles/Hill2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+mesh = SubResource( 4 )
+material/0 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Obstacles/Hill2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+shape = SubResource( 5 )
+
+[node name="Hill3" type="StaticBody" parent="Obstacles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Obstacles/Hill3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+mesh = SubResource( 4 )
+material/0 = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Obstacles/Hill3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+shape = SubResource( 5 )
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 4 )]
+data = {
+"cells": PoolIntArray( 2, 0, 655360, 3, 0, 1048614, 65532, 0, 1441830, -65536, 0, 12, -65535, 0, 12, -65534, 0, 12, -65533, 0, 12, -65532, 0, 17, -5, 0, 655377, -4, 0, 1441798, -3, 0, 1048582, -2, 0, 12, -1, 0, 12, 3, 1, 1048614, 65532, 1, 1441830, -65536, 1, 12, -65535, 1, 655366, -65534, 1, 1048582, -65533, 1, 6, -65532, 1, 13, -5, 1, 655377, -4, 1, 655366, -3, 1, 12, -2, 1, 12, -1, 1, 12, 1, 2, 1048576, 2, 2, 1441795, 3, 2, 1048614, 65532, 2, 1441830, 65533, 2, 0, -65536, 2, 12, -65535, 2, 1441798, -65534, 2, 1441798, -65533, 2, 6, -65532, 2, 17, -5, 2, 655373, -4, 2, 12, -3, 2, 12, -2, 2, 12, -1, 2, 12, 0, 3, 38, 1, 3, 38, 2, 3, 38, 3, 3, 39, 65532, 3, 1441831, 65533, 3, 38, 65534, 3, 38, 65535, 3, 38, -65536, 3, 1441798, -65535, 3, 6, -65534, 3, 1048582, -65533, 3, 1048582, -65532, 3, 17, -5, 3, 655373, -4, 3, 12, -3, 3, 12, -2, 3, 12, -1, 3, 12, -65536, 4, 1441809, -65535, 4, 1441809, -65534, 4, 1441805, -65533, 4, 1441809, -65532, 4, 7, -5, 4, 1441803, -4, 4, 1441805, -3, 4, 1441805, -2, 4, 1441805, -1, 4, 1441809, -65536, 65531, 1048589, -65535, 65531, 1048589, -65534, 65531, 1048589, -65533, 65531, 1048589, -65532, 65531, 1048583, -5, 65531, 655371, -4, 65531, 1048589, -3, 65531, 1048593, -2, 65531, 1048593, -1, 65531, 1048593, 0, 65532, 655398, 1, 65532, 655398, 2, 65532, 655398, 3, 65532, 1048615, 65532, 65532, 655399, 65533, 65532, 655398, 65534, 65532, 655398, 65535, 65532, 655398, -65536, 65532, 12, -65535, 65532, 12, -65534, 65532, 6, -65533, 65532, 1048582, -65532, 65532, 13, -5, 65532, 655373, -4, 65532, 12, -3, 65532, 12, -2, 65532, 12, -1, 65532, 1048582, 1, 65533, 1048576, 2, 65533, 1441796, 3, 65533, 1048614, 65532, 65533, 1441830, 65533, 65533, 1048581, 65534, 65533, 655362, -65536, 65533, 12, -65535, 65533, 12, -65534, 65533, 655366, -65533, 65533, 12, -65532, 65533, 13, -5, 65533, 655373, -4, 65533, 12, -3, 65533, 12, -2, 65533, 12, -1, 65533, 12, 3, 65534, 1048614, 65532, 65534, 1441830, 65534, 65534, 1441792, -65536, 65534, 12, -65535, 65534, 12, -65534, 65534, 12, -65533, 65534, 12, -65532, 65534, 13, -5, 65534, 655377, -4, 65534, 12, -3, 65534, 12, -2, 65534, 12, -1, 65534, 12, 3, 65535, 1048614, 65532, 65535, 1441830, 65533, 65535, 1441792, -65536, 65535, 12, -65535, 65535, 12, -65534, 65535, 12, -65533, 65535, 12, -65532, 65535, 13, -5, 65535, 655373, -4, 65535, 12, -3, 65535, 12, -2, 65535, 12, -1, 65535, 12 )
+}

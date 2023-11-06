@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/DemoScreen2D.gd" type="Script" id=2]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenNavigator.gd" type="Script" id=3]
+[ext_resource path="res://Screens/RichTextLabel/Tooltip/Tooltip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/RichTextLabel/BBCodes/BBCodes.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/RichTextLabel/ChatBox/ChatBox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/RichTextLabel/CustomBBCode/CustomBBCode.tscn" type="PackedScene" id=8]
+
+[node name="RichTextLabel" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="BBCodes" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 6 )
+controls = [ "ui_accept" ]
+
+[node name="ChatBox" type="Node2D" parent="."]
+position = Vector2( 1920, 0 )
+script = ExtResource( 2 )
+scene = ExtResource( 7 )
+
+[node name="Tooltip" type="Node2D" parent="."]
+position = Vector2( 3840, 0 )
+script = ExtResource( 2 )
+scene = ExtResource( 5 )
+
+[node name="CustomBBCode" type="Node2D" parent="."]
+position = Vector2( 0, 1080 )
+script = ExtResource( 2 )
+scene = ExtResource( 8 )

@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://common/Player/flameA_yellow.png" type="Texture" id=1]
+[ext_resource path="res://Screens/Path2D/FireLaserOnTarget/FireLaserOnTarget.gd" type="Script" id=2]
+[ext_resource path="res://common/enemy/enemy.png" type="Texture" id=3]
+[ext_resource path="res://common/explosion/Plop.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0.781797, 188.09, -0.781797, -188.09, 480, 648, -210.718, 0, 210.718, 0, 960, 351, 0, -189.505, 0, 189.505, 1440, 648, 210.718, -1.41421, -210.718, 1.41421, 960, 945, 1.2182, 188.617, -1.2182, -188.617, 480, 648 )
+}
+
+[sub_resource type="Animation" id=2]
+length = 8.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2DShip/PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2DShip/PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -30, -27, 0, 0, 0, 0, 1950, -27, 0, 0, 0, 0, 1950, 1107, 0, 0, 0, 0, -30, 1107, 0, 0, 0, 0, -30, -27 )
+}
+
+[sub_resource type="Environment" id=5]
+background_mode = 4
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/5 = false
+
+[node name="FireLaserOnTarget" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Path2DShip" type="Path2D" parent="." groups=[
+"Draw",
+]]
+self_modulate = Color( 1, 1, 1, 1 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2DShip"]
+position = Vector2( 480, 648 )
+rotation = -1.56217
+cubic_interp = false
+
+[node name="Ship" type="Sprite" parent="Path2DShip/PathFollow2D"]
+rotation = 1.57079
+texture = ExtResource( 3 )
+
+[node name="FlameMain" type="Sprite" parent="Path2DShip/PathFollow2D/Ship"]
+show_behind_parent = true
+position = Vector2( -0.000351365, 56 )
+rotation = 4.05312e-06
+texture = ExtResource( 1 )
+offset = Vector2( 4.76837e-07, 40.5 )
+
+[node name="FlameLeft" type="Sprite" parent="Path2DShip/PathFollow2D/Ship"]
+show_behind_parent = true
+position = Vector2( -30.502, 53.3778 )
+rotation = 0.261799
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 4.76837e-07, 40.5 )
+
+[node name="FlameRight" type="Sprite" parent="Path2DShip/PathFollow2D/Ship"]
+show_behind_parent = true
+position = Vector2( 30.5014, 53.5654 )
+rotation = -0.261799
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 4.76837e-07, 40.5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2DShip/PathFollow2D"]
+root_node = NodePath("../../..")
+autoplay = "Move"
+anims/Move = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2DShip/PathFollow2D"]
+position = Vector2( 60, 0 )
+remote_path = NodePath("../../../Target")
+update_rotation = false
+
+[node name="Path2DLaser" type="Path2D" parent="."]
+curve = SubResource( 4 )
+
+[node name="Laser" type="Line2D" parent="."]
+modulate = Color( 2, 2, 2, 1 )
+width = 4.0
+default_color = Color( 0.921569, 0.337255, 0.294118, 1 )
+antialiased = true
+
+[node name="Target" type="Line2D" parent="." groups=[
+"CollisionShapeDebug",
+]]
+position = Vector2( 480.518, 588.002 )
+scale = Vector2( 1, 1 )
+points = PoolVector2Array( -80, 0, 80, 0 )
+width = 1.0
+default_color = Color( 0.921569, 0.337255, 0.294118, 1 )
+
+[node name="Plop" parent="." instance=ExtResource( 4 )]
+explosiveness = 0.0
+local_coords = false
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.2
+autostart = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 5 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/juhani_junkala_title_screen.ogg-09a6b3f9952fb4f47c9b8f1d8131e8a8.oggstr"
+
+[deps]
+
+source_file="res://Screens/AudioStreamPlayer/juhani_junkala_title_screen.ogg"
+dest_files=[ "res://.import/juhani_junkala_title_screen.ogg-09a6b3f9952fb4f47c9b8f1d8131e8a8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

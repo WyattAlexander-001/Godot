@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Screens/Line2D/GolfTrajectory/GolfTrajectory.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreen2D.gd" type="Script" id=2]
+[ext_resource path="res://Screens/Line2D/NavigationLine/NavigationLine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenNavigator.gd" type="Script" id=4]
+[ext_resource path="res://Screens/Line2D/PolygonOutline/PolygonOutline.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/Line2D/ArcAttack/ArcAttack.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/Line2D/BulletTrails/BulletTrails.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Screens/Line2D/Tether/Tether.tscn" type="PackedScene" id=9]
+
+[node name="Line2D" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="PolygonOutline" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 5 )
+
+[node name="BulletTrails" type="Node2D" parent="."]
+position = Vector2( 1920, 0 )
+script = ExtResource( 2 )
+scene = ExtResource( 8 )
+controls = [ "shoot" ]
+movement_scheme = 1
+
+[node name="NavigationLine" type="Node2D" parent="."]
+position = Vector2( 0, 1080 )
+script = ExtResource( 2 )
+scene = ExtResource( 3 )
+controls = [ "move_to_target" ]
+
+[node name="Golf" type="Node2D" parent="."]
+position = Vector2( 3840, 0 )
+script = ExtResource( 2 )
+scene = ExtResource( 1 )
+controls = [ "pull_object" ]
+
+[node name="ArcAttack" type="Node2D" parent="."]
+position = Vector2( 1920, 1080 )
+script = ExtResource( 2 )
+scene = ExtResource( 7 )
+controls = [ "shoot" ]
+movement_scheme = 1
+
+[node name="Tether" type="Node2D" parent="."]
+position = Vector2( 3840, 1080 )
+script = ExtResource( 2 )
+scene = ExtResource( 9 )
+controls = [ "use_balloon" ]
+movement_scheme = 2

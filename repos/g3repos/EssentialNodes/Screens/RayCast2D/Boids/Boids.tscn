@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Screens/RayCast2D/Boids/SmartEnemy.tscn" type="PackedScene" id=2]
+
+[node name="Boids" type="Node2D"]
+
+[node name="SmartEnemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 203.125, 229.852 )
+
+[node name="SmartEnemy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1715.87, 949.698 )
+
+[node name="SmartEnemy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1537.69, 375.959 )
+
+[node name="SmartEnemy4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1302.49, 582.648 )
+
+[node name="SmartEnemy5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 507.812, 876.644 )

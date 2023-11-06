@@ -1,0 +1,24 @@
+[gd_scene format=2]
+
+[node name="CSGStatue" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.97393, 0 )
+use_collision = true
+width = 2.12248
+height = 3.9857
+depth = 2.69775
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00047493, 6.04078, 0.00025034 )
+use_collision = true
+width = 1.76915
+height = 3.9857
+depth = 1.82755
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00047493, 8.82857, 0.00025034 )
+use_collision = true
+width = 0.96389
+height = 1.5049
+depth = 1.31325

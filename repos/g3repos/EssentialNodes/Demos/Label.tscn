@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenNavigator.gd" type="Script" id=1]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreen2D.gd" type="Script" id=2]
+[ext_resource path="res://Screens/Label/Alignment/Alignment.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/Label/AnimatedText/AnimatedText.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/Label/DisplayText/DisplayText.tscn" type="PackedScene" id=7]
+
+[node name="Label" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="DisplayText" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 7 )
+
+[node name="Alignment" type="Node2D" parent="."]
+position = Vector2( 1920, 0 )
+script = ExtResource( 2 )
+scene = ExtResource( 5 )
+
+[node name="AnimatedText" type="Node2D" parent="."]
+position = Vector2( 3840, 0 )
+script = ExtResource( 2 )
+scene = ExtResource( 6 )

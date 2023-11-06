@@ -1,0 +1,145 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Screens/RigidBody/Shattering3D/DestructableCrateBox3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/PlayerFPS3D/FPSPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/RigidBody/Shattering3D/ShatterWeapon.gd" type="Script" id=3]
+[ext_resource path="res://common/PlayerFPS3D/WeaponReticle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://common/Environment/LevelGridMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://common/Environment/dirt.material" type="Material" id=6]
+[ext_resource path="res://common/Basic3D/SafetyNet.gd" type="Script" id=7]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 16, 16 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 8, 1, 8 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 50, 1, 50 )
+
+[node name="Shattering3D" type="Spatial"]
+
+[node name="FPSPlayer" parent="." instance=ExtResource( 2 )]
+
+[node name="RayCast" parent="FPSPlayer/TiltPivot/Camera" index="0"]
+enabled = true
+script = ExtResource( 3 )
+
+[node name="WeaponReticle" parent="FPSPlayer" instance=ExtResource( 4 )]
+
+[node name="Ground" type="StaticBody" parent="."]
+collision_mask = 17
+
+[node name="GroundMeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_bias = 0.05
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_max_distance = 50.0
+
+[node name="SafetyNet" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.47564, 0 )
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SafetyNet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164833, 4.57253, 0 )
+shape = SubResource( 3 )
+
+[node name="Crates" type="Spatial" parent="."]
+
+[node name="DestructableCrateBox3D" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.7144, 0.25025, 0.504204 )
+
+[node name="DestructableCrateBox3D2" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7144, 0.25025, -0.20905 )
+
+[node name="DestructableCrateBox3D3" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.7144, 0.25025, -0.863806 )
+
+[node name="DestructableCrateBox3D8" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.7144, 1.7594, -0.635919 )
+
+[node name="DestructableCrateBox3D9" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7144, 1.25335, -0.317545 )
+
+[node name="DestructableCrateBox3D10" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.7144, 1.25335, -0.972301 )
+
+[node name="DestructableCrateBox3D4" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.7144, 0.25025, -1.54293 )
+
+[node name="DestructableCrateBox3D5" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.7144, 0.751847, 0.157299 )
+
+[node name="DestructableCrateBox3D6" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7144, 0.751847, -0.497457 )
+
+[node name="DestructableCrateBox3D7" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.7144, 0.751847, -1.17658 )
+
+[node name="DestructableCrateBox3D11" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.56551, 0.25025, 4.20786 )
+
+[node name="DestructableCrateBox3D12" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56551, 0.25025, 3.49461 )
+
+[node name="DestructableCrateBox3D13" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.56551, 0.25025, 2.83985 )
+
+[node name="DestructableCrateBox3D14" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.56437, 1.76673, 3.20763 )
+
+[node name="DestructableCrateBox3D15" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56551, 1.26313, 3.5114 )
+
+[node name="DestructableCrateBox3D16" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.56551, 1.26313, 2.85665 )
+
+[node name="DestructableCrateBox3D17" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.56551, 0.25025, 2.16073 )
+
+[node name="DestructableCrateBox3D18" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.56551, 0.757343, 3.86096 )
+
+[node name="DestructableCrateBox3D19" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56551, 0.757343, 3.2062 )
+
+[node name="DestructableCrateBox3D20" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.56551, 0.757343, 2.52708 )
+
+[node name="DestructableCrateBox3D22" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 0.633219, 0, -0.773973, 0, 1, 0, 0.773973, 0, 0.633219, -2.11181, 0.25025, -1.316 )
+
+[node name="DestructableCrateBox3D23" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 0.552446, 0, 0.833548, 0, 1, 0, -0.833548, 0, 0.552446, -1.61516, 0.25025, -1.8517 )
+
+[node name="DestructableCrateBox3D26" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 0.387483, 0, 0.921877, 0, 1, 0, -0.921877, 0, 0.387483, -1.66626, 1.26226, -1.86884 )
+
+[node name="DestructableCrateBox3D27" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -0.317917, 0, -0.948119, 0, 1, 0, 0.948119, 0, -0.317917, -1.46236, 0.25025, -2.59431 )
+
+[node name="DestructableCrateBox3D29" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( 0.833548, 0, -0.552446, 0, 1, 0, 0.552446, 0, 0.833548, -1.81755, 0.75885, -1.54633 )
+
+[node name="DestructableCrateBox3D30" parent="Crates" instance=ExtResource( 1 )]
+transform = Transform( -0.967661, 0, 0.252255, 0, 1, 0, -0.252255, 0, -0.967661, -1.53247, 0.75885, -2.22511 )
+
+[node name="LevelGridMap" parent="." instance=ExtResource( 5 )]
+data = {
+"cells": PoolIntArray( 1, 0, 655405, 2, 0, 1441837, 3, 0, 1048614, 65531, 0, 1441830, 65532, 0, 1048621, 65533, 0, 45, 65537, 0, 1441799, 65538, 0, 7, 131068, 0, 655371, 131069, 0, 1048587, -65536, 0, 9, -65535, 0, 9, -65534, 0, 9, -65533, 0, 15, -65532, 0, 16, -6, 0, 655370, -5, 0, 9, -4, 0, 9, -3, 0, 9, -2, 0, 9, -1, 0, 1441807, 3, 1, 1048614, 65531, 1, 1441830, 65532, 1, 12, 65533, 1, 12, 131068, 1, 655377, 131069, 1, 17, -65536, 1, 9, -65535, 1, 9, -65534, 1, 9, -65533, 1, 9, -65532, 1, 10, -6, 1, 655370, -5, 1, 9, -4, 1, 9, -3, 1, 9, -2, 1, 9, -1, 1, 9, 0, 2, 1048621, 1, 2, 12, 2, 2, 45, 3, 2, 1048614, 65531, 2, 1441830, 65532, 2, 655405, 65533, 2, 1441837, 65536, 2, 655371, 65537, 2, 1048593, 65538, 2, 1048587, 131068, 2, 1441803, 131069, 2, 7, -65536, 2, 9, -65535, 2, 9, -65534, 2, 9, -65533, 2, 9, -65532, 2, 10, -6, 2, 655370, -5, 2, 9, -4, 2, 9, -3, 2, 9, -2, 2, 9, -1, 2, 9, 0, 3, 655405, 1, 3, 12, 2, 3, 1441837, 3, 3, 1048614, 65531, 3, 1441830, 65532, 3, 4, 65536, 3, 1441803, 65537, 3, 1441809, 65538, 3, 11, -65536, 3, 9, -65535, 3, 9, -65534, 3, 9, -65533, 3, 9, -65532, 3, 10, -6, 3, 655370, -5, 3, 9, -4, 3, 9, -3, 3, 15, -2, 3, 9, -1, 3, 9, 0, 4, 38, 1, 4, 38, 2, 4, 38, 3, 4, 39, 65531, 4, 1441831, 65532, 4, 38, 65533, 4, 38, 65534, 4, 38, 65535, 4, 38, -65536, 4, 9, -65535, 4, 1048591, -65534, 4, 9, -65533, 4, 9, -65532, 4, 10, -6, 4, 655370, -5, 4, 9, -4, 4, 9, -3, 4, 9, -2, 4, 9, -1, 4, 9, -65536, 5, 1441802, -65535, 5, 1441802, -65534, 5, 1441802, -65533, 5, 1441808, -65532, 5, 14, -6, 5, 1441800, -5, 5, 1441802, -4, 5, 1441802, -3, 5, 1441802, -2, 5, 1441802, -1, 5, 1441802, -65536, 65531, 1048586, -65535, 65531, 1048586, -65534, 65531, 1048586, -65533, 65531, 1048586, -65532, 65531, 1048584, -6, 65531, 655368, -5, 65531, 1048586, -4, 65531, 1048586, -3, 65531, 1048586, -2, 65531, 1048586, -1, 65531, 1048586, 0, 65532, 655398, 1, 65532, 655398, 2, 65532, 655398, 3, 65532, 1048615, 65531, 65532, 655399, 65532, 65532, 655398, 65533, 65532, 655398, 65534, 65532, 655398, 65535, 65532, 655398, -65536, 65532, 9, -65535, 65532, 9, -65534, 65532, 9, -65533, 65532, 9, -65532, 65532, 10, -6, 65532, 655370, -5, 65532, 1048591, -4, 65532, 9, -3, 65532, 9, -2, 65532, 9, -1, 65532, 9, 2, 65533, 5, 3, 65533, 1048614, 65531, 65533, 1441830, -65536, 65533, 9, -65535, 65533, 9, -65534, 65533, 9, -65533, 65533, 9, -65532, 65533, 10, -6, 65533, 655370, -5, 65533, 9, -4, 65533, 9, -3, 65533, 9, -2, 65533, 9, -1, 65533, 9, 1, 65534, 1048621, 2, 65534, 45, 3, 65534, 1048614, 65531, 65534, 1441830, 65533, 65534, 655389, 65534, 65534, 655389, 65537, 65534, 655371, 65538, 65534, 1048587, 131069, 65534, 655389, 131070, 65534, 655389, 196605, 65534, 655389, 196606, 65534, 655389, -65536, 65534, 9, -65535, 65534, 9, -65534, 65534, 9, -65533, 65534, 9, -65532, 65534, 10, -6, 65534, 655376, -5, 65534, 9, -4, 65534, 9, -3, 65534, 9, -2, 65534, 9, -1, 65534, 9, 1, 65535, 12, 2, 65535, 12, 3, 65535, 1048614, 65531, 65535, 1441830, 65537, 65535, 655373, 65538, 65535, 17, -65536, 65535, 9, -65535, 65535, 9, -65534, 65535, 9, -65533, 65535, 1048591, -65532, 65535, 10, -6, 65535, 655376, -5, 65535, 9, -4, 65535, 9, -3, 65535, 9, -2, 65535, 655375, -1, 65535, 9 )
+}
+
+[editable path="FPSPlayer"]

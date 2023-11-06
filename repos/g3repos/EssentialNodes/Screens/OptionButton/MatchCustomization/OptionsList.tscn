@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Screens/OptionButton/MatchCustomization/OptionsList.gd" type="Script" id=2]
+
+[node name="OptionsList" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1904.0
+margin_bottom = 1064.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 1888.0
+margin_bottom = 45.0
+text = "Game options"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 61.0
+margin_right = 1888.0
+margin_bottom = 65.0
+
+[node name="GameMode" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 81.0
+margin_right = 1888.0
+margin_bottom = 195.0
+
+[node name="ModeLabel" type="Label" parent="VBoxContainer/GameMode"]
+margin_top = 34.0
+margin_right = 936.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+text = "Game Mode"
+align = 2
+
+[node name="ModeOptionButton" type="OptionButton" parent="VBoxContainer/GameMode"]
+margin_left = 952.0
+margin_right = 1464.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 512, 0 )
+size_flags_horizontal = 2
+
+[node name="Map" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 211.0
+margin_right = 1888.0
+margin_bottom = 325.0
+
+[node name="MapLabel" type="Label" parent="VBoxContainer/Map"]
+margin_top = 34.0
+margin_right = 936.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+text = "Map"
+align = 2
+
+[node name="MapOptionButton" type="OptionButton" parent="VBoxContainer/Map"]
+margin_left = 952.0
+margin_right = 1464.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 512, 0 )
+size_flags_horizontal = 2
+selected = 0
+
+[node name="MapSize" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 341.0
+margin_right = 1888.0
+margin_bottom = 455.0
+
+[node name="MapSizeLabel" type="Label" parent="VBoxContainer/MapSize"]
+margin_top = 34.0
+margin_right = 936.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+text = "Map Size"
+align = 2
+
+[node name="MapSizeOptionButton" type="OptionButton" parent="VBoxContainer/MapSize"]
+margin_left = 952.0
+margin_right = 1464.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 512, 0 )
+size_flags_horizontal = 2

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Screens/Area2D/Chest/Chest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=2]
+
+[node name="ChestScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 626.738, 289.734 )
+
+[node name="Chest" parent="." instance=ExtResource( 1 )]
+position = Vector2( 944.929, 729.939 )
+
+[node name="Chest2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1429.83, 476.263 )
+rotation = -0.785397
+
+[node name="Chest3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 401.657, 469.528 )
+rotation = 0.785397

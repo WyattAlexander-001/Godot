@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Screens/Area2D/Sign/Sign.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreen2D.gd" type="Script" id=2]
+[ext_resource path="res://Screens/Area2D/Coins/Coins.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenNavigator.gd" type="Script" id=4]
+[ext_resource path="res://Screens/Area2D/Chest/ChestScene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/Area2D/TacticalUnitSelection/TacticalUnitSelection.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/Area2D/Enemies/Enemies.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/Area2D/Rocks/Rocks.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Screens/Area2D/Door/DoorScene.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Screens/Area2D/Hurtbox/Hurtbox.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Screens/Area2D/ComplexShapes/ComplexShapes.tscn" type="PackedScene" id=12]
+
+[node name="Area2D" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Sign" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 1 )
+movement_scheme = 1
+
+[node name="Coins" type="Node2D" parent="."]
+position = Vector2( 1920, 0 )
+script = ExtResource( 2 )
+scene = ExtResource( 3 )
+movement_scheme = 1
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2( 3840, 0 )
+script = ExtResource( 2 )
+scene = ExtResource( 7 )
+movement_scheme = 1
+
+[node name="Door" type="Node2D" parent="."]
+position = Vector2( 0, 1080 )
+script = ExtResource( 2 )
+scene = ExtResource( 9 )
+movement_scheme = 1
+
+[node name="Rocks" type="Node2D" parent="."]
+position = Vector2( 1920, 1080 )
+script = ExtResource( 2 )
+scene = ExtResource( 8 )
+movement_scheme = 1
+
+[node name="Hurtbox" type="Node2D" parent="."]
+position = Vector2( 3840, 1080 )
+script = ExtResource( 2 )
+scene = ExtResource( 10 )
+controls = [ "shoot" ]
+movement_scheme = 1
+
+[node name="ChestScene" type="Node2D" parent="."]
+position = Vector2( 0, 2160 )
+script = ExtResource( 2 )
+scene = ExtResource( 5 )
+controls = [ "interact" ]
+movement_scheme = 1
+
+[node name="TacticalUnitSelection" type="Node2D" parent="."]
+position = Vector2( 1920, 2160 )
+script = ExtResource( 2 )
+scene = ExtResource( 6 )
+controls = [ "select" ]
+
+[node name="ComplexShapes" type="Node2D" parent="."]
+position = Vector2( 1920, 2160 )
+script = ExtResource( 2 )
+scene = ExtResource( 12 )
+movement_scheme = 1

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Screens/HBoxContainer/JRPGActionList/ActionButton.gd" type="Script" id=1]
+[ext_resource path="res://Screens/HBoxContainer/JRPGActionList/menu_action_bg.png" type="Texture" id=2]
+[ext_resource path="res://Screens/HBoxContainer/JRPGActionList/menu_action_bg_pressed.png" type="Texture" id=3]
+[ext_resource path="res://Screens/HBoxContainer/JRPGActionList/menu_action_bg_disabled.png" type="Texture" id=4]
+[ext_resource path="res://Screens/HBoxContainer/JRPGActionList/menu_action_bg_focused.png" type="Texture" id=5]
+
+[node name="ActionButton" type="TextureButton"]
+margin_right = 334.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 334, 96 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_disabled = ExtResource( 4 )
+texture_focused = ExtResource( 5 )
+expand = true
+stretch_mode = 4
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+margin_right = 97.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.42
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 101.0
+margin_top = 41.0
+margin_right = 334.0
+margin_bottom = 55.0
+size_flags_horizontal = 3

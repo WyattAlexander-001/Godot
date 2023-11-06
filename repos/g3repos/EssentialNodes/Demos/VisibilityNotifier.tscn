@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=1]
+[ext_resource path="res://Screens/VisibilityNotifier/ObserverAI/ObserverAI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=3]
+[ext_resource path="res://Screens/VisibilityNotifier/VisibilityBehavior/VisibilityBehavior.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/VisibilityNotifier/MultipleCameras/MultipleCameras.tscn" type="PackedScene" id=5]
+
+[node name="VisibilityNotifier" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="VisibilityBehavior" type="Node2D" parent="."]
+script = ExtResource( 3 )
+scene = ExtResource( 4 )
+movement_scheme = 3
+
+[node name="ObserverAI" type="Node2D" parent="."]
+script = ExtResource( 3 )
+scene = ExtResource( 2 )
+movement_scheme = 3
+
+[node name="MultipleCameras" type="Node2D" parent="."]
+script = ExtResource( 3 )
+scene = ExtResource( 5 )
+movement_scheme = 3

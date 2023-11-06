@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/node-essential-helpers/SceneSlideshow.gd" type="Script" id=1]
+[ext_resource path="res://addons/node-essential-helpers/DemoScreenSlide.gd" type="Script" id=2]
+[ext_resource path="res://Screens/Viewport/3Din2D/3Din2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Screens/Viewport/Splitscreen/Splitscreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Screens/Viewport/GraphicsSettings/GraphicsSettings.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Screens/Viewport/Portals/Portals.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Screens/Viewport/FPSWeapon/FPSWeapon.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Screens/Viewport/Nametags/Nametags.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Screens/Viewport/Screenshots/Screenshots.tscn" type="PackedScene" id=9]
+
+[node name="Viewport" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Splitscreen" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 4 )
+movement_scheme = 4
+
+[node name="Screenshots" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 9 )
+controls = [ "take_screenshot" ]
+movement_scheme = 1
+
+[node name="Nametags" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 8 )
+
+[node name="3Din2D" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 3 )
+movement_scheme = 1
+
+[node name="GraphicsSettings" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 5 )
+
+[node name="Portals" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 6 )
+movement_scheme = 4
+
+[node name="FPSWeapon" type="Node2D" parent="."]
+script = ExtResource( 2 )
+scene = ExtResource( 7 )
+controls = [ "interact" ]
+movement_scheme = 4

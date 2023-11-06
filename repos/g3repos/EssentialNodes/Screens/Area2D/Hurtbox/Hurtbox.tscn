@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://common/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Area2D/Hurtbox/HurtboxEnemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Screens/Area2D/Hurtbox/HitboxWeapon.tscn" type="PackedScene" id=3]
+
+[node name="Hurtbox" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 266.985, 487.353 )
+
+[node name="Weapon" parent="Player" instance=ExtResource( 3 )]
+show_behind_parent = true
+
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1090.46, 552.357 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1469.61, 333.244 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 789.972, 477.163 )
+
+[node name="Enemy6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 441.475, 249.199 )
+
+[node name="Enemy7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 205.475, 937.199 )
+
+[node name="Enemy8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1637.47, 581.199 )
+
+[node name="Enemy9" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1061.47, 897.199 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 511.14, 760.592 )
+
+[node name="Enemy5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1416.16, 800.637 )

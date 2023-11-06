@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/thrusterFire_003.ogg-d4124b514dee4931d558e44b958436f2.oggstr"
+
+[deps]
+
+source_file="res://Screens/AudioStreamPlayer/SecurityCamera/thrusterFire_003.ogg"
+dest_files=[ "res://.import/thrusterFire_003.ogg-d4124b514dee4931d558e44b958436f2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Screens/Tween/ProgressBar/ProgressBar.gd" type="Script" id=1]
+[ext_resource path="res://common/UI/TextButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://common/UI/ui_theme.tres" type="Theme" id=3]
+[ext_resource path="res://common/UI/progressbar_fill.png" type="Texture" id=4]
+[ext_resource path="res://common/UI/progressbar_back.png" type="Texture" id=5]
+[ext_resource path="res://common/UI/progressbar_top.png" type="Texture" id=6]
+
+[node name="ProgressBar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" type="TextureProgress" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -540.0
+margin_top = -180.0
+margin_right = 540.0
+margin_bottom = -28.0
+rect_min_size = Vector2( 954, 152 )
+value = 55.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 6 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="HealButton" parent="." instance=ExtResource( 2 )]
+margin_left = 397.946
+margin_top = 600.0
+margin_right = 715.946
+margin_bottom = 752.0
+text = "heal"
+
+[node name="DamageButton" parent="." instance=ExtResource( 2 )]
+margin_left = 1211.42
+margin_top = 600.0
+margin_right = 1529.42
+margin_bottom = 752.0
+text = "damage"
+
+[connection signal="pressed" from="HealButton" to="." method="_on_HealButton_pressed"]
+[connection signal="pressed" from="DamageButton" to="." method="_on_DamageButton_pressed"]

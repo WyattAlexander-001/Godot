@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Screens/MeshInstance/HeightMapShader/NoiseTexture.tres" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+
+uniform float scale = 3.0;
+uniform sampler2D noise;
+
+void vertex() {
+	vec2 position = VERTEX.xz;
+	// Return a value between 0.0 and 1.0 for the corresponding spot on the noise texture.
+	float height = texture(noise, position).x;
+	// Save this vlaue as a grayscale color for the fragment to use.
+	COLOR.rgb = vec3(height);
+	// Offset the height of each vertex proportionally to the noise texture
+	VERTEX.y += (height - 0.5) * scale;
+}
+
+void fragment() {
+	ALBEDO = COLOR.rgb;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/scale = 3.0
+shader_param/noise = ExtResource( 1 )

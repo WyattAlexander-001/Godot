@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://common/asteroids/asteroidA.png" type="Texture" id=1]
+[ext_resource path="res://Screens/RigidBody2D/DelaunayExplosion/DestructibleAsteroid.gd" type="Script" id=2]
+[ext_resource path="res://Screens/RigidBody2D/DelaunayExplosion/AsteroidFragment.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 1.49707, 0, 0, Vector2( 1, 0 ), -2.35564, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 220.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 15.0
+scale_random = 1.0
+scale_curve = SubResource( 2 )
+
+[node name="DestructibleAsteroid" type="RigidBody2D"]
+input_pickable = true
+collision_layer = 5
+collision_mask = 7
+script = ExtResource( 2 )
+_asteroid_fragment_scene = ExtResource( 3 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( -32, -32 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 16, 0, 40, 0, 64, 16, 64, 56, 48, 64, 16, 64, 0, 48, 0, 16 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 16, 0, 40, 0, 64, 16, 64, 56, 48, 64, 16, 64, 0, 48, 0, 16 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 12
+lifetime = 2.0
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 3 )
