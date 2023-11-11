@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 
-const ACCELERATION = 800
-const FRICTION = 1000
-const SPEED = 100.0
-const JUMP_VELOCITY = -300.0
+@export var ACCELERATION = 800
+@export var FRICTION = 1000
+@export var SPEED = 100.0
+@export var JUMP_VELOCITY = -300.0
 
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

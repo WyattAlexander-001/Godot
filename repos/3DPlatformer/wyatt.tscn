@@ -8,6 +8,7 @@
 
 [node name="Wyatt" type="CharacterBody3D"]
 script = ExtResource("1_k4k18")
+SPEED = 50.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_wcnau")
