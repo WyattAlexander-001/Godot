@@ -39,7 +39,7 @@ func _on_body_entered(body: Node) -> void:
 	if "Start" in body.get_groups():
 		print("You are at the starting platform")
 	elif "Goal" in body.get_groups():
-		complete_level()
+		complete_level(body.file_path)
 	elif "Hazard" in body.get_groups():
 		crash_sequence()
 
@@ -47,7 +47,8 @@ func crash_sequence() -> void:
 	print("YOU CRASHED!")
 	get_tree().reload_current_scene() # Gives access to other funcs
 
-func complete_level() -> void:
+func complete_level(next_level_file: String) -> void:
 	print("You WIN!!!")
-	get_tree().quit()
+	#get_tree().quit() # Good for ending game....
+	get_tree().change_scene_to_file(next_level_file)
 	
