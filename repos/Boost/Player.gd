@@ -1,6 +1,8 @@
 extends RigidBody3D
 
 
+@export_range(0,2000) var thrust : float = 1000.0
+@export_range(0,200) var torque : float = 100.0
 # Called when the node enters the scene tree for the first time.
 var count: int = 0
 func _ready() -> void:
@@ -24,13 +26,28 @@ func _process(delta: float) -> void:
 		print("tab pressed boi!")
 		
 	if Input.is_action_pressed("boost"):
-		apply_central_force(basis.y * delta *1000.0)
+		apply_central_force(basis.y * delta * thrust)
 	elif Input.is_action_pressed("rotate_left"):
-		apply_torque(Vector3(0.0,0.0,100.0) * delta)
+		apply_torque(Vector3(0.0,0.0,torque) * delta)
 	elif Input.is_action_pressed("rotate_right"):
 		#rotate_z(-delta * 2)
-		apply_torque(Vector3(0.0,0.0,-100.0) * delta)
+		apply_torque(Vector3(0.0,0.0,-torque) * delta)
 
 
 func _on_body_entered(body: Node) -> void:
 	print(body.name)
+	if "Start" in body.get_groups():
+		print("You are at the starting platform")
+	elif "Goal" in body.get_groups():
+		complete_level()
+	elif "Hazard" in body.get_groups():
+		crash_sequence()
+
+func crash_sequence() -> void:
+	print("YOU CRASHED!")
+	get_tree().reload_current_scene() # Gives access to other funcs
+
+func complete_level() -> void:
+	print("You WIN!!!")
+	get_tree().quit()
+	
