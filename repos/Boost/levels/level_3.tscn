@@ -45,7 +45,7 @@ size = Vector3(2, 10, 4)
 size = Vector3(2, 10, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_blnr7"]
-size = Vector3(1, 2.5, 4)
+size = Vector3(1, 7.5, 4)
 
 [node name="Level" type="Node3D"]
 
@@ -118,7 +118,7 @@ shape = SubResource("BoxShape3D_asa53")
 
 [node name="LeftPanel2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 5.00088, 0)
-size = Vector3(1, 2.5, 4)
+size = Vector3(1, 7.5, 4)
 material = SubResource("StandardMaterial3D_m086n")
 metadata/_edit_group_ = true
 
