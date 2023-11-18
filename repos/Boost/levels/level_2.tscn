@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dqqg77w4ce57d"]
+[gd_scene load_steps=21 format=3 uid="uid://dqqg77w4ce57d"]
 
 [ext_resource type="Script" path="res://levels/WinZone.gd" id="1_n4ayk"]
 [ext_resource type="PackedScene" uid="uid://cy1hpr68ty7qs" path="res://player.tscn" id="2_p163t"]
@@ -19,7 +19,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bd1h"]
-albedo_color = Color(0.988235, 0.701961, 0.117647, 1)
+albedo_color = Color(1, 0.780392, 0.172549, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uyig"]
 albedo_color = Color(0, 0.615686, 0.901961, 1)
@@ -44,8 +44,22 @@ size = Vector3(2, 10, 4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_asa53"]
 size = Vector3(2, 10, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_blnr7"]
-size = Vector3(1, 2.5, 4)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fitk5"]
+albedo_color = Color(1, 0.780392, 0.172549, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pyxj"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_agxsq"]
+points = PackedVector3Array(-1.5, -1.49971, -1.49971, 1.5, 1.49978, 1.49978, 1.5, -1.49978, 1.49978, 1.5, 1.49978, -1.49978, -1.5, 1.49971, 1.49971, 1.5, -1.49978, -1.49978, -1.5, -1.49971, 1.49971, -1.5, 1.49971, -1.49971)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxih8"]
+albedo_color = Color(0.698039, 0, 0.709804, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ko6es"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7fpwx"]
+size = Vector3(1, 20, 4)
 
 [node name="Level" type="Node3D"]
 
@@ -116,24 +130,35 @@ physics_material_override = SubResource("PhysicsMaterial_onwbq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 shape = SubResource("BoxShape3D_asa53")
 
-[node name="LeftPanel2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.00088, 0)
-size = Vector3(1, 2.5, 4)
-material = SubResource("StandardMaterial3D_m086n")
-metadata/_edit_group_ = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="LeftPanel2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
-physics_material_override = SubResource("PhysicsMaterial_onwbq")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftPanel2/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-shape = SubResource("BoxShape3D_blnr7")
-metadata/_edit_group_ = true
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 4, 8.055)
 
 [node name="Player" parent="." instance=ExtResource("2_p163t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.329, 0)
+
+[node name="MovingHazard" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39808, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingHazard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0758371, 0)
+material_override = SubResource("StandardMaterial3D_fitk5")
+mesh = SubResource("BoxMesh_8pyxj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingHazard"]
+shape = SubResource("ConvexPolygonShape3D_agxsq")
+
+[node name="Roof" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 9.5, 0)
+size = Vector3(1, 20, 4)
+material = SubResource("StandardMaterial3D_mxih8")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_ko6es")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.84217e-14, 0)
+shape = SubResource("BoxShape3D_7fpwx")
+metadata/_edit_group_ = true

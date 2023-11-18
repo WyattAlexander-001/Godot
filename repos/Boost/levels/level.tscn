@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://binhr7ebfffsv"]
+[gd_scene load_steps=19 format=3 uid="uid://binhr7ebfffsv"]
 
 [ext_resource type="PackedScene" uid="uid://cy1hpr68ty7qs" path="res://player.tscn" id="1_b11or"]
 [ext_resource type="Script" path="res://levels/WinZone.gd" id="1_xj7s7"]
@@ -46,6 +46,14 @@ size = Vector3(2, 10, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_blnr7"]
 size = Vector3(2, 5, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ac3hl"]
+albedo_color = Color(0.698039, 0, 0.709804, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o1mlg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cbh5m"]
+size = Vector3(1, 20, 4)
 
 [node name="Level" type="Node3D"]
 
@@ -131,6 +139,22 @@ shape = SubResource("BoxShape3D_blnr7")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 4, 8.055)
+
+[node name="Roof" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.130364, 9.48989, 0)
+size = Vector3(1, 20, 4)
+material = SubResource("StandardMaterial3D_ac3hl")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_o1mlg")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.84217e-14, 0)
+shape = SubResource("BoxShape3D_cbh5m")
+metadata/_edit_group_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_b11or")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.329, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmxoveax2hnem"]
+[gd_scene load_steps=21 format=3 uid="uid://bmxoveax2hnem"]
 
 [ext_resource type="Script" path="res://levels/WinZone.gd" id="1_481ip"]
 [ext_resource type="PackedScene" uid="uid://cy1hpr68ty7qs" path="res://player.tscn" id="2_nc6nx"]
@@ -19,7 +19,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bd1h"]
-albedo_color = Color(0.988235, 0.701961, 0.117647, 1)
+albedo_color = Color(0.596078, 0.819608, 0.741176, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uyig"]
 albedo_color = Color(0, 0.615686, 0.901961, 1)
@@ -44,8 +44,22 @@ size = Vector3(2, 10, 4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_asa53"]
 size = Vector3(2, 10, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_blnr7"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_yfeou"]
 size = Vector3(1, 7.5, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_blnr7"]
+size = Vector3(1, 20, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nppil"]
+size = Vector3(1, 7.5, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqg1y"]
+albedo_color = Color(0.596078, 0.819608, 0.741176, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hj36g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_imw0y"]
+size = Vector3(1, 1, 5)
 
 [node name="Level" type="Node3D"]
 
@@ -116,20 +130,52 @@ physics_material_override = SubResource("PhysicsMaterial_onwbq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 shape = SubResource("BoxShape3D_asa53")
 
-[node name="LeftPanel2" type="CSGBox3D" parent="."]
+[node name="CenterPlatform" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 5.00088, 0)
 size = Vector3(1, 7.5, 4)
 material = SubResource("StandardMaterial3D_m086n")
 metadata/_edit_group_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="LeftPanel2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="CenterPlatform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_onwbq")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftPanel2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CenterPlatform/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+shape = SubResource("BoxShape3D_yfeou")
+metadata/_edit_group_ = true
+
+[node name="Roof" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 9.5, 0)
+size = Vector3(1, 20, 4)
+material = SubResource("StandardMaterial3D_m086n")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_onwbq")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.84217e-14, 0)
 shape = SubResource("BoxShape3D_blnr7")
+metadata/_edit_group_ = true
+
+[node name="CenterPlatform2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60558, 0)
+size = Vector3(1, 7.5, 4)
+material = SubResource("StandardMaterial3D_m086n")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CenterPlatform2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_onwbq")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CenterPlatform2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+shape = SubResource("BoxShape3D_nppil")
 metadata/_edit_group_ = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -137,3 +183,25 @@ transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 
 
 [node name="Player" parent="." instance=ExtResource("2_nc6nx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.329, 0)
+
+[node name="HazardBlock" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.98628, 1.96803, 0)
+size = Vector3(1, 1, 5)
+material = SubResource("StandardMaterial3D_wqg1y")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="HazardBlock" groups=["Hazard"]]
+physics_material_override = SubResource("PhysicsMaterial_hj36g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HazardBlock/StaticBody3D"]
+shape = SubResource("BoxShape3D_imw0y")
+
+[node name="HazardBlock2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07448, 1.97389, 0)
+size = Vector3(1, 1, 5)
+material = SubResource("StandardMaterial3D_wqg1y")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="HazardBlock2" groups=["Hazard"]]
+physics_material_override = SubResource("PhysicsMaterial_hj36g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HazardBlock2/StaticBody3D"]
+shape = SubResource("BoxShape3D_imw0y")

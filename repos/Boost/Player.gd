@@ -3,6 +3,7 @@ extends RigidBody3D
 
 @export_range(0,2000) var thrust : float = 1000.0
 @export_range(0,200) var torque : float = 100.0
+var is_transitioning: bool = false
 # Called when the node enters the scene tree for the first time.
 var count: int = 0
 func _ready() -> void:
@@ -16,16 +17,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("boost"):
-		#position.y = position.y + 2 # y does go up in 3D!
+	if Input.is_action_pressed("boost"):
 		print("Spacebar pressed")
 		count+=1
 		print(count)
-	elif Input.is_action_just_pressed("ui_focus_next"):
-		#position.y = position.y - 2
-		print("tab pressed boi!")
-		
-	if Input.is_action_pressed("boost"):
 		apply_central_force(basis.y * delta * thrust)
 	elif Input.is_action_pressed("rotate_left"):
 		apply_torque(Vector3(0.0,0.0,torque) * delta)
@@ -36,19 +31,28 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	print(body.name)
-	if "Start" in body.get_groups():
-		print("You are at the starting platform")
-	elif "Goal" in body.get_groups():
-		complete_level(body.file_path)
-	elif "Hazard" in body.get_groups():
-		crash_sequence()
+	if is_transitioning == false:
+		if "Start" in body.get_groups():
+			print("You are at the starting platform")
+		elif "Goal" in body.get_groups():
+			complete_level(body.file_path)
+		elif "Hazard" in body.get_groups():
+			crash_sequence()
 
 func crash_sequence() -> void:
-	print("YOU CRASHED!")
-	get_tree().reload_current_scene() # Gives access to other funcs
+	print("YOU CRASHED! We Wait 1 Second And Then Reload")
+	var tween = create_tween()
+	set_process(false) #disables process function so we can't control ship
+	is_transitioning =true
+	tween.tween_interval(1.0)
+	tween.tween_callback(get_tree().reload_current_scene)
 
 func complete_level(next_level_file: String) -> void:
 	print("You WIN!!!")
+	var tween = create_tween()
+	set_process(false) #disables process function so we can't control ship
+	is_transitioning =true
+	tween.tween_interval(1.0)
 	#get_tree().quit() # Good for ending game....
-	get_tree().change_scene_to_file(next_level_file)
+	tween.tween_callback(get_tree().change_scene_to_file.bind(next_level_file))
 	
