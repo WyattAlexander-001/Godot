@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://dqqg77w4ce57d"]
+[gd_scene load_steps=19 format=3 uid="uid://dqqg77w4ce57d"]
 
 [ext_resource type="Script" path="res://levels/WinZone.gd" id="1_n4ayk"]
 [ext_resource type="PackedScene" uid="uid://cy1hpr68ty7qs" path="res://player.tscn" id="2_p163t"]
+[ext_resource type="PackedScene" uid="uid://tj5lma1oxbqe" path="res://moving_hazard.tscn" id="3_dvrnw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ymdvk"]
 sky_top_color = Color(0.215686, 0.352941, 1, 1)
@@ -43,15 +44,6 @@ size = Vector3(2, 10, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_asa53"]
 size = Vector3(2, 10, 4)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fitk5"]
-albedo_color = Color(1, 0.780392, 0.172549, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8pyxj"]
-size = Vector3(3, 3, 3)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_agxsq"]
-points = PackedVector3Array(-1.5, -1.49971, -1.49971, 1.5, 1.49978, 1.49978, 1.5, -1.49978, 1.49978, 1.5, 1.49978, -1.49978, -1.5, 1.49971, 1.49971, 1.5, -1.49978, -1.49978, -1.5, -1.49971, 1.49971, -1.5, 1.49971, -1.49971)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxih8"]
 albedo_color = Color(0.698039, 0, 0.709804, 1)
@@ -136,16 +128,8 @@ transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 
 [node name="Player" parent="." instance=ExtResource("2_p163t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.329, 0)
 
-[node name="MovingHazard" type="AnimatableBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39808, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingHazard"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0758371, 0)
-material_override = SubResource("StandardMaterial3D_fitk5")
-mesh = SubResource("BoxMesh_8pyxj")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingHazard"]
-shape = SubResource("ConvexPolygonShape3D_agxsq")
+[node name="MovingHazard" parent="." instance=ExtResource("3_dvrnw")]
+destination = Vector3(0, 2.5, 0)
 
 [node name="Roof" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 9.5, 0)

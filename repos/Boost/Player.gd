@@ -3,6 +3,10 @@ extends RigidBody3D
 
 @export_range(0,2000) var thrust : float = 1000.0
 @export_range(0,200) var torque : float = 100.0
+
+@onready var explosion_audio: AudioStreamPlayer = $ExplosionAudio # hold ctrl and click/drag
+
+
 var is_transitioning: bool = false
 # Called when the node enters the scene tree for the first time.
 var count: int = 0
@@ -41,10 +45,11 @@ func _on_body_entered(body: Node) -> void:
 
 func crash_sequence() -> void:
 	print("YOU CRASHED! We Wait 1 Second And Then Reload")
+	explosion_audio.play()
 	var tween = create_tween()
 	set_process(false) #disables process function so we can't control ship
 	is_transitioning =true
-	tween.tween_interval(1.0)
+	tween.tween_interval(2.5) #the audio is 2.5 seconds long, so wait 2.5 before reloading (hacky)
 	tween.tween_callback(get_tree().reload_current_scene)
 
 func complete_level(next_level_file: String) -> void:
