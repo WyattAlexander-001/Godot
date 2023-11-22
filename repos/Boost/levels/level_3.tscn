@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bmxoveax2hnem"]
 
 [ext_resource type="Script" path="res://levels/WinZone.gd" id="1_481ip"]
-[ext_resource type="PackedScene" uid="uid://cy1hpr68ty7qs" path="res://player.tscn" id="2_nc6nx"]
+[ext_resource type="PackedScene" uid="uid://cjg382u034rnf" path="res://player.tscn" id="2_nc6nx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ymdvk"]
 sky_top_color = Color(0.215686, 0.352941, 1, 1)

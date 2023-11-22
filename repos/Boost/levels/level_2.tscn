@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://dqqg77w4ce57d"]
 
 [ext_resource type="Script" path="res://levels/WinZone.gd" id="1_n4ayk"]
-[ext_resource type="PackedScene" uid="uid://cy1hpr68ty7qs" path="res://player.tscn" id="2_p163t"]
+[ext_resource type="PackedScene" uid="uid://cjg382u034rnf" path="res://player.tscn" id="2_p163t"]
 [ext_resource type="PackedScene" uid="uid://tj5lma1oxbqe" path="res://moving_hazard.tscn" id="3_dvrnw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ymdvk"]
