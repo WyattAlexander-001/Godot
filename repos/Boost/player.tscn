@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjg382u034rnf"]
+[gd_scene load_steps=19 format=3 uid="uid://cjg382u034rnf"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_j51hn"]
 [ext_resource type="AudioStream" uid="uid://c1yb6wg5g8qmp" path="res://audio/SFX - Death Explosion.ogg" id="2_l1gfs"]
@@ -7,10 +7,46 @@
 [ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://particles/booster_particles.tscn" id="5_tmwfl"]
 [ext_resource type="PackedScene" uid="uid://dcecb8hw7dbrv" path="res://particles/explosion_particles.tscn" id="6_7d05b"]
 [ext_resource type="PackedScene" uid="uid://jfwajmrh6ca7" path="res://particles/success_particles.tscn" id="7_474nf"]
+[ext_resource type="Material" uid="uid://ccvs4x7uugsdf" path="res://McDonaldsYellow.tres" id="8_ilh3e"]
+[ext_resource type="Material" uid="uid://g8euxoa4mtn3" path="res://McDonaldsRed.tres" id="9_d373u"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_p7ubk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b4gou"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o1vw0"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vtdew"]
+top_radius = 0.0
+bottom_radius = 0.2
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hmmlv"]
+top_radius = 0.0
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xl2kk"]
+top_radius = 0.22
+bottom_radius = 0.22
+height = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5qoug"]
+top_radius = 0.22
+bottom_radius = 0.22
+height = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_27ste"]
+top_radius = 0.1
+bottom_radius = 0.05
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_f0pmd"]
+top_radius = 0.1
+bottom_radius = 0.05
+height = 0.1
 
 [node name="Player" type="RigidBody3D"]
 axis_lock_linear_z = true
@@ -25,6 +61,7 @@ thrust = 1374.36
 torque = 142.238
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CylinderMesh_p7ubk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -54,5 +91,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -1, 0)
 [node name="ExplosionParticles" parent="." instance=ExtResource("6_7d05b")]
 
 [node name="SuccessParticles" parent="." instance=ExtResource("7_474nf")]
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = ExtResource("8_ilh3e")
+mesh = SubResource("CylinderMesh_o1vw0")
+
+[node name="Cockpit" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("9_d373u")
+mesh = SubResource("CylinderMesh_vtdew")
+skeleton = NodePath("../..")
+
+[node name="LowerCone" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.186315, 0)
+material_override = ExtResource("9_d373u")
+mesh = SubResource("CylinderMesh_hmmlv")
+
+[node name="TopCoupler" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565363, 0)
+material_override = ExtResource("9_d373u")
+mesh = SubResource("CylinderMesh_xl2kk")
+
+[node name="BottomCoupler" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0976464, 0)
+material_override = ExtResource("9_d373u")
+mesh = SubResource("CylinderMesh_5qoug")
+
+[node name="LeftBooster" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.90353, 0.428525, 0, -0.428525, 0.90353, 0, 0, 0, 1, -0.304877, -0.671029, 0)
+material_override = ExtResource("8_ilh3e")
+mesh = SubResource("CylinderMesh_27ste")
+
+[node name="RightBooster" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(-0.903335, -0.428935, -8.74228e-08, -0.428935, 0.903335, 0, 7.89721e-08, 3.74987e-08, -1, 0.305, -0.671, 0)
+material_override = ExtResource("8_ilh3e")
+mesh = SubResource("CylinderMesh_f0pmd")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
