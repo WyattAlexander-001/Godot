@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjg382u034rnf"]
+[gd_scene load_steps=10 format=3 uid="uid://cjg382u034rnf"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_j51hn"]
 [ext_resource type="AudioStream" uid="uid://c1yb6wg5g8qmp" path="res://audio/SFX - Death Explosion.ogg" id="2_l1gfs"]
 [ext_resource type="AudioStream" uid="uid://ctbw67k0a5gl1" path="res://audio/SFX - Success.ogg" id="3_bjmy3"]
 [ext_resource type="AudioStream" uid="uid://po5k7cs5lsyu" path="res://audio/SFX - Main engine thrust.ogg" id="4_dqs1d"]
+[ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://particles/booster_particles.tscn" id="5_tmwfl"]
+[ext_resource type="PackedScene" uid="uid://dcecb8hw7dbrv" path="res://particles/explosion_particles.tscn" id="6_7d05b"]
+[ext_resource type="PackedScene" uid="uid://jfwajmrh6ca7" path="res://particles/success_particles.tscn" id="7_474nf"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_p7ubk"]
 
@@ -29,12 +32,27 @@ shape = SubResource("CylinderShape3D_b4gou")
 
 [node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_l1gfs")
+volume_db = -6.0
 
 [node name="SuccessAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_bjmy3")
+volume_db = -4.689
 
 [node name="RocketAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_dqs1d")
 volume_db = -6.0
+
+[node name="BoosterParticles" parent="." instance=ExtResource("5_tmwfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="RightBoosterParticles" parent="." instance=ExtResource("5_tmwfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -1, 0)
+
+[node name="LeftBoosterParticles" parent="." instance=ExtResource("5_tmwfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -1, 0)
+
+[node name="ExplosionParticles" parent="." instance=ExtResource("6_7d05b")]
+
+[node name="SuccessParticles" parent="." instance=ExtResource("7_474nf")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
