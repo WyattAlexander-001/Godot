@@ -10,8 +10,12 @@
 * Directional lights
 * Particle/Sound effects upon: flying, dying, and winning
 
+# Screenshots
 
 ![Screenshot1](./images/screenshot1.png)
+![Screenshot2](./images/screenshot2.png)
+
+
 
 
 
