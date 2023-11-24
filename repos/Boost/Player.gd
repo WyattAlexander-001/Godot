@@ -53,6 +53,10 @@ func _process(delta: float) -> void:
 		left_booster_particles.emitting = true
 	else:
 		left_booster_particles.emitting = false
+		
+	if Input.is_action_just_pressed("ui_cancel"): # just pressed is one press "esc"
+		get_tree().quit()
+		
 
 
 # Player Body Touching A node with special GROUP NAME
