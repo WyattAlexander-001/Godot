@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://cjg382u034rnf" path="res://player.tscn" id="1_b11or"]
 [ext_resource type="Script" path="res://levels/WinZone.gd" id="1_xj7s7"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bd1h"]
+albedo_color = Color(0.988235, 0.701961, 0.117647, 1)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ymdvk"]
 sky_top_color = Color(0.215686, 0.352941, 1, 1)
 sky_horizon_color = Color(0.678431, 0.636275, 0.75, 1)
@@ -13,13 +16,12 @@ ground_horizon_color = Color(0.678431, 0.636275, 0.75, 1)
 sky_material = SubResource("ProceduralSkyMaterial_ymdvk")
 
 [sub_resource type="Environment" id="Environment_8id1h"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.109804, 0.0862745, 0.14902, 1)
 sky = SubResource("Sky_0xjuo")
+ambient_light_source = 3
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bd1h"]
-albedo_color = Color(0.988235, 0.701961, 0.117647, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uyig"]
 albedo_color = Color(0, 0.615686, 0.901961, 1)
@@ -57,13 +59,6 @@ size = Vector3(1, 20, 4)
 
 [node name="Level" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_8id1h")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
-
 [node name="MainPlatform" type="CSGBox3D" parent="." groups=["Hazard"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 use_collision = true
@@ -99,6 +94,21 @@ material = SubResource("StandardMaterial3D_1bd1h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.817, 4.08978, -8.09965)
 size = Vector3(4, 10, 4)
 material = SubResource("StandardMaterial3D_1bd1h")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MainPlatform"]
+environment = SubResource("Environment_8id1h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainPlatform"]
+transform = Transform3D(-0.963597, -0.247053, 0.102208, -0.0687397, 0.598362, 0.798272, -0.258373, 0.762186, -0.593562, 0, 12.0798, -2.16419)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MainPlatform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.09, 0)
+light_color = Color(1, 0.360784, 1, 1)
+light_energy = 2.293
+omni_range = 16.3
+omni_attenuation = 0.5
 
 [node name="BluePlatform" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.1, 0)

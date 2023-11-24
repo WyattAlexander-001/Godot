@@ -59,7 +59,7 @@ size = Vector3(1, 20, 4)
 environment = SubResource("Environment_8id1h")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.191823, -0.946581, 0.259206, 0.369269, 0.175091, 0.912679, -0.90931, 0.270789, 0.315956, 1.13735, 9.69859, 6.05073)
 shadow_enabled = true
 
 [node name="MainPlatform" type="CSGBox3D" parent="." groups=["Hazard"]]
@@ -130,6 +130,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.329, 0)
 
 [node name="MovingHazard" parent="." instance=ExtResource("3_dvrnw")]
 destination = Vector3(0, 2.5, 0)
+
+[node name="LeftMovingHazard" parent="." instance=ExtResource("3_dvrnw")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -7.21126, 5.24198, 0)
+destination = Vector3(0, 2.5, 0)
+duration = 2.0
+
+[node name="RightMovingHazard" parent="." instance=ExtResource("3_dvrnw")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.24143, 5.24198, 0)
+destination = Vector3(0, 2.5, 0)
+duration = 2.0
 
 [node name="Roof" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 9.5, 0)
