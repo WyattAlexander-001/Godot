@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cyboyb5g4mjxo"]
+[gd_scene load_steps=24 format=3 uid="uid://cyboyb5g4mjxo"]
 
 [ext_resource type="Script" path="res://levels/WinZone.gd" id="1_38oe6"]
 [ext_resource type="PackedScene" uid="uid://cjg382u034rnf" path="res://player.tscn" id="2_fj6wm"]
@@ -18,13 +18,19 @@ sky = SubResource("Sky_0xjuo")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xvsw"]
+albedo_color = Color(0.698039, 0, 0.709804, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onwbq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_blnr7"]
+size = Vector3(1, 20, 4)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bd1h"]
-albedo_color = Color(0.9387, 0.610567, 0.497767, 1)
+albedo_color = Color(0.937255, 0.611765, 0.498039, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uyig"]
 albedo_color = Color(0, 0.615686, 0.901961, 1)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onwbq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5v6p0"]
 size = Vector3(2, 0.25, 2)
@@ -36,7 +42,7 @@ albedo_color = Color(0.933333, 0.388235, 0.0745098, 1)
 size = Vector3(2, 0.25, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m086n"]
-albedo_color = Color(0.698039, 0, 0.709804, 1)
+albedo_color = Color(0.937255, 0.611765, 0.498039, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hrby0"]
 size = Vector3(2, 10, 4)
@@ -44,11 +50,14 @@ size = Vector3(2, 10, 4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_asa53"]
 size = Vector3(2, 10, 4)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dj5kh"]
+albedo_color = Color(0.698039, 0, 0.709804, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_yfeou"]
 size = Vector3(0.25, 4.5, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_blnr7"]
-size = Vector3(1, 20, 4)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nryxa"]
+albedo_color = Color(0.698039, 0, 0.709804, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nppil"]
 size = Vector3(1, 7.5, 4)
@@ -69,6 +78,19 @@ environment = SubResource("Environment_8id1h")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Roof" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 9.5, 0)
+size = Vector3(1, 20, 4)
+material = SubResource("StandardMaterial3D_4xvsw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Roof"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_onwbq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.84217e-14, 0)
+shape = SubResource("BoxShape3D_blnr7")
 
 [node name="MainPlatform" type="CSGBox3D" parent="." groups=["Hazard"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
@@ -98,7 +120,7 @@ material = SubResource("StandardMaterial3D_qb5lr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_onwbq")
 script = ExtResource("1_38oe6")
-file_path = "res://levels/level.tscn"
+file_path = "res://levels/level_5.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OrangePlatform/OrangeStaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
@@ -109,7 +131,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
 size = Vector3(2, 10, 4)
 material = SubResource("StandardMaterial3D_m086n")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="RightPanel"]
+[node name="StaticBody3D" type="StaticBody3D" parent="RightPanel" groups=["Hazard"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_onwbq")
 
@@ -122,7 +144,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5, 0)
 size = Vector3(2, 10, 4)
 material = SubResource("StandardMaterial3D_m086n")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="LeftPanel"]
+[node name="StaticBody3D" type="StaticBody3D" parent="LeftPanel" groups=["Hazard"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_onwbq")
 
@@ -133,78 +155,34 @@ shape = SubResource("BoxShape3D_asa53")
 [node name="CenterPlatform" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.91447, 3.73872, 0)
 size = Vector3(0.25, 4.5, 4)
-material = SubResource("StandardMaterial3D_m086n")
-metadata/_edit_group_ = true
+material = SubResource("StandardMaterial3D_dj5kh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CenterPlatform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_onwbq")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CenterPlatform/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 shape = SubResource("BoxShape3D_yfeou")
-metadata/_edit_group_ = true
-
-[node name="Roof" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 9.5, 0)
-size = Vector3(1, 20, 4)
-material = SubResource("StandardMaterial3D_m086n")
-metadata/_edit_group_ = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Roof"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
-physics_material_override = SubResource("PhysicsMaterial_onwbq")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.84217e-14, 0)
-shape = SubResource("BoxShape3D_blnr7")
-metadata/_edit_group_ = true
 
 [node name="CenterPlatform2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60558, 0)
 size = Vector3(1, 7.5, 4)
-material = SubResource("StandardMaterial3D_m086n")
-metadata/_edit_group_ = true
+material = SubResource("StandardMaterial3D_nryxa")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CenterPlatform2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_onwbq")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CenterPlatform2/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 shape = SubResource("BoxShape3D_nppil")
-metadata/_edit_group_ = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 4, 8.055)
 
 [node name="Player" parent="." instance=ExtResource("2_fj6wm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.329, 0)
-
-[node name="HazardBlock2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.43832, 4.52506, 0)
-size = Vector3(1, 10, 5)
-material = SubResource("StandardMaterial3D_wqg1y")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="HazardBlock2" groups=["Hazard"]]
-physics_material_override = SubResource("PhysicsMaterial_hj36g")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HazardBlock2/StaticBody3D"]
-shape = SubResource("BoxShape3D_imw0y")
-
-[node name="HazardBlock3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.46816, 4.40358, 0)
-size = Vector3(1, 10, 5)
-material = SubResource("StandardMaterial3D_wqg1y")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="HazardBlock3" groups=["Hazard"]]
-physics_material_override = SubResource("PhysicsMaterial_hj36g")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HazardBlock3/StaticBody3D"]
-shape = SubResource("BoxShape3D_imw0y")
 
 [node name="HazardBlock4" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61091, 4.61, 0)
