@@ -106,7 +106,7 @@ material = SubResource("StandardMaterial3D_qb5lr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97553, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_onwbq")
 script = ExtResource("1_hpbvy")
-file_path = "res://levels/level_5.tscn"
+file_path = "res://levels/level.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OrangePlatform/OrangeStaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
