@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7ec6vd2o15f0"]
+
+[ext_resource type="PackedScene" uid="uid://delf1hsoeovuw" path="res://player/player.tscn" id="1_7tdos"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cbd6v"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_6dpm7"]
+sky_material = SubResource("ProceduralSkyMaterial_cbd6v")
+
+[sub_resource type="Environment" id="Environment_a2nb6"]
+background_mode = 2
+sky = SubResource("Sky_6dpm7")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Sandbox" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a2nb6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(64, 1, 64)
+
+[node name="Player" parent="." instance=ExtResource("1_7tdos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

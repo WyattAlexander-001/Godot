@@ -1,6 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://cjg382u034rnf"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_j51hn"]
+[ext_resource type="ArrayMesh" uid="uid://d0rd6qjar8c0n" path="res://Models/OBJ format/bomb.obj" id="2_6cvse"]
 [ext_resource type="AudioStream" uid="uid://c1yb6wg5g8qmp" path="res://audio/SFX - Death Explosion.ogg" id="2_l1gfs"]
 [ext_resource type="AudioStream" uid="uid://ctbw67k0a5gl1" path="res://audio/SFX - Success.ogg" id="3_bjmy3"]
 [ext_resource type="AudioStream" uid="uid://po5k7cs5lsyu" path="res://audio/SFX - Main engine thrust.ogg" id="4_dqs1d"]
@@ -9,8 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://jfwajmrh6ca7" path="res://particles/success_particles.tscn" id="7_474nf"]
 [ext_resource type="Material" uid="uid://ccvs4x7uugsdf" path="res://McDonaldsYellow.tres" id="8_ilh3e"]
 [ext_resource type="Material" uid="uid://g8euxoa4mtn3" path="res://McDonaldsRed.tres" id="9_d373u"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_p7ubk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b4gou"]
 
@@ -61,8 +60,8 @@ thrust = 1374.36
 torque = 142.238
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CylinderMesh_p7ubk")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.956956, 0)
+mesh = ExtResource("2_6cvse")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_b4gou")
