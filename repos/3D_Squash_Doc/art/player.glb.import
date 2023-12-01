@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ognkm3m6sd3b"
+uid="uid://c1bvn752i8hgn"
 path="res://.godot/imported/player.glb-08dcfb373480a049995065542e37637b.scn"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/player.glb-08dcfb373480a049995065542e37637b.s
 
 [params]
 
-nodes/root_type="Spatial"
+nodes/root_type="Node3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
