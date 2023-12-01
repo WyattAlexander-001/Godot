@@ -8,7 +8,6 @@ radius = 0.8
 [node name="Player" type="CharacterBody3D"]
 
 [node name="Pivot" type="Node3D" parent="."]
-visible = false
 
 [node name="Character" parent="Pivot" instance=ExtResource("1_gcesk")]
 
