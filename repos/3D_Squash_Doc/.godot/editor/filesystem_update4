@@ -4,3 +4,7 @@ res://player.gd
 res://mob.tscn
 res://mob.gd
 res://main.gd
+res://materials/redAlpha.tres
+res://materials/pictureEg.tres
+res://materials/MaterialsEg.tscn
+res://materials/metalGreen.tres
