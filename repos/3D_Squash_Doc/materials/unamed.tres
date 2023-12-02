@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://4i720syd67j4"]
+
+[resource]
+albedo_color = Color(0.913725, 0.882353, 0.690196, 1)
+metallic_specular = 1.0
+rim_enabled = true
+refraction_scale = -1.0
+billboard_mode = 1

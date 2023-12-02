@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckmewqt8o5vd8"]
+[gd_scene load_steps=6 format=3 uid="uid://ckmewqt8o5vd8"]
 
 [ext_resource type="Material" uid="uid://cmhunf17o54lq" path="res://materials/redAlpha.tres" id="1_gkd1n"]
 [ext_resource type="Material" uid="uid://dmjck8fsygytu" path="res://materials/pictureEg.tres" id="2_53p06"]
 [ext_resource type="Material" uid="uid://872uv7cpq8o1" path="res://materials/metalGreen.tres" id="3_o1wix"]
+[ext_resource type="Material" uid="uid://4i720syd67j4" path="res://materials/unamed.tres" id="4_4kb1k"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_hy2e3"]
 
@@ -20,4 +21,9 @@ mesh = SubResource("SphereMesh_hy2e3")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 material_override = ExtResource("3_o1wix")
+mesh = SubResource("SphereMesh_hy2e3")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+material_override = ExtResource("4_4kb1k")
 mesh = SubResource("SphereMesh_hy2e3")
