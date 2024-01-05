@@ -32,6 +32,7 @@ use_collision = true
 size = Vector3(64, 1, 64)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_7tdos")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
