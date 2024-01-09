@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctvmw85fux4n8"]
+
+[ext_resource type="PackedScene" uid="uid://dajncop0pt7gh" path="res://weapons/hit_scan_weapon.tscn" id="1_bngi8"]
+[ext_resource type="PackedScene" uid="uid://bbcps85437rig" path="res://weapons/SMG.glb" id="2_cun2f"]
+
+[node name="SMG" instance=ExtResource("1_bngi8")]
+
+[node name="CoolDownTimer" parent="." index="0"]
+one_shot = true
+
+[node name="SMG" parent="." index="1" instance=ExtResource("2_cun2f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1)
