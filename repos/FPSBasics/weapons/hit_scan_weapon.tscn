@@ -6,3 +6,6 @@
 script = ExtResource("1_al863")
 
 [node name="CoolDownTimer" type="Timer" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -100)
