@@ -10,6 +10,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var mouse_motion := Vector2.ZERO
 @onready var camera_pivot = $CameraPivot
 @onready var damage_animation_player = $DamageTexture/DamageAnimationPlayer
+@onready var game_over_menu = $GameOverMenu
 
 var hitpoints: int = max_hitpoints:
 	set(value):
@@ -19,7 +20,7 @@ var hitpoints: int = max_hitpoints:
 		hitpoints = value
 		print(hitpoints)
 		if hitpoints <= 0:
-			get_tree().quit()
+			game_over_menu.game_over()
 
 func _ready()-> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # mouse disappears
