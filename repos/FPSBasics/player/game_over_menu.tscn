@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1ioa5nkjmm87"]
+[gd_scene load_steps=8 format=3 uid="uid://c1ioa5nkjmm87"]
 
 [ext_resource type="FontFile" uid="uid://bdnmpihvpw1cg" path="res://assets/Arimo/static/Arimo-Bold.ttf" id="1_h5cs6"]
 [ext_resource type="Script" path="res://player/game_over_menu.gd" id="2_eio0u"]
+[ext_resource type="Shader" uid="uid://xlk0kxcppl6w" path="res://player/game_over_menu.tres" id="3_hjxgy"]
 
 [sub_resource type="Theme" id="Theme_anmlc"]
 default_font = ExtResource("1_h5cs6")
 default_font_size = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vd68"]
+shader = ExtResource("3_hjxgy")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7ml4p"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_keu6d"]
 font_size = 96
@@ -20,6 +26,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_anmlc")
 script = ExtResource("2_eio0u")
+
+[node name="BackgroundBlur" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_1vd68")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_7ml4p")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
