@@ -29,6 +29,7 @@ size = Vector3(0.1, 0.1, 0.1)
 [node name="SMG" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_bngi8")]
 weapon_mesh = NodePath("SMG")
 muzzle_flash = NodePath("MuzzleFlash")
+automatic = true
 
 [node name="CoolDownTimer" parent="." index="0"]
 one_shot = true

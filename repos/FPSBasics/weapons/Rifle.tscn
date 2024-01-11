@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dsw1mwmmxlrpx"]
 
 [ext_resource type="PackedScene" uid="uid://dajncop0pt7gh" path="res://weapons/hit_scan_weapon.tscn" id="1_i1kh0"]
-[ext_resource type="PackedScene" uid="uid://bbcps85437rig" path="res://weapons/SMG.glb" id="2_0lbxt"]
+[ext_resource type="PackedScene" uid="uid://sr38vreph1ad" path="res://weapons/21_RR_G3D+-+Rifle/Rifle.glb" id="2_iwlud"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhqo4"]
 emission_enabled = true
@@ -26,45 +26,18 @@ scale_curve = SubResource("CurveTexture_a5v70")
 [sub_resource type="BoxMesh" id="BoxMesh_tqtlp"]
 size = Vector3(0.1, 0.1, 0.1)
 
-[node name="SMG" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_i1kh0")]
-weapon_mesh = NodePath("SMG")
+[node name="Rifle" node_paths=PackedStringArray("weapon_mesh", "muzzle_flash") instance=ExtResource("1_i1kh0")]
+fire_rate = 8.0
+recoil = 0.3
+weapon_mesh = NodePath("Rifle")
+weapon_damage = 70.0
 muzzle_flash = NodePath("MuzzleFlash")
 
 [node name="CoolDownTimer" parent="." index="0"]
 one_shot = true
 
-[node name="SMG" parent="." index="1" instance=ExtResource("2_0lbxt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1.8)
-
-[node name="Suppressors_003" parent="SMG" index="0"]
-layers = 2
-
-[node name="Part_024" parent="SMG" index="1"]
-layers = 2
-
-[node name="Rail_009" parent="SMG" index="2"]
-layers = 2
-
-[node name="Grip_017" parent="SMG" index="3"]
-layers = 2
-
-[node name="Charger_011" parent="SMG" index="4"]
-layers = 2
-
-[node name="Scope_016" parent="SMG" index="5"]
-layers = 2
-
-[node name="Part_029" parent="SMG" index="6"]
-layers = 2
-
-[node name="Part_030" parent="SMG" index="7"]
-layers = 2
-
-[node name="Gun butt_012" parent="SMG" index="8"]
-layers = 2
-
-[node name="MuzzleFlash" type="GPUParticles3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.3, -2.9)
+[node name="MuzzleFlash" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.4, -3.2)
 layers = 2
 material_override = SubResource("StandardMaterial3D_uhqo4")
 cast_shadow = 0
@@ -77,4 +50,40 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_xebb6")
 draw_pass_1 = SubResource("BoxMesh_tqtlp")
 
-[editable path="SMG"]
+[node name="Rifle" parent="." index="3" instance=ExtResource("2_iwlud")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1.8)
+
+[node name="Part_104" parent="Rifle" index="0"]
+layers = 2
+
+[node name="Gun butt_018" parent="Rifle" index="1"]
+layers = 2
+
+[node name="Part_106" parent="Rifle" index="2"]
+layers = 2
+
+[node name="Grip_027" parent="Rifle" index="3"]
+layers = 2
+
+[node name="Part_108" parent="Rifle" index="4"]
+layers = 2
+
+[node name="Scope_022" parent="Rifle" index="5"]
+layers = 2
+
+[node name="Scope_023" parent="Rifle" index="6"]
+layers = 2
+
+[node name="Extra accessories_008" parent="Rifle" index="7"]
+layers = 2
+
+[node name="Part_112" parent="Rifle" index="8"]
+layers = 2
+
+[node name="Part_113" parent="Rifle" index="9"]
+layers = 2
+
+[node name="Muzzle breaks" parent="Rifle" index="10"]
+layers = 2
+
+[editable path="Rifle"]

@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://delf1hsoeovuw"]
+[gd_scene load_steps=14 format=3 uid="uid://delf1hsoeovuw"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_e1ssm"]
 [ext_resource type="Script" path="res://player/SmoothCamera.gd" id="2_3jsl8"]
 [ext_resource type="Script" path="res://player/Crosshair.gd" id="3_0rpkm"]
+[ext_resource type="Script" path="res://player/WeaponHandler.gd" id="3_f1ps4"]
 [ext_resource type="PackedScene" uid="uid://ctvmw85fux4n8" path="res://weapons/SMG.tscn" id="3_wxcfv"]
 [ext_resource type="Texture2D" uid="uid://buxrtgk882dtr" path="res://texture/damage.png" id="5_f2lvb"]
+[ext_resource type="PackedScene" uid="uid://dsw1mwmmxlrpx" path="res://weapons/Rifle.tscn" id="5_q2o4e"]
 [ext_resource type="PackedScene" uid="uid://c1ioa5nkjmm87" path="res://player/game_over_menu.tscn" id="6_btasu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4fs3x"]
@@ -89,8 +91,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 cull_mask = 1048573
 script = ExtResource("2_3jsl8")
 
-[node name="SMG" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_wxcfv")]
-
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera"]
 remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
 
@@ -112,6 +112,15 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 cull_mask = 2
 fov = 40.0
+
+[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/WeaponCamera" node_paths=PackedStringArray("weapon_1", "weapon_2")]
+script = ExtResource("3_f1ps4")
+weapon_1 = NodePath("Rifle")
+weapon_2 = NodePath("SMG")
+
+[node name="Rifle" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" instance=ExtResource("5_q2o4e")]
+
+[node name="SMG" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" instance=ExtResource("3_wxcfv")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
