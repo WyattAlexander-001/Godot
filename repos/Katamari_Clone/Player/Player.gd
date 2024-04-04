@@ -1,6 +1,10 @@
 extends RigidBody3D
 
 @export var ballSpeed := 1200
+@export var mouse_seensitivity := 0.001
+@export var twist_input := 0.0
+@export var pitch_input := 0.0
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Hides Mouse On Start
