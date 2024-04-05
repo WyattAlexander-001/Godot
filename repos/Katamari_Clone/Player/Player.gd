@@ -23,8 +23,9 @@ func _toggleCursor():
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			
 	elif Input.is_action_just_pressed("left_click") && Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Hides cursor upon left click
 
+func _unhandled_input(event:InputEvent) -> void:
+	pass
 	
