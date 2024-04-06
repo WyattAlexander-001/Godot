@@ -18,7 +18,6 @@ func _process(delta):
 	elif Input.is_action_pressed("move_back"):
 		rotation_axis = Vector3(1, 0, 0)   # Rotate around X-axis (nod up).
 	elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		# Using GDScript's inline if-else syntax for determining the rotation direction
 		rotation_axis = Vector3(0, 0, 1 if Input.is_action_pressed("move_left") else -1)  # Rotate around Z-axis.
 
 	# Apply rotation based on the determined axis.

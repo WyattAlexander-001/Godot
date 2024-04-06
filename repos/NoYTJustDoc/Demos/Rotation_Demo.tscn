@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d10wsg4msgudu"]
 
-[ext_resource type="PackedScene" uid="uid://2khnmmpltvd2" path="res://rotation_box.tscn" id="1_jo1jy"]
+[ext_resource type="PackedScene" uid="uid://2khnmmpltvd2" path="res://objects/rotation_box.tscn" id="1_jo1jy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yhm4c"]
 sky_top_color = Color(0.854902, 0.392157, 0.545098, 1)
