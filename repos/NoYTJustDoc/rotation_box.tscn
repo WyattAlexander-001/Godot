@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://2khnmmpltvd2"]
+
+[ext_resource type="Script" path="res://rotation_box.gd" id="1_3acu4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fvl30"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b35sw"]
+
+[node name="Rotation_Box" type="Node3D"]
+script = ExtResource("1_3acu4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_fvl30")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_b35sw")

@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://d10wsg4msgudu"]
+
+[ext_resource type="PackedScene" uid="uid://2khnmmpltvd2" path="res://rotation_box.tscn" id="1_jo1jy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yhm4c"]
+sky_top_color = Color(0.854902, 0.392157, 0.545098, 1)
+sky_horizon_color = Color(0.963726, 0.848039, 0.886275, 1)
+ground_bottom_color = Color(1, 1, 1, 1)
+ground_horizon_color = Color(0.963726, 0.848039, 0.886275, 1)
+
+[sub_resource type="Sky" id="Sky_2wcqk"]
+sky_material = SubResource("ProceduralSkyMaterial_yhm4c")
+
+[sub_resource type="Environment" id="Environment_a3dfd"]
+background_mode = 2
+sky = SubResource("Sky_2wcqk")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v28m5"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4642"]
+albedo_color = Color(0.0313726, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3vah"]
+albedo_color = Color(0.00784314, 0, 1, 1)
+
+[node name="Rotation_Demo" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a3dfd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.971118, 0.238601, 0, -0.238601, 0.971118, 0, 0.936321, 3.36725)
+
+[node name="Rotation_Box_X" parent="." instance=ExtResource("1_jo1jy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+rotation_speed = 3.0
+
+[node name="MeshInstance3D" parent="Rotation_Box_X" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_v28m5")
+
+[node name="Rotation_Box_Y" parent="." instance=ExtResource("1_jo1jy")]
+rotation_speed = 2.0
+rotation_axis = Vector3(0, 1, 0)
+
+[node name="MeshInstance3D" parent="Rotation_Box_Y" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_p4642")
+
+[node name="Rotation_Box_Z" parent="." instance=ExtResource("1_jo1jy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+rotation_speed = 1.0
+rotation_axis = Vector3(0, 0, 1)
+
+[node name="MeshInstance3D" parent="Rotation_Box_Z" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i3vah")
+
+[editable path="Rotation_Box_X"]
+[editable path="Rotation_Box_Y"]
+[editable path="Rotation_Box_Z"]
