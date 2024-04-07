@@ -1,29 +1,41 @@
 extends MeshInstance3D
 
 @export var rotation_speed = 11.0
-var initial_rotation = Quaternion()  # Default orientation as a quaternion.
-var rotation_axis = Vector3.ZERO  # Dynamically changed rotation axis, reset each frame.
-@onready var thing = $"."
+var initial_rotation = Quaternion()
+var rotation_axis = Vector3.ZERO
+@onready var thing = $"." 
+
+@onready var camera = $"../TwistPivot/PitchPivot/Camera3D"
 
 func _ready():
-	# Capture the initial orientation in quaternion format for accurate resetting.
+	# Capture the initial orientation
 	initial_rotation = thing.global_transform.basis.get_rotation_quaternion()
 
 func _process(delta):
-	rotation_axis = Vector3.ZERO  # Assume no rotation by default each frame.
-	
-	# Determine the rotation axis based on current input.
-	if Input.is_action_pressed("move_forward"):
-		rotation_axis = Vector3(-1, 0, 0)  # Rotate around X-axis (nod down).
-	elif Input.is_action_pressed("move_back"):
-		rotation_axis = Vector3(1, 0, 0)   # Rotate around X-axis (nod up).
-	elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		rotation_axis = Vector3(0, 0, 1 if Input.is_action_pressed("move_left") else -1)  # Rotate around Z-axis.
+	rotation_axis = Vector3.ZERO  # Reset each frame
 
-	# Apply rotation based on the determined axis.
-	if rotation_axis != Vector3.ZERO:
-		var angle = rotation_speed * delta
-		thing.rotate_object_local(rotation_axis.normalized(), angle)
+	var input_vector = Vector2.ZERO
+	if Input.is_action_pressed("move_forward"):
+		input_vector.y += 1
+	if Input.is_action_pressed("move_back"):
+		input_vector.y -= 1
+	if Input.is_action_pressed("move_left"):
+		input_vector.x -= 1
+	if Input.is_action_pressed("move_right"):
+		input_vector.x += 1
+
+	# Normalize to handle diagonal movement correctly
+	input_vector = input_vector.normalized()
+
+	# Convert the input vector into a 3D vector in the world space, relative to the camera's orientation
+	var forward_dir = camera.global_transform.basis.z.normalized() * -1
+	var right_dir = camera.global_transform.basis.x.normalized()
+	var world_input_dir = forward_dir * input_vector.y + right_dir * input_vector.x
+
+	if world_input_dir.length() > 0:
+		var target_rotation = Quaternion(Vector3(0, 1, 0), world_input_dir.angle_to(Vector3(0, 0, -1)))
+		thing.global_transform.basis = Basis(target_rotation).slerp(thing.global_transform.basis, rotation_speed * delta)
 	else:
-		# If no input and the object was rotating, reset to the initial orientation.
+		# Reset to initial orientation if there's no input
 		thing.global_transform.basis = Basis(initial_rotation)
+#

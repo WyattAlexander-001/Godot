@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bilcfrc1vqwdu"]
+[gd_scene load_steps=10 format=3 uid="uid://bilcfrc1vqwdu"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_ru6gc"]
-[ext_resource type="Script" path="res://Player/rootPlayer.gd" id="1_vacf6"]
 [ext_resource type="Texture2D" uid="uid://bwgvv7vyh3y61" path="res://Texture/tile.png" id="2_e0k6i"]
 [ext_resource type="Script" path="res://Player/playerMesh.gd" id="4_wfeuc"]
 
@@ -27,7 +26,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_vacf6")
 
 [node name="Player" type="RigidBody3D" parent="."]
 lock_rotation = true

@@ -1,0 +1,149 @@
+[gd_scene load_steps=9 format=3 uid="uid://bn4ilbhh8y3hl"]
+
+[ext_resource type="PackedScene" uid="uid://cogjm5pqhmnsb" path="res://3DModels/japanese_traffic_light/scene.gltf" id="1_dj1ly"]
+[ext_resource type="Script" path="res://objects/Lights.gd" id="2_n8qng"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3wpfd"]
+sky_top_color = Color(0.345098, 0.541176, 1, 1)
+sky_horizon_color = Color(0.667647, 0.716667, 0.831373, 1)
+ground_bottom_color = Color(0.32549, 0.32549, 0.32549, 1)
+ground_horizon_color = Color(0.667647, 0.716667, 0.831373, 1)
+
+[sub_resource type="Sky" id="Sky_2rrh4"]
+sky_material = SubResource("ProceduralSkyMaterial_3wpfd")
+
+[sub_resource type="Environment" id="Environment_sn8cf"]
+background_mode = 2
+sky = SubResource("Sky_2rrh4")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lya68"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5agwj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4ha1"]
+albedo_color = Color(1, 0.513726, 0, 1)
+
+[node name="TrafficLight" instance=ExtResource("1_dj1ly")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_sn8cf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.453789, -0.470732, 0.756629, -0.209949, 0.768706, 0.604163, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Wall" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 5.30048, -3.13769)
+mesh = SubResource("PlaneMesh_lya68")
+surface_material_override/0 = SubResource("StandardMaterial3D_5agwj")
+metadata/_edit_lock_ = true
+
+[node name="Floor" type="MeshInstance3D" parent="." index="4"]
+mesh = SubResource("PlaneMesh_lya68")
+surface_material_override/0 = SubResource("StandardMaterial3D_b4ha1")
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5389, 7.31098)
+
+[node name="Lights" type="Node3D" parent="." index="6"]
+script = ExtResource("2_n8qng")
+
+[node name="RearRedLight" type="OmniLight3D" parent="Lights" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6516, 5.51741, -0.443491)
+visible = false
+light_color = Color(1, 0, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_size = 0.057
+omni_range = 0.167108
+
+[node name="FrontRedLight" type="OmniLight3D" parent="Lights" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49319, 5.51741, 0.41218)
+visible = false
+light_color = Color(1, 0, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_size = 0.057
+omni_range = 0.167108
+
+[node name="CrossLightRedFront" type="OmniLight3D" parent="Lights" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.906603, 3.52536, 0.151761)
+visible = false
+light_color = Color(1, 0, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+omni_range = 0.167108
+
+[node name="CrossLightRedRear" type="OmniLight3D" parent="Lights" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.136242, 3.58798, -0.691281)
+visible = false
+light_color = Color(1, 0, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+omni_range = 0.167108
+
+[node name="RearYellowLight" type="OmniLight3D" parent="Lights" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07486, 5.51741, -0.443491)
+visible = false
+light_color = Color(1, 0.890196, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_size = 0.057
+omni_range = 0.185092
+
+[node name="FrontYellowLight" type="OmniLight3D" parent="Lights" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07486, 5.51741, 0.429304)
+visible = false
+light_color = Color(1, 0.890196, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_size = 0.057
+omni_range = 0.185092
+
+[node name="RearGreenLight" type="OmniLight3D" parent="Lights" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49985, 5.51741, -0.443491)
+visible = false
+light_color = Color(0.243137, 1, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_size = 0.057
+omni_range = 0.193272
+
+[node name="FrontGreenLight" type="OmniLight3D" parent="Lights" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66967, 5.51741, 0.402931)
+visible = false
+light_color = Color(0.243137, 1, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_size = 0.057
+omni_range = 0.193272
+
+[node name="CrossLightGreenLightFront" type="OmniLight3D" parent="Lights" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.902612, 3.16713, 0.130988)
+visible = false
+light_color = Color(0.243137, 1, 0, 1)
+light_energy = 0.404
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+omni_range = 0.193272
+
+[node name="CrossLightGreenLightRear" type="OmniLight3D" parent="Lights" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.169071, 3.21482, -0.698083)
+visible = false
+light_color = Color(0.243137, 1, 0, 1)
+light_energy = 2.69
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+omni_range = 0.193272

@@ -12,21 +12,25 @@ func _ready() -> void:
 
 	
 func _process(delta: float) -> void:
+	var input_vector = Vector3.ZERO
+	input_vector.x = Input.get_axis("move_left", "move_right")
+	input_vector.z = Input.get_axis("move_forward", "move_back")
 
-	
-	
-	var input := Vector3.ZERO
-	input.x = Input.get_axis("move_left","move_right")
-	input.z = Input.get_axis("move_forward","move_back")
-	apply_central_force(twist_pivot.basis * input * ballSpeed * delta)
-	
-	
+	# Convert the input vector into a direction based on the camera's orientation
+	var forward_dir = twist_pivot.global_transform.basis.z.normalized() * 1
+	var right_dir = twist_pivot.global_transform.basis.x.normalized()
+	var movement_direction = (input_vector.z * forward_dir + input_vector.x * right_dir).normalized()
+
+	# Apply central force in the calculated direction
+	apply_central_force(movement_direction * ballSpeed * delta)
 	_toggleCursor()
 	twist_pivot.rotate_y(twist_input)
 	pitch_pivot.rotate_x(pitch_input)
-	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(-15),deg_to_rad(15))
+	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(-15), deg_to_rad(15))
 	twist_input = 0.0
 	pitch_input = 0.0
+
+
 
 func _toggleCursor():
 	if Input.is_action_just_pressed("ui_cancel"): # For hitting escape key to toggle mouse cursor
