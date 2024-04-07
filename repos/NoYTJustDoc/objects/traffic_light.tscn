@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bn4ilbhh8y3hl"]
 
 [ext_resource type="PackedScene" uid="uid://cogjm5pqhmnsb" path="res://3DModels/japanese_traffic_light/scene.gltf" id="1_dj1ly"]
-[ext_resource type="Script" path="res://objects/Lights.gd" id="2_n8qng"]
+[ext_resource type="Script" path="res://scripts/Lights.gd" id="2_n8qng"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3wpfd"]
 sky_top_color = Color(0.345098, 0.541176, 1, 1)

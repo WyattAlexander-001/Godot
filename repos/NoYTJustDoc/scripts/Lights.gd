@@ -22,8 +22,8 @@ var current_state = States.STATE_1
 var state_timer = Timer.new()
 
 func _ready():
-	add_child(state_timer)
-	state_timer.connect("timeout", Callable(self, "_on_state_timer_timeout"))
+	add_child(state_timer) # Adds a timer node to scene tree
+	state_timer.connect("timeout", Callable(self, "_on_state_timer_timeout")) #timeout signal is emitted when Timer == 0, connect is used to connect a signal to method (timeout -> _onstate_timer_timeout()) //This means 0 sec => _on_state_timer_timeout is called, 
 	set_state(current_state)
 
 func set_state(state):

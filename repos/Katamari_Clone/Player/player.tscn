@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bilcfrc1vqwdu"]
+[gd_scene load_steps=9 format=3 uid="uid://bilcfrc1vqwdu"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_ru6gc"]
 [ext_resource type="Texture2D" uid="uid://bwgvv7vyh3y61" path="res://Texture/tile.png" id="2_e0k6i"]
-[ext_resource type="Script" path="res://Player/playerMesh.gd" id="4_wfeuc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3nwly"]
 albedo_texture = ExtResource("2_e0k6i")
@@ -37,7 +36,6 @@ ballSpeed = 1500
 material_override = SubResource("StandardMaterial3D_3nwly")
 mesh = SubResource("SphereMesh_onv5x")
 skeleton = NodePath("../..")
-script = ExtResource("4_wfeuc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("ConvexPolygonShape3D_bb4qq")
@@ -51,9 +49,12 @@ transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195
 [node name="Camera3D" type="Camera3D" parent="Player/TwistPivot/PitchPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../Player")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aay8o")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 6.55854, 0)
 shadow_enabled = true
